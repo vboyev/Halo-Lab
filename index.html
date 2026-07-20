@@ -204,7 +204,7 @@
         position: absolute;
         inset: 0;
         overflow: hidden;
-        clip-path: inset(50% 50% 50% 50%);
+        clip-path: inset(50% 50% 50% 50% round 8px);
         will-change: clip-path;
       }
 
@@ -439,7 +439,7 @@
           medias.forEach((layer, index) => {
             const reveal = index === 0 ? 1 : clamp(position - (index - 1), 0, 1);
             const centerInset = (1 - reveal) * 50;
-            layer.style.clipPath = `inset(${centerInset}% ${centerInset}% ${centerInset}% ${centerInset}%)`;
+            layer.style.clipPath = `inset(${centerInset}% ${centerInset}% ${centerInset}% ${centerInset}% round 8px)`;
           });
 
           copyItems.forEach((item, index) => {
