@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vixiv — case hover preview</title>
+    <title>Halo Lab — case studies interaction</title>
     <style>
       @font-face {
         font-family: "Suisse Intl";
         src: url("SuisseIntl-Regular-WebS.woff") format("woff");
         font-weight: 400;
-        font-style: normal;
         font-display: swap;
       }
 
@@ -17,55 +16,84 @@
         font-family: "Suisse Intl";
         src: url("SuisseIntl-Medium-WebS.woff") format("woff");
         font-weight: 500;
-        font-style: normal;
         font-display: swap;
       }
 
       :root {
         color-scheme: dark;
         font-family: "Suisse Intl", Arial, sans-serif;
-        background: #1b1e20;
+        background: #15181a;
         color: #fff;
       }
 
       * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      body { background: #15181a; }
 
-      html,
-      body {
-        min-height: 100%;
-        margin: 0;
-      }
+      .case-scroll { height: 400svh; }
 
-      body { background: #1b1e20; }
-
-      .case-card {
-        position: relative;
+      .case-stage {
+        position: sticky;
+        top: 0;
         isolation: isolate;
         width: 100%;
         min-height: 100svh;
         overflow: hidden;
-        background: #303437 url("vixiv-background.png") center / cover no-repeat;
         cursor: none;
       }
 
-      .case-card::after {
-        content: "";
+      .case-backgrounds,
+      .case-background,
+      .case-background::after,
+      .case-background img {
         position: absolute;
         inset: 0;
-        z-index: -1;
-        background: rgba(12, 14, 16, 0.14);
-        pointer-events: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      .case-backgrounds { z-index: -2; }
+
+      .case-background {
+        overflow: hidden;
+        clip-path: inset(100% 0 0);
+        will-change: clip-path;
+      }
+
+      .case-background:first-child { clip-path: inset(0); }
+
+      .case-background img {
+        object-fit: cover;
+        transform: scale(1.12);
+        will-change: transform;
+      }
+
+      .case-background::after {
+        content: "";
+        background: rgba(8, 10, 11, .64);
       }
 
       .case-copy {
         position: absolute;
         z-index: 3;
-        left: clamp(32px, 4.45vw, 64px);
         top: 50%;
-        width: min(380px, 32vw);
-        transform: translateY(-4%);
+        left: clamp(32px, 4.45vw, 64px);
+        width: min(390px, 32vw);
+        height: 185px;
+        transform: translateY(-13%);
         cursor: pointer;
       }
+
+      .case-copy__item {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: translateY(22px);
+        pointer-events: none;
+        will-change: opacity, transform;
+      }
+
+      .case-copy__item.is-active { pointer-events: auto; }
 
       .case-title {
         display: inline-flex;
@@ -76,8 +104,7 @@
         font-size: clamp(28px, 2.25vw, 32px);
         font-weight: 500;
         line-height: 1;
-        letter-spacing: -0.025em;
-        cursor: pointer;
+        letter-spacing: -.025em;
         text-decoration: none;
       }
 
@@ -90,23 +117,18 @@
         transition: opacity 180ms ease, transform 360ms cubic-bezier(.22, .8, .24, 1);
       }
 
-      .case-title:hover .case-title__arrow,
-      .case-title:focus-visible .case-title__arrow,
-      .case-card.is-title-hover .case-title__arrow {
+      .case-stage.is-copy-hover .case-copy__item.is-active .case-title__arrow,
+      .case-title:focus-visible .case-title__arrow {
         opacity: 1;
         transform: translateX(0);
       }
 
-      .case-title:focus-visible {
-        outline: 1px solid rgba(255, 255, 255, .72);
-        outline-offset: 7px;
-        border-radius: 2px;
-      }
+      .case-title:focus-visible { outline: none; }
 
       .case-description {
-        max-width: 350px;
+        max-width: 365px;
         margin: 0;
-        color: rgba(255, 255, 255, .56);
+        color: rgba(255, 255, 255, .58);
         font-size: clamp(16px, 1.25vw, 18px);
         line-height: 1.45;
         letter-spacing: -.012em;
@@ -114,10 +136,8 @@
 
       .case-cta {
         display: inline-flex;
-        align-items: center;
         margin-top: 32px;
         padding: 0;
-        border: 0;
         color: rgba(255, 255, 255, .92);
         font-size: 12px;
         font-weight: 400;
@@ -127,20 +147,14 @@
         opacity: 0;
         transform: translateY(8px);
         pointer-events: none;
-        transition: opacity 220ms ease, transform 360ms cubic-bezier(.22, .8, .24, 1), color 180ms ease;
+        transition: opacity 220ms ease, transform 360ms cubic-bezier(.22, .8, .24, 1);
       }
 
-      .case-card.is-title-hover .case-cta,
+      .case-stage.is-copy-hover .case-copy__item.is-active .case-cta,
       .case-cta:focus-visible {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
-      }
-
-      .case-cta:hover,
-      .case-cta:focus-visible {
-        color: #fff;
-        outline: none;
       }
 
       .case-preview {
@@ -159,10 +173,10 @@
       .case-preview__count {
         position: absolute;
         left: 50%;
+        z-index: 3;
         margin: 0;
-        color: rgba(255, 255, 255, .92);
+        color: rgba(255, 255, 255, .94);
         font-size: 12px;
-        font-weight: 400;
         line-height: 1;
         letter-spacing: .01em;
         white-space: nowrap;
@@ -171,21 +185,56 @@
 
       .case-preview__label {
         top: -23px;
-        opacity: 1;
         transition: opacity 180ms ease;
       }
 
-      .case-card.is-title-hover .case-preview__label { opacity: 0; }
+      .case-stage.is-copy-hover .case-preview__label { opacity: 0; }
       .case-preview__count { bottom: -25px; }
 
-      .case-preview__media {
-        display: block;
+      .case-preview__viewport {
+        position: relative;
         width: 100%;
         aspect-ratio: 540 / 400;
-        object-fit: cover;
+        overflow: hidden;
         border-radius: 8px;
         background: #74777a;
       }
+
+      .case-preview__media {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        clip-path: inset(100% 0 0);
+        will-change: clip-path;
+      }
+
+      .case-preview__media:first-child { clip-path: inset(0); }
+
+      .case-preview__media iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 178%;
+        height: 100%;
+        border: 0;
+        transform: translate(-50%, -50%) scale(1.04);
+        pointer-events: none;
+      }
+
+      .case-counter__window {
+        display: inline-block;
+        height: 12px;
+        overflow: hidden;
+        vertical-align: bottom;
+      }
+
+      .case-counter__digits {
+        display: flex;
+        flex-direction: column;
+        transition: transform 480ms cubic-bezier(.22, .8, .24, 1);
+      }
+
+      .case-counter__digits span { height: 12px; }
 
       .native-cursor {
         position: absolute;
@@ -200,214 +249,247 @@
         will-change: transform;
       }
 
-      .case-card.is-active .native-cursor { opacity: 1; }
-      .case-card.is-title-hover .native-cursor { opacity: 0; }
+      .case-stage.is-active .native-cursor { opacity: 1; }
+      .case-stage.is-copy-hover .native-cursor { opacity: 0; }
+
+      .scroll-hint {
+        position: absolute;
+        z-index: 3;
+        right: 28px;
+        bottom: 26px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255,255,255,.6);
+        font-size: 11px;
+        letter-spacing: .08em;
+      }
+
+      .scroll-hint::after {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: currentColor;
+      }
 
       @media (max-width: 800px), (pointer: coarse) {
-        .case-card {
-          min-height: 760px;
-          cursor: auto;
-        }
+        .case-stage { cursor: auto; }
 
         .case-copy {
           top: auto;
           right: 24px;
-          bottom: 70px;
+          bottom: 54px;
           left: 24px;
           width: auto;
+          height: 160px;
           transform: none;
         }
 
         .case-preview {
           --preview-width: min(82vw, 540px);
-          top: 44%;
+          top: 39%;
           left: 50%;
           transform: translate(-50%, -50%) !important;
         }
 
-        .case-title__arrow {
-          opacity: 1;
-          transform: none;
-        }
-
-        .native-cursor { display: none; }
+        .case-title__arrow { opacity: 1; transform: none; }
+        .native-cursor, .scroll-hint { display: none; }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .case-title__arrow { transition: none; }
+        .case-title__arrow, .case-cta, .case-counter__digits { transition: none; }
       }
     </style>
   </head>
   <body>
-    <main>
-      <section class="case-card" aria-labelledby="vixiv-title">
-        <div class="case-copy">
-          <a class="case-title" id="vixiv-title" href="#vixiv-case">
-            <span>Vixiv</span>
-            <svg class="case-title__arrow" aria-hidden="true" role="img" fill="currentColor" viewBox="0 0 19 19">
-              <path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd"></path>
-            </svg>
-          </a>
-          <p class="case-description">
-            Launching an AI-powered engineering platform from beta to a market-ready product.
-          </p>
-          <a class="case-cta" href="#vixiv-case">VIEW CASE STUDY</a>
+    <main class="case-scroll">
+      <section class="case-stage" aria-label="Selected case studies">
+        <div class="case-backgrounds" aria-hidden="true">
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d62b1a222584f983ca9_bg-home-case-01.avif" alt="" /></div>
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d61329b1000b30e51d4_bg-home-case-02.avif" alt="" /></div>
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d622ba61d5a73f9a22b_bg-home-case-03.avif" alt="" /></div>
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d622ba61d5a73f9a249_bg-home-case-04.avif" alt="" /></div>
         </div>
 
-        <figure class="case-preview" aria-hidden="true">
+        <div class="case-copy">
+          <article class="case-copy__item is-active" data-href="https://halo-lab.webflow.io/project/pluto">
+            <a class="case-title" href="https://halo-lab.webflow.io/project/pluto"><span>Pluto</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">Transforming a regional fintech into a globally positioned spend management platform.</p>
+            <a class="case-cta" href="https://halo-lab.webflow.io/project/pluto">VIEW CASE STUDY</a>
+          </article>
+          <article class="case-copy__item" data-href="https://halo-lab.webflow.io/project/vixiv">
+            <a class="case-title" href="https://halo-lab.webflow.io/project/vixiv"><span>Vixiv</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">Launching an AI-powered engineering platform from beta to a market-ready product.</p>
+            <a class="case-cta" href="https://halo-lab.webflow.io/project/vixiv">VIEW CASE STUDY</a>
+          </article>
+          <article class="case-copy__item" data-href="#">
+            <a class="case-title" href="#"><span>Stay</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">Rebranding an insurance brokerage into a modern digital experience for expats.</p>
+            <a class="case-cta" href="#">VIEW CASE STUDY</a>
+          </article>
+          <article class="case-copy__item" data-href="https://halo-lab.webflow.io/project/relocate-now">
+            <a class="case-title" href="https://halo-lab.webflow.io/project/relocate-now"><span>Relocate Now</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">From emergency team augmentation to a long-term product design partnership.</p>
+            <a class="case-cta" href="https://halo-lab.webflow.io/project/relocate-now">VIEW CASE STUDY</a>
+          </article>
+        </div>
+
+        <figure class="case-preview">
           <figcaption class="case-preview__label">VIEW CASE STUDY</figcaption>
-          <video
-            class="case-preview__media"
-            poster="vixiv-preview.png"
-            width="540"
-            height="400"
-            autoplay
-            loop
-            muted
-            playsinline
-            preload="metadata"
-          >
-            <source src="showreal-preview-33_mp4.mp4" type="video/mp4" />
-          </video>
-          <p class="case-preview__count">01 / 04</p>
+          <div class="case-preview__viewport">
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1161111533?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Pluto case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1202430101?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Vixiv case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1191460791?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Stay case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1003505375?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Relocate Now case preview"></iframe></div>
+          </div>
+          <p class="case-preview__count">0<span class="case-counter__window"><span class="case-counter__digits"><span>1</span><span>2</span><span>3</span><span>4</span></span></span> / 04</p>
         </figure>
 
-        <svg class="native-cursor" viewBox="0 0 18 23" aria-hidden="true">
-          <path d="M1 1.2 16.3 12l-7.1 1.1-3.7 7.1L1 1.2Z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" />
-        </svg>
-
+        <svg class="native-cursor" viewBox="0 0 18 23" aria-hidden="true"><path d="M1 1.2 16.3 12l-7.1 1.1-3.7 7.1L1 1.2Z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" /></svg>
+        <div class="scroll-hint">SCROLL</div>
       </section>
     </main>
 
     <script>
       (() => {
-        const card = document.querySelector('.case-card');
-        const preview = card.querySelector('.case-preview');
-        const copy = card.querySelector('.case-copy');
-        const title = card.querySelector('.case-title');
-        const cursor = card.querySelector('.native-cursor');
-        const finePointer = window.matchMedia('(pointer: fine)');
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const scrollRoot = document.querySelector('.case-scroll');
+        const stage = document.querySelector('.case-stage');
+        const preview = document.querySelector('.case-preview');
+        const copy = document.querySelector('.case-copy');
+        const copyItems = [...document.querySelectorAll('.case-copy__item')];
+        const backgrounds = [...document.querySelectorAll('.case-background')];
+        const medias = [...document.querySelectorAll('.case-preview__media')];
+        const digits = document.querySelector('.case-counter__digits');
+        const cursor = document.querySelector('.native-cursor');
+        const finePointer = matchMedia('(pointer: fine)');
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-        let targetX = 0;
-        let targetY = 0;
-        let currentX = 0;
-        let currentY = 0;
+        let activeIndex = 0;
+        let targetX = innerWidth / 2;
+        let targetY = innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
         let targetScale = 1;
         let currentScale = 1;
         let cursorX = 0;
         let cursorY = 0;
-        let titleHover = false;
-        let frame = 0;
+        let copyHover = false;
+        let motionFrame = 0;
+        let scrollFrame = 0;
 
-        const centeredPosition = () => ({
-          x: card.clientWidth / 2,
-          y: card.clientHeight / 2
-        });
+        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-        const clampTarget = (x, y) => {
-          const rect = preview.getBoundingClientRect();
-          const halfW = rect.width / 2;
-          const halfH = rect.height / 2;
-          const labelSpace = 34;
-          const sideSpace = 20;
-
+        const clampPreviewTarget = (x, y) => {
+          const width = preview.offsetWidth;
+          const height = width * 400 / 540;
           return {
-            x: Math.max(halfW + sideSpace, Math.min(card.clientWidth - halfW - sideSpace, x)),
-            y: Math.max(halfH + labelSpace, Math.min(card.clientHeight - halfH - labelSpace, y))
+            x: clamp(x, width / 2 + 20, stage.clientWidth - width / 2 - 20),
+            y: clamp(y, height / 2 + 34, stage.clientHeight - height / 2 - 34)
           };
         };
 
-        const render = () => {
-          const easing = reduceMotion.matches ? 1 : (titleHover ? .11 : .2);
+        const renderMotion = () => {
+          const easing = reduceMotion.matches ? 1 : (copyHover ? .11 : .2);
           currentX += (targetX - currentX) * easing;
           currentY += (targetY - currentY) * easing;
           currentScale += (targetScale - currentScale) * (reduceMotion.matches ? 1 : .12);
           preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
           cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
 
-          if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1 ||
-              Math.abs(targetScale - currentScale) > .001) {
-            frame = requestAnimationFrame(render);
+          if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1 || Math.abs(targetScale - currentScale) > .001) {
+            motionFrame = requestAnimationFrame(renderMotion);
           } else {
-            frame = 0;
+            motionFrame = 0;
           }
         };
 
-        const requestRender = () => {
-          if (!frame) frame = requestAnimationFrame(render);
+        const requestMotion = () => {
+          if (!motionFrame) motionFrame = requestAnimationFrame(renderMotion);
         };
 
-        const movePreviewToCenter = () => {
-          const center = centeredPosition();
-          targetX = center.x;
-          targetY = center.y;
-          requestRender();
+        const setCopyHover = (enabled, event) => {
+          copyHover = enabled;
+          targetScale = enabled ? .84 : 1;
+          stage.classList.toggle('is-copy-hover', enabled);
+          if (enabled) {
+            targetX = stage.clientWidth / 2;
+            targetY = stage.clientHeight / 2;
+          } else if (event && finePointer.matches) {
+            const rect = stage.getBoundingClientRect();
+            const point = clampPreviewTarget(event.clientX - rect.left, event.clientY - rect.top);
+            targetX = point.x;
+            targetY = point.y;
+          }
+          requestMotion();
         };
 
-        const reset = () => {
-          const center = centeredPosition();
-          targetX = currentX = center.x;
-          targetY = currentY = center.y;
-          targetScale = currentScale = 1;
-          preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
+        const renderScroll = () => {
+          scrollFrame = 0;
+          const max = scrollRoot.offsetHeight - innerHeight;
+          const progress = max > 0 ? clamp(-scrollRoot.getBoundingClientRect().top / max, 0, 1) : 0;
+          const position = progress * 3;
+          const nextActive = clamp(Math.round(position), 0, 3);
+
+          backgrounds.forEach((layer, index) => {
+            const reveal = index === 0 ? 1 : clamp(position - (index - 1), 0, 1);
+            layer.style.clipPath = `inset(${(1 - reveal) * 100}% 0 0)`;
+            layer.querySelector('img').style.transform = `scale(${1.12 - reveal * .12})`;
+          });
+
+          medias.forEach((layer, index) => {
+            const reveal = index === 0 ? 1 : clamp(position - (index - 1), 0, 1);
+            layer.style.clipPath = `inset(${(1 - reveal) * 100}% 0 0)`;
+          });
+
+          copyItems.forEach((item, index) => {
+            const visibility = clamp(1 - Math.abs(position - index) * 1.8, 0, 1);
+            item.style.opacity = visibility;
+            item.style.transform = `translateY(${(index - position) * 22}px)`;
+            item.classList.toggle('is-active', index === nextActive);
+          });
+
+          if (nextActive !== activeIndex) {
+            activeIndex = nextActive;
+            digits.style.transform = `translateY(-${activeIndex * 12}px)`;
+          }
         };
 
-        card.addEventListener('pointerenter', () => card.classList.add('is-active'));
-        card.addEventListener('pointerleave', () => {
-          card.classList.remove('is-active');
-        });
+        const requestScroll = () => {
+          if (!scrollFrame) scrollFrame = requestAnimationFrame(renderScroll);
+        };
 
-        card.addEventListener('pointermove', (event) => {
+        stage.addEventListener('pointerenter', () => stage.classList.add('is-active'));
+        stage.addEventListener('pointerleave', () => stage.classList.remove('is-active'));
+        stage.addEventListener('pointermove', event => {
           if (!finePointer.matches) return;
-          const cardRect = card.getBoundingClientRect();
-          cursorX = event.clientX - cardRect.left;
-          cursorY = event.clientY - cardRect.top;
-
+          const stageRect = stage.getBoundingClientRect();
+          cursorX = event.clientX - stageRect.left;
+          cursorY = event.clientY - stageRect.top;
           const copyRect = copy.getBoundingClientRect();
-          const isOverTitle = event.clientX >= copyRect.left &&
-            event.clientX <= copyRect.right &&
-            event.clientY >= copyRect.top &&
-            event.clientY <= copyRect.bottom;
-
-          if (isOverTitle && !titleHover) pinPreview();
-          if (!isOverTitle && titleHover && document.activeElement !== title) releasePreview(event);
-
-          if (!titleHover) {
-            const next = clampTarget(cursorX, cursorY);
-            targetX = next.x;
-            targetY = next.y;
+          const overCopy = event.clientX >= copyRect.left && event.clientX <= copyRect.right && event.clientY >= copyRect.top && event.clientY <= copyRect.bottom;
+          if (overCopy !== copyHover) setCopyHover(overCopy, event);
+          if (!copyHover) {
+            const point = clampPreviewTarget(cursorX, cursorY);
+            targetX = point.x;
+            targetY = point.y;
           }
-
-          requestRender();
+          requestMotion();
         });
 
-        const pinPreview = () => {
-          titleHover = true;
-          targetScale = .84;
-          card.classList.add('is-title-hover');
-          movePreviewToCenter();
-        };
-
-        const releasePreview = (event) => {
-          titleHover = false;
-          targetScale = 1;
-          card.classList.remove('is-title-hover');
-          if (event && finePointer.matches) {
-            const cardRect = card.getBoundingClientRect();
-            const next = clampTarget(event.clientX - cardRect.left, event.clientY - cardRect.top);
-            targetX = next.x;
-            targetY = next.y;
-            requestRender();
+        copy.addEventListener('pointerenter', event => setCopyHover(true, event));
+        copy.addEventListener('pointerleave', event => setCopyHover(false, event));
+        addEventListener('scroll', requestScroll, { passive: true });
+        addEventListener('resize', () => {
+          if (copyHover) {
+            targetX = currentX = stage.clientWidth / 2;
+            targetY = currentY = stage.clientHeight / 2;
           }
-        };
+          requestScroll();
+          requestMotion();
+        });
 
-        copy.addEventListener('pointerenter', pinPreview);
-        copy.addEventListener('pointerleave', releasePreview);
-        title.addEventListener('focus', pinPreview);
-        title.addEventListener('blur', releasePreview);
-        window.addEventListener('resize', reset);
-        reset();
+        preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
+        renderScroll();
       })();
     </script>
   </body>
