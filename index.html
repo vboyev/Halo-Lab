@@ -389,6 +389,9 @@
         let copyHover = false;
         let motionFrame = 0;
         let scrollFrame = 0;
+        let pagingFrame = 0;
+        let wheelLocked = false;
+        let lastWheelAt = 0;
 
         const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -472,6 +475,59 @@
         const requestScroll = () => {
           if (!scrollFrame) scrollFrame = requestAnimationFrame(renderScroll);
         };
+
+        const unlockPagingAfterWheelStops = () => {
+          const quietFor = performance.now() - lastWheelAt;
+          if (quietFor < 140) {
+            setTimeout(unlockPagingAfterWheelStops, 140 - quietFor);
+          } else {
+            wheelLocked = false;
+          }
+        };
+
+        const goToCase = index => {
+          const targetIndex = clamp(index, 0, 3);
+          const rootTop = scrollY + scrollRoot.getBoundingClientRect().top;
+          const step = (scrollRoot.offsetHeight - innerHeight) / 3;
+          const from = scrollY;
+          const to = rootTop + targetIndex * step;
+          const duration = reduceMotion.matches ? 0 : 720;
+          const startedAt = performance.now();
+
+          cancelAnimationFrame(pagingFrame);
+          const animatePage = now => {
+            const progress = duration ? clamp((now - startedAt) / duration, 0, 1) : 1;
+            const eased = progress < .5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            scrollTo(0, from + (to - from) * eased);
+            if (progress < 1) {
+              pagingFrame = requestAnimationFrame(animatePage);
+            } else {
+              pagingFrame = 0;
+              scrollTo(0, to);
+              unlockPagingAfterWheelStops();
+            }
+          };
+          pagingFrame = requestAnimationFrame(animatePage);
+        };
+
+        stage.addEventListener('wheel', event => {
+          lastWheelAt = performance.now();
+          const direction = Math.sign(event.deltaY);
+          if (!direction) return;
+
+          const rootTop = scrollY + scrollRoot.getBoundingClientRect().top;
+          const step = (scrollRoot.offsetHeight - innerHeight) / 3;
+          const current = clamp(Math.round((scrollY - rootTop) / step), 0, 3);
+          const target = clamp(current + direction, 0, 3);
+          if (target === current && ((current === 0 && direction < 0) || (current === 3 && direction > 0))) return;
+
+          event.preventDefault();
+          if (wheelLocked) return;
+          wheelLocked = true;
+          goToCase(target);
+        }, { passive: false });
 
         stage.addEventListener('pointerenter', () => stage.classList.add('is-active'));
         stage.addEventListener('pointerleave', () => stage.classList.remove('is-active'));
