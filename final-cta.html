@@ -51,13 +51,15 @@
         top: var(--y);
         width: var(--w);
         height: var(--h);
+        --lift-x: 0px;
+        --lift-y: -10px;
         pointer-events: auto;
         transition: transform 420ms cubic-bezier(.22, .8, .24, 1);
         will-change: transform;
       }
 
       .final-cta__shot:hover {
-        transform: translateY(-10px);
+        transform: translate(var(--lift-x), var(--lift-y));
       }
 
       .final-cta__shot img {
@@ -184,5 +186,38 @@
         <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts"><span class="final-cta__button-text"><span>BOOK A CALL</span><span>BOOK A CALL</span></span></a>
       </div>
     </main>
+    <script>
+      (() => {
+        const wheel = document.querySelector('.final-cta__wheel');
+        const shots = document.querySelectorAll('.final-cta__shot');
+        let hoveredShot = null;
+        let liftFrame = 0;
+
+        const updateLiftDirection = () => {
+          liftFrame = 0;
+          if (!hoveredShot) return;
+
+          const transform = getComputedStyle(wheel).transform;
+          const values = transform.match(/matrix(?:3d)?\(([^)]+)\)/)?.[1].split(',').map(Number);
+          const angle = values ? Math.atan2(values[1], values[0]) : 0;
+          const distance = 10;
+          hoveredShot.style.setProperty('--lift-x', `${-Math.sin(angle) * distance}px`);
+          hoveredShot.style.setProperty('--lift-y', `${-Math.cos(angle) * distance}px`);
+          liftFrame = requestAnimationFrame(updateLiftDirection);
+        };
+
+        shots.forEach(shot => {
+          shot.addEventListener('pointerenter', () => {
+            hoveredShot = shot;
+            if (!liftFrame) liftFrame = requestAnimationFrame(updateLiftDirection);
+          });
+          shot.addEventListener('pointerleave', () => {
+            hoveredShot = null;
+            cancelAnimationFrame(liftFrame);
+            liftFrame = 0;
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
