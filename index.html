@@ -189,7 +189,11 @@
       }
 
       .case-stage.is-copy-hover .case-preview__label { opacity: 0; }
-      .case-preview__count { bottom: -25px; }
+      .case-preview__count {
+        bottom: -25px;
+        transform-origin: center;
+        will-change: transform;
+      }
 
       .case-preview__viewport {
         position: relative;
@@ -373,6 +377,7 @@
         const backgrounds = [...document.querySelectorAll('.case-background')];
         const medias = [...document.querySelectorAll('.case-preview__media')];
         const digits = document.querySelector('.case-counter__digits');
+        const counter = document.querySelector('.case-preview__count');
         const cursor = document.querySelector('.native-cursor');
         const finePointer = matchMedia('(pointer: fine)');
         const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -410,6 +415,7 @@
           currentY += (targetY - currentY) * easing;
           currentScale += (targetScale - currentScale) * (reduceMotion.matches ? 1 : .12);
           preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
+          counter.style.transform = `translateX(-50%) scale(${1 / currentScale})`;
           cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
 
           if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1 || Math.abs(targetScale - currentScale) > .001) {
