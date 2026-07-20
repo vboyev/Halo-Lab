@@ -88,7 +88,7 @@
         position: absolute;
         inset: 0;
         opacity: 0;
-        transform: translateY(22px);
+        transform: translateY(39vh);
         pointer-events: none;
         will-change: opacity, transform;
       }
@@ -443,9 +443,10 @@
           });
 
           copyItems.forEach((item, index) => {
-            const visibility = clamp(1 - Math.abs(position - index) * 1.8, 0, 1);
+            const distance = index - position;
+            const visibility = clamp(1 - Math.abs(distance) * 1.15, 0, 1);
             item.style.opacity = visibility;
-            item.style.transform = `translateY(${(index - position) * 22}px)`;
+            item.style.transform = `translateY(${distance * innerHeight * .39}px)`;
             item.classList.toggle('is-active', index === nextActive);
           });
 
