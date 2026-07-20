@@ -36,6 +36,12 @@
         aspect-ratio: 1;
         transform: translateX(-50%);
         pointer-events: none;
+        transition: transform 420ms cubic-bezier(.22, .8, .24, 1);
+        will-change: transform;
+      }
+
+      .final-cta__orbit.is-hovered {
+        transform: translateX(-50%) translateY(-8px);
       }
 
       .final-cta__orbit img {
@@ -127,5 +133,24 @@
         <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts">BOOK A CALL</a>
       </div>
     </main>
+    <script>
+      (() => {
+        const section = document.querySelector('.final-cta');
+        const orbit = document.querySelector('.final-cta__orbit');
+        const finePointer = matchMedia('(pointer: fine)');
+
+        section.addEventListener('pointermove', event => {
+          if (!finePointer.matches) return;
+          const rect = orbit.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+          const overCards = distance > rect.width * .34 && distance < rect.width * .51;
+          orbit.classList.toggle('is-hovered', overCards);
+        });
+
+        section.addEventListener('pointerleave', () => orbit.classList.remove('is-hovered'));
+      })();
+    </script>
   </body>
 </html>
