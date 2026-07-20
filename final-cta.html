@@ -99,22 +99,41 @@
         align-items: center;
         justify-content: center;
         min-width: 132px;
-        height: 44px;
+        height: 42px;
         margin-top: 36px;
         padding: 0 24px;
         border-radius: 999px;
-        background: #f6c752;
+        overflow: hidden;
+        background: #fdc448;
         color: #08081d;
         font-size: 13px;
         font-weight: 500;
         letter-spacing: .01em;
         text-decoration: none;
-        transition: transform 300ms cubic-bezier(.22, .8, .24, 1), background 200ms ease;
       }
 
-      .final-cta__button:hover {
-        background: #ffd267;
-        transform: scale(1.04);
+      .final-cta__button-text {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        line-height: 1.4;
+      }
+
+      .final-cta__button-text span {
+        display: block;
+        transition: transform 300ms ease;
+      }
+
+      .final-cta__button-text span:last-child {
+        position: absolute;
+        right: 0;
+        bottom: -150%;
+        left: 0;
+        width: 100%;
+      }
+
+      .final-cta__button:hover .final-cta__button-text span {
+        transform: translateY(-150%);
       }
 
       @keyframes final-cta-spin {
@@ -162,7 +181,7 @@
       <div class="final-cta__content">
         <h1 class="final-cta__title" id="final-cta-title">Ready to discuss your<br />project with us?</h1>
         <p class="final-cta__description">Let’s discuss how we can craft a distinctive brand identity<br />that captivates, connects, and converts.</p>
-        <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts">BOOK A CALL</a>
+        <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts"><span class="final-cta__button-text"><span>BOOK A CALL</span><span>BOOK A CALL</span></span></a>
       </div>
     </main>
   </body>
