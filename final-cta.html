@@ -190,33 +190,23 @@
       (() => {
         const wheel = document.querySelector('.final-cta__wheel');
         const shots = document.querySelectorAll('.final-cta__shot');
-        let hoveredShot = null;
-        let liftFrame = 0;
 
-        const updateLiftDirection = () => {
-          liftFrame = 0;
-          if (!hoveredShot) return;
+        const setRadialLiftDirections = () => {
+          const centerX = wheel.clientWidth / 2;
+          const centerY = wheel.clientHeight / 2;
+          const distance = 12;
 
-          const transform = getComputedStyle(wheel).transform;
-          const values = transform.match(/matrix(?:3d)?\(([^)]+)\)/)?.[1].split(',').map(Number);
-          const angle = values ? Math.atan2(values[1], values[0]) : 0;
-          const distance = 10;
-          hoveredShot.style.setProperty('--lift-x', `${-Math.sin(angle) * distance}px`);
-          hoveredShot.style.setProperty('--lift-y', `${-Math.cos(angle) * distance}px`);
-          liftFrame = requestAnimationFrame(updateLiftDirection);
+          shots.forEach(shot => {
+            const x = shot.offsetLeft + shot.offsetWidth / 2 - centerX;
+            const y = shot.offsetTop + shot.offsetHeight / 2 - centerY;
+            const length = Math.hypot(x, y) || 1;
+            shot.style.setProperty('--lift-x', `${x / length * distance}px`);
+            shot.style.setProperty('--lift-y', `${y / length * distance}px`);
+          });
         };
 
-        shots.forEach(shot => {
-          shot.addEventListener('pointerenter', () => {
-            hoveredShot = shot;
-            if (!liftFrame) liftFrame = requestAnimationFrame(updateLiftDirection);
-          });
-          shot.addEventListener('pointerleave', () => {
-            hoveredShot = null;
-            cancelAnimationFrame(liftFrame);
-            liftFrame = 0;
-          });
-        });
+        setRadialLiftDirections();
+        addEventListener('resize', setRadialLiftDirections);
       })();
     </script>
   </body>
