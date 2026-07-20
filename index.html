@@ -293,6 +293,8 @@
         let targetY = 0;
         let currentX = 0;
         let currentY = 0;
+        let targetScale = 1;
+        let currentScale = 1;
         let cursorX = 0;
         let cursorY = 0;
         let titleHover = false;
@@ -320,10 +322,12 @@
           const easing = reduceMotion.matches ? 1 : (titleHover ? .11 : .2);
           currentX += (targetX - currentX) * easing;
           currentY += (targetY - currentY) * easing;
-          preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+          currentScale += (targetScale - currentScale) * (reduceMotion.matches ? 1 : .12);
+          preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
           cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
 
-          if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1) {
+          if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1 ||
+              Math.abs(targetScale - currentScale) > .001) {
             frame = requestAnimationFrame(render);
           } else {
             frame = 0;
@@ -345,7 +349,8 @@
           const center = centeredPosition();
           targetX = currentX = center.x;
           targetY = currentY = center.y;
-          preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+          targetScale = currentScale = 1;
+          preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
         };
 
         card.addEventListener('pointerenter', () => card.classList.add('is-active'));
@@ -379,12 +384,14 @@
 
         const pinPreview = () => {
           titleHover = true;
+          targetScale = .92;
           card.classList.add('is-title-hover');
           movePreviewToCenter();
         };
 
         const releasePreview = (event) => {
           titleHover = false;
+          targetScale = 1;
           card.classList.remove('is-title-hover');
           if (event && finePointer.matches) {
             const cardRect = card.getBoundingClientRect();
