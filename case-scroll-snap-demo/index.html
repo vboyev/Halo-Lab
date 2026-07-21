@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Halo Lab — native scroll snap comparison</title>
+    <style>
+      @font-face {
+        font-family: "Suisse Intl";
+        src: url("SuisseIntl-Regular-WebS.woff") format("woff");
+        font-weight: 400;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Suisse Intl";
+        src: url("SuisseIntl-Medium-WebS.woff") format("woff");
+        font-weight: 500;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: dark;
+        font-family: "Suisse Intl", Arial, sans-serif;
+        background: #15181a;
+        color: #fff;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      html { scroll-snap-type: y mandatory; }
+      body { background: #15181a; }
+
+      .case-scroll {
+        position: relative;
+        height: 400svh;
+      }
+
+      .case-stage {
+        position: sticky;
+        top: 0;
+        isolation: isolate;
+        width: 100%;
+        min-height: 100svh;
+        height: 100svh;
+        margin-bottom: -100svh;
+        overflow: hidden;
+        cursor: none;
+      }
+
+      .case-snap-points {
+        position: relative;
+        z-index: -3;
+        pointer-events: none;
+      }
+
+      .case-snap-point {
+        height: 100svh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+
+      .final-cta { scroll-snap-align: start; }
+
+      .case-backgrounds,
+      .case-background,
+      .case-background::after,
+      .case-background img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .case-backgrounds { z-index: -2; }
+
+      .case-background {
+        overflow: hidden;
+        clip-path: inset(100% 0 0);
+        will-change: clip-path;
+      }
+
+      .case-background:first-child { clip-path: inset(0); }
+
+      .case-background img {
+        object-fit: cover;
+        transform: scale(1.12);
+        will-change: transform;
+      }
+
+      .case-background::after {
+        content: "";
+        background: rgba(8, 10, 11, .32);
+      }
+
+      .case-copy {
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        left: clamp(32px, 4.45vw, 64px);
+        width: min(390px, 32vw);
+        height: 185px;
+        transform: translateY(-13%);
+        cursor: pointer;
+      }
+
+      .case-copy__item {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: translateY(39vh);
+        pointer-events: none;
+        will-change: opacity, transform;
+      }
+
+      .case-copy__item.is-active { pointer-events: auto; }
+
+      .case-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 13px;
+        color: #fff;
+        font-size: clamp(28px, 2.25vw, 32px);
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: -.025em;
+        text-decoration: none;
+      }
+
+      .case-title__arrow {
+        display: block;
+        width: 19px;
+        height: 19px;
+        opacity: 0;
+        transform: translateX(-9px);
+        transition: opacity 180ms ease, transform 360ms cubic-bezier(.22, .8, .24, 1);
+      }
+
+      .case-stage.is-copy-hover .case-copy__item.is-active .case-title__arrow,
+      .case-title:focus-visible .case-title__arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .case-title:focus-visible { outline: none; }
+
+      .case-description {
+        max-width: 365px;
+        margin: 0;
+        color: rgba(255, 255, 255, .58);
+        font-size: clamp(16px, 1.25vw, 18px);
+        line-height: 1.45;
+        letter-spacing: -.012em;
+      }
+
+      .case-cta {
+        display: inline-flex;
+        margin-top: 32px;
+        padding: 0;
+        color: rgba(255, 255, 255, .92);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: .01em;
+        text-decoration: none;
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 360ms cubic-bezier(.22, .8, .24, 1);
+      }
+
+      .case-stage.is-copy-hover .case-copy__item.is-active .case-cta,
+      .case-cta:focus-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .case-preview {
+        --preview-width: min(37.5vw, 540px);
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: var(--preview-width);
+        margin: 0;
+        pointer-events: none;
+        will-change: transform;
+      }
+
+      .case-preview__label,
+      .case-preview__count {
+        position: absolute;
+        left: 50%;
+        z-index: 3;
+        margin: 0;
+        color: rgba(255, 255, 255, .94);
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: .01em;
+        white-space: nowrap;
+        transform: translateX(-50%);
+      }
+
+      .case-preview__label {
+        top: -23px;
+        transition: opacity 180ms ease;
+      }
+
+      .case-stage.is-copy-hover .case-preview__label { opacity: 0; }
+      .case-preview__count {
+        bottom: -25px;
+        transform-origin: center;
+        will-change: transform;
+      }
+
+      .case-preview__viewport {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 540 / 400;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #74777a;
+      }
+
+      .case-preview__media {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        clip-path: inset(50% 50% 50% 50% round 8px);
+        will-change: clip-path;
+      }
+
+      .case-preview__media:first-child { clip-path: inset(0); }
+
+      .case-preview__media iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 178%;
+        height: 100%;
+        border: 0;
+        transform: translate(-50%, -50%) scale(1.04);
+        pointer-events: none;
+      }
+
+      .case-counter__window {
+        display: inline-block;
+        height: 12px;
+        overflow: hidden;
+        vertical-align: bottom;
+      }
+
+      .case-counter__digits {
+        display: flex;
+        flex-direction: column;
+        transition: transform 480ms cubic-bezier(.22, .8, .24, 1);
+      }
+
+      .case-counter__digits span { height: 12px; }
+
+      .native-cursor {
+        position: absolute;
+        z-index: 4;
+        top: 0;
+        left: 0;
+        width: 18px;
+        height: 23px;
+        opacity: 0;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .65));
+        pointer-events: none;
+        will-change: transform;
+      }
+
+      .case-stage.is-active .native-cursor { opacity: 1; }
+      .case-stage.is-copy-hover .native-cursor { opacity: 0; }
+
+      .scroll-hint {
+        position: absolute;
+        z-index: 3;
+        right: 28px;
+        top: 50%;
+        width: 16px;
+        height: 24px;
+        transform: translateY(-50%);
+        color: rgba(255,255,255,.6);
+        pointer-events: none;
+      }
+
+      .scroll-hint svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .scroll-hint__wheel {
+        animation: scroll-wheel 1.35s cubic-bezier(.76, 0, .24, 1) infinite alternate;
+      }
+
+      @keyframes scroll-wheel {
+        from { transform: translateY(-.5px); }
+        to { transform: translateY(8.5px); }
+      }
+
+      .final-cta {
+        position: relative;
+        isolation: isolate;
+        min-height: 790px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #4e7fd4 0%, #9db7e3 30%, #f5f5f7 68%, #f5f5f7 100%);
+        color: #08081d;
+      }
+
+      .final-cta__orbit {
+        position: absolute;
+        z-index: -1;
+        top: 14.4%;
+        left: 50%;
+        width: max(112.35vw, 1180px);
+        aspect-ratio: 1;
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .final-cta__orbit img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        animation: final-cta-spin 200s linear infinite;
+        will-change: transform;
+      }
+
+      .final-cta__content {
+        position: absolute;
+        z-index: 2;
+        top: 68.6%;
+        left: 50%;
+        width: min(600px, calc(100% - 48px));
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      .final-cta__title {
+        margin: 0;
+        font-size: clamp(42px, 4.05vw, 58px);
+        font-weight: 600;
+        line-height: .98;
+        letter-spacing: -.045em;
+      }
+
+      .final-cta__description {
+        max-width: 520px;
+        margin: 32px auto 0;
+        color: rgba(8, 8, 29, .72);
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .final-cta__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 132px;
+        height: 44px;
+        margin-top: 36px;
+        padding: 0 24px;
+        border-radius: 999px;
+        background: #f6c752;
+        color: #08081d;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: .01em;
+        text-decoration: none;
+        transition: transform 300ms cubic-bezier(.22, .8, .24, 1), background 200ms ease;
+      }
+
+      .final-cta__button:hover {
+        background: #ffd267;
+        transform: scale(1.04);
+      }
+
+      @keyframes final-cta-spin {
+        to { transform: rotate(360deg); }
+      }
+
+      @media (max-width: 800px), (pointer: coarse) {
+        .case-stage { cursor: auto; }
+
+        .case-copy {
+          top: auto;
+          right: 24px;
+          bottom: 54px;
+          left: 24px;
+          width: auto;
+          height: 160px;
+          transform: none;
+        }
+
+        .case-preview {
+          --preview-width: min(82vw, 540px);
+          top: 39%;
+          left: 50%;
+          transform: translate(-50%, -50%) !important;
+        }
+
+        .case-title__arrow { opacity: 1; transform: none; }
+        .native-cursor, .scroll-hint { display: none; }
+
+        .final-cta { min-height: 720px; }
+        .final-cta__orbit {
+          top: 18%;
+          width: max(190vw, 900px);
+        }
+        .final-cta__content { top: 53%; }
+        .final-cta__title { font-size: clamp(38px, 11vw, 52px); }
+        .final-cta__description { margin-top: 24px; font-size: 16px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .case-title__arrow, .case-cta, .case-counter__digits { transition: none; }
+        .scroll-hint__wheel { animation: none; }
+        .final-cta__orbit img { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="case-scroll">
+      <section class="case-stage" aria-label="Selected case studies">
+        <div class="case-backgrounds" aria-hidden="true">
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d62b1a222584f983ca9_bg-home-case-01.avif" alt="" /></div>
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d61329b1000b30e51d4_bg-home-case-02.avif" alt="" /></div>
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d622ba61d5a73f9a22b_bg-home-case-03.avif" alt="" /></div>
+          <div class="case-background"><img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a509d622ba61d5a73f9a249_bg-home-case-04.avif" alt="" /></div>
+        </div>
+
+        <div class="case-copy">
+          <article class="case-copy__item is-active" data-href="https://halo-lab.webflow.io/project/pluto">
+            <a class="case-title" href="https://halo-lab.webflow.io/project/pluto"><span>Pluto</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">Transforming a regional fintech into a globally positioned spend management platform.</p>
+            <a class="case-cta" href="https://halo-lab.webflow.io/project/pluto">VIEW CASE STUDY</a>
+          </article>
+          <article class="case-copy__item" data-href="https://halo-lab.webflow.io/project/vixiv">
+            <a class="case-title" href="https://halo-lab.webflow.io/project/vixiv"><span>Vixiv</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">Launching an AI-powered engineering platform from beta to a market-ready product.</p>
+            <a class="case-cta" href="https://halo-lab.webflow.io/project/vixiv">VIEW CASE STUDY</a>
+          </article>
+          <article class="case-copy__item" data-href="#">
+            <a class="case-title" href="#"><span>Stay</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">Rebranding an insurance brokerage into a modern digital experience for expats.</p>
+            <a class="case-cta" href="#">VIEW CASE STUDY</a>
+          </article>
+          <article class="case-copy__item" data-href="https://halo-lab.webflow.io/project/relocate-now">
+            <a class="case-title" href="https://halo-lab.webflow.io/project/relocate-now"><span>Relocate Now</span><svg class="case-title__arrow" aria-hidden="true" fill="currentColor" viewBox="0 0 19 19"><path fill-rule="evenodd" d="M6.25.879 14.871 9.5l-8.62 8.622L4.128 16l6.5-6.5-6.5-6.5L6.25.88Z" clip-rule="evenodd" /></svg></a>
+            <p class="case-description">From emergency team augmentation to a long-term product design partnership.</p>
+            <a class="case-cta" href="https://halo-lab.webflow.io/project/relocate-now">VIEW CASE STUDY</a>
+          </article>
+        </div>
+
+        <figure class="case-preview">
+          <figcaption class="case-preview__label">VIEW CASE STUDY</figcaption>
+          <div class="case-preview__viewport">
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1161111533?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Pluto case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1202430101?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Vixiv case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1191460791?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Stay case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1003505375?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Relocate Now case preview"></iframe></div>
+          </div>
+          <p class="case-preview__count">0<span class="case-counter__window"><span class="case-counter__digits"><span>1</span><span>2</span><span>3</span><span>4</span></span></span> / 04</p>
+        </figure>
+
+        <svg class="native-cursor" viewBox="0 0 18 23" aria-hidden="true"><path d="M1 1.2 16.3 12l-7.1 1.1-3.7 7.1L1 1.2Z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" /></svg>
+        <div class="scroll-hint" role="img" aria-label="Scroll to explore cases">
+          <svg viewBox="0 0 16 24" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.25" />
+            <path class="scroll-hint__wheel" d="M8 6.5v3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" />
+          </svg>
+        </div>
+      </section>
+      <div class="case-snap-points" aria-hidden="true">
+        <div class="case-snap-point"></div>
+        <div class="case-snap-point"></div>
+        <div class="case-snap-point"></div>
+        <div class="case-snap-point"></div>
+      </div>
+    </main>
+
+    <section class="final-cta" aria-labelledby="final-cta-title">
+      <div class="final-cta__orbit" aria-hidden="true">
+        <img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a00877b6353604e2daa98d2_shots-circle.avif" alt="" />
+      </div>
+      <div class="final-cta__content">
+        <h2 class="final-cta__title" id="final-cta-title">Ready to discuss your<br />project with us?</h2>
+        <p class="final-cta__description">Let’s discuss how we can craft a distinctive brand identity<br />that captivates, connects, and converts.</p>
+        <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts">BOOK A CALL</a>
+      </div>
+    </section>
+
+    <script>
+      (() => {
+        const scrollRoot = document.querySelector('.case-scroll');
+        const stage = document.querySelector('.case-stage');
+        const preview = document.querySelector('.case-preview');
+        const copy = document.querySelector('.case-copy');
+        const copyItems = [...document.querySelectorAll('.case-copy__item')];
+        const backgrounds = [...document.querySelectorAll('.case-background')];
+        const medias = [...document.querySelectorAll('.case-preview__media')];
+        const digits = document.querySelector('.case-counter__digits');
+        const counter = document.querySelector('.case-preview__count');
+        const cursor = document.querySelector('.native-cursor');
+        const finePointer = matchMedia('(pointer: fine)');
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+        let activeIndex = 0;
+        let targetX = innerWidth / 2;
+        let targetY = innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+        let targetScale = 1;
+        let currentScale = 1;
+        let cursorX = 0;
+        let cursorY = 0;
+        let copyHover = false;
+        let motionFrame = 0;
+        let scrollFrame = 0;
+
+        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+        const clampPreviewTarget = (x, y) => {
+          const width = preview.offsetWidth;
+          const height = width * 400 / 540;
+          return {
+            x: clamp(x, width / 2 + 20, stage.clientWidth - width / 2 - 20),
+            y: clamp(y, height / 2 + 34, stage.clientHeight - height / 2 - 34)
+          };
+        };
+
+        const renderMotion = () => {
+          const easing = reduceMotion.matches ? 1 : (copyHover ? .11 : .2);
+          currentX += (targetX - currentX) * easing;
+          currentY += (targetY - currentY) * easing;
+          currentScale += (targetScale - currentScale) * (reduceMotion.matches ? 1 : .12);
+          preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
+          counter.style.transform = `translateX(-50%) scale(${1 / currentScale})`;
+          cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+
+          if (Math.abs(targetX - currentX) > .1 || Math.abs(targetY - currentY) > .1 || Math.abs(targetScale - currentScale) > .001) {
+            motionFrame = requestAnimationFrame(renderMotion);
+          } else {
+            motionFrame = 0;
+          }
+        };
+
+        const requestMotion = () => {
+          if (!motionFrame) motionFrame = requestAnimationFrame(renderMotion);
+        };
+
+        const setCopyHover = (enabled, event) => {
+          copyHover = enabled;
+          targetScale = enabled ? .72 : 1;
+          stage.classList.toggle('is-copy-hover', enabled);
+          if (enabled) {
+            targetX = stage.clientWidth / 2;
+            targetY = stage.clientHeight / 2;
+          } else if (event && finePointer.matches) {
+            const rect = stage.getBoundingClientRect();
+            const point = clampPreviewTarget(event.clientX - rect.left, event.clientY - rect.top);
+            targetX = point.x;
+            targetY = point.y;
+          }
+          requestMotion();
+        };
+
+        const renderScroll = () => {
+          scrollFrame = 0;
+          const max = scrollRoot.offsetHeight - innerHeight;
+          const progress = max > 0 ? clamp(-scrollRoot.getBoundingClientRect().top / max, 0, 1) : 0;
+          const position = progress * 3;
+          const nextActive = clamp(Math.round(position), 0, 3);
+
+          backgrounds.forEach((layer, index) => {
+            const reveal = index === 0 ? 1 : clamp(position - (index - 1), 0, 1);
+            layer.style.clipPath = `inset(${(1 - reveal) * 100}% 0 0)`;
+            layer.querySelector('img').style.transform = `scale(${1.12 - reveal * .12})`;
+          });
+
+          medias.forEach((layer, index) => {
+            const reveal = index === 0 ? 1 : clamp(position - (index - 1), 0, 1);
+            const centerInset = (1 - reveal) * 50;
+            layer.style.clipPath = `inset(${centerInset}% ${centerInset}% ${centerInset}% ${centerInset}% round 8px)`;
+          });
+
+          copyItems.forEach((item, index) => {
+            const distance = index - position;
+            const visibility = clamp(1 - Math.abs(distance) * 1.15, 0, 1);
+            item.style.opacity = visibility;
+            item.style.transform = `translateY(${distance * innerHeight * .39}px)`;
+            item.classList.toggle('is-active', index === nextActive);
+          });
+
+          if (nextActive !== activeIndex) {
+            activeIndex = nextActive;
+            digits.style.transform = `translateY(-${activeIndex * 12}px)`;
+          }
+        };
+
+        const requestScroll = () => {
+          if (!scrollFrame) scrollFrame = requestAnimationFrame(renderScroll);
+        };
+
+        stage.addEventListener('pointerenter', () => stage.classList.add('is-active'));
+        stage.addEventListener('pointerleave', () => stage.classList.remove('is-active'));
+        stage.addEventListener('pointermove', event => {
+          if (!finePointer.matches) return;
+          const stageRect = stage.getBoundingClientRect();
+          cursorX = event.clientX - stageRect.left;
+          cursorY = event.clientY - stageRect.top;
+          const copyRect = copy.getBoundingClientRect();
+          const overCopy = event.clientX >= copyRect.left && event.clientX <= copyRect.right && event.clientY >= copyRect.top && event.clientY <= copyRect.bottom;
+          if (overCopy !== copyHover) setCopyHover(overCopy, event);
+          if (!copyHover) {
+            const point = clampPreviewTarget(cursorX, cursorY);
+            targetX = point.x;
+            targetY = point.y;
+          }
+          requestMotion();
+        });
+
+        copy.addEventListener('pointerenter', event => setCopyHover(true, event));
+        copy.addEventListener('pointerleave', event => setCopyHover(false, event));
+        addEventListener('scroll', requestScroll, { passive: true });
+        addEventListener('resize', () => {
+          if (copyHover) {
+            targetX = currentX = stage.clientWidth / 2;
+            targetY = currentY = stage.clientHeight / 2;
+          }
+          requestScroll();
+          requestMotion();
+        });
+
+        preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
+        renderScroll();
+      })();
+    </script>
+  </body>
+</html>
