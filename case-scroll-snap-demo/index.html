@@ -141,20 +141,21 @@
         --products-ink: #02021e;
         --products-paper: #f5f5f7;
         --products-line: rgba(2, 2, 30, .3);
+        --products-heading-top: clamp(132px, 9.15vw, 160px);
         position: relative;
         min-height: 100svh;
         overflow: visible;
-        padding: clamp(145px, 12.5vw, 180px) clamp(24px, 4.9vw, 72px) clamp(70px, 6vw, 92px);
+        padding: var(--products-heading-top) clamp(24px, 4.9vw, 72px) clamp(70px, 6vw, 92px);
         background: var(--products-paper);
         color: var(--products-ink);
       }
 
       .products-crystal {
         position: absolute;
-        top: clamp(-145px, -10.2vw, -115px);
+        top: var(--products-heading-top);
         left: 50%;
         width: clamp(280px, 26vw, 380px);
-        transform: translateX(-50%);
+        transform: translate(-50%, -100%);
         pointer-events: none;
       }
 
@@ -956,8 +957,8 @@
         .values-card__label { font-size: 14.63px; line-height: 1.6; }
         .values-card__value { margin-left: 16px; font-size: 41.44px; }
 
-        .products-section { padding: 116px 20px 64px; }
-        .products-crystal { top: -70px; width: 250px; }
+        .products-section { --products-heading-top: 116px; padding: var(--products-heading-top) 20px 64px; }
+        .products-crystal { width: 250px; }
         .products-heading { margin-bottom: 58px; font-size: clamp(42px, 11vw, 58px); }
         .services-columns { flex-direction: column; gap: 64px; }
         .services-head__title { font-size: 54px; }
