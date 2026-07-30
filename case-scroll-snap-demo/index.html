@@ -3,8 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Halo Lab — native scroll snap comparison</title>
+    <title>Halo Lab — combined scroll experience</title>
+    <link rel="stylesheet" href="vendor/swiper-bundle.min.css" />
     <style>
+      @font-face {
+        font-family: "Instrument Serif";
+        src: url("love-assets/InstrumentSerif-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+
       @font-face {
         font-family: "Suisse Intl";
         src: url("SuisseIntl-Regular-WebS.woff") format("woff");
@@ -20,6 +29,8 @@
       }
 
       :root {
+        --love-gradient-start: #09285a;
+        --love-gradient-end: #1754ad;
         color-scheme: dark;
         font-family: "Suisse Intl", Arial, sans-serif;
         background: #15181a;
@@ -27,9 +38,300 @@
       }
 
       * { box-sizing: border-box; }
-      html, body { margin: 0; }
-      html { scroll-snap-type: y mandatory; }
+      html, body { margin: 0; overflow-anchor: none; }
       body { background: #15181a; }
+
+      .values-section {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(88px, 7.22vw, 104px) clamp(24px, 4.9vw, 70.5px) clamp(190px, 17.46vw, 251.5px);
+        background: linear-gradient(180deg, #1964d1 0%, #4c86d8 46%, #b4caec 82%, #f5f5f7 100%);
+        color: #fff;
+      }
+
+      .values-container {
+        width: min(1299px, 100%);
+        margin: 0 auto;
+      }
+
+      .values-intro {
+        display: grid;
+        grid-template-columns: 39.1% 60.9%;
+      }
+
+      .values-badge {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(18px, 1.65vw, 23.8px);
+        width: 150px;
+        font-size: clamp(14px, 1.1vw, 15.84px);
+        line-height: 1.6;
+      }
+
+      .values-badge img {
+        display: block;
+        width: clamp(88px, 7.15vw, 103px);
+        height: auto;
+      }
+
+      .values-copy {
+        margin: 0;
+        font-size: clamp(32px, 2.75vw, 39.6px);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -.02em;
+      }
+
+      .values-inline-icon {
+        display: inline-block;
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: .16em;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        vertical-align: -.28em;
+      }
+
+      .values-inline-icon.is-workflows {
+        background-image: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a310e180964917819240c03_39f2d41ba16a81a35f2bd3e2b72f1f61_ai-workflows-ico.svg");
+      }
+
+      .values-inline-icon.is-products {
+        background-image: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a310e18f4480caf41c8a180_ai-products-ico.svg");
+      }
+
+      .values-grid {
+        display: grid;
+        margin-top: clamp(78px, 7.15vw, 103px);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(18px, 1.65vw, 23.8px);
+      }
+
+      .values-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: clamp(116px, 9.35vw, 134.6px);
+        padding: clamp(26px, 2.2vw, 31.7px) clamp(30px, 2.75vw, 39.6px);
+        border-radius: clamp(10px, .825vw, 11.9px);
+        background: #fff;
+        color: #02021e;
+      }
+
+      .values-card__label {
+        color: rgba(2, 2, 30, .6);
+        font-size: clamp(14px, 1.1vw, 15.84px);
+        line-height: 1.6;
+      }
+
+      .values-card__value {
+        flex: none;
+        margin-left: 24px;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: clamp(58px, 4.95vw, 71.3px);
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .products-section {
+        --products-ink: #02021e;
+        --products-paper: #f5f5f7;
+        --products-line: rgba(2, 2, 30, .3);
+        position: relative;
+        min-height: 100svh;
+        overflow: visible;
+        padding: clamp(145px, 12.5vw, 180px) clamp(24px, 4.9vw, 72px) clamp(70px, 6vw, 92px);
+        background: var(--products-paper);
+        color: var(--products-ink);
+      }
+
+      .products-crystal {
+        position: absolute;
+        top: clamp(-145px, -10.2vw, -115px);
+        left: 50%;
+        width: clamp(280px, 26vw, 380px);
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .products-heading {
+        position: relative;
+        width: min(760px, 82vw);
+        margin: 0 auto clamp(62px, 5.5vw, 84px);
+        font-size: clamp(52px, 5vw, 72px);
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -.013em;
+        text-align: center;
+      }
+
+      .services-columns {
+        position: relative;
+        display: flex;
+        width: min(1320px, 100%);
+        margin: 0 auto;
+        gap: clamp(64px, 7.6vw, 110px);
+      }
+
+      .services-column { flex: 1; min-width: 0; }
+
+      .services-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 78px;
+        margin-bottom: 13px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .services-head__title {
+        margin: 0;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: clamp(56px, 5vw, 72px);
+        font-style: italic;
+        font-weight: 400;
+        line-height: .92;
+        letter-spacing: -.025em;
+      }
+
+      .services-head__icons { display: flex; flex: none; }
+
+      .services-head__round {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 56px;
+        height: 56px;
+        overflow: hidden;
+        border: 1px solid var(--products-line);
+        border-radius: 50%;
+        color: var(--products-ink);
+      }
+
+      .services-head__round::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--products-ink);
+        transform: scale(0);
+        transition: transform 300ms ease;
+      }
+
+      .services-head__arrow-track {
+        position: relative;
+        z-index: 1;
+        width: 24px;
+        height: 24px;
+        transition: transform 420ms cubic-bezier(.215, .61, .355, 1);
+      }
+
+      .services-head__arrow {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
+      }
+
+      .services-head__arrow.is-clone { transform: translate(-180%, 180%); }
+
+      .services-head__icon {
+        display: block;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        transition: transform 420ms cubic-bezier(.215, .61, .355, 1);
+      }
+
+      .services-head:hover .services-head__round {
+        border-color: transparent;
+        color: #fff;
+      }
+
+      .services-head:hover .services-head__round::before { transform: scale(1); }
+      .services-head:hover .services-head__arrow-track { transform: translate(180%, -180%); }
+      .services-head:hover .services-head__icon { transform: rotate(8deg); }
+
+      .services-list { border-top: 1px solid var(--products-line); }
+
+      .service-row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: clamp(68px, 5.25vw, 76px);
+        overflow: visible;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .service-row::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        background: var(--products-line);
+      }
+
+      .service-row__label {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding-right: 24px;
+        font-size: clamp(18px, 1.55vw, 22px);
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      .service-row__chevron-mask { width: 16px; height: 16px; overflow: hidden; }
+
+      .service-row__chevron {
+        display: block;
+        width: 16px;
+        height: 16px;
+        transform: translateX(-110%);
+        transition: transform 300ms ease;
+      }
+
+      .service-row__preview {
+        position: fixed;
+        z-index: 10;
+        width: clamp(148px, 12.2vw, 176px);
+        overflow: hidden;
+        clip-path: inset(100% 0 0);
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -50%) scale(.8) rotate(-22deg);
+        transform-origin: center;
+        box-shadow: 0 10px 30px rgba(2, 2, 30, .12);
+        transition: clip-path 200ms ease, transform 200ms ease, opacity 100ms linear;
+      }
+
+      .service-row__preview img { display: block; width: 100%; height: auto; }
+      .service-row:hover .service-row__chevron { transform: translateX(0); }
+
+      .service-row.is-hovered .service-row__preview {
+        clip-path: inset(0);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        transition-duration: 400ms;
+      }
+
+      .service-row.is-over-label .service-row__preview {
+        clip-path: inset(100% 0 0);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.8) rotate(-22deg);
+        transition-duration: 200ms;
+      }
 
       .case-scroll {
         position: relative;
@@ -56,11 +358,7 @@
 
       .case-snap-point {
         height: 100svh;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
       }
-
-      .final-cta { scroll-snap-align: start; }
 
       .case-backgrounds,
       .case-background,
@@ -303,18 +601,224 @@
         to { transform: translateY(8.5px); }
       }
 
+      .reasons-section {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(78px, 7vw, 102px) clamp(24px, 4.9vw, 72px) clamp(74px, 6vw, 92px);
+        background: linear-gradient(180deg, #020217 0%, #02021a 48%, #041536 76%, var(--love-gradient-start) 100%);
+        color: #fff;
+      }
+
+      .reasons-heading-wrap {
+        width: min(620px, 88vw);
+        margin: 0 auto clamp(54px, 4.4vw, 63.4px);
+        text-align: center;
+      }
+
+      .reasons-eyebrow {
+        margin-bottom: 16px;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: clamp(18px, 1.55vw, 22px);
+        font-style: italic;
+        line-height: 1.2;
+        opacity: .6;
+      }
+
+      .reasons-title {
+        margin: 0;
+        font-size: clamp(44px, 3.85vw, 55.5px);
+        font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -.013em;
+      }
+
+      .reasons-grid {
+        display: grid;
+        width: min(1299px, 100%);
+        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(76px, 7.65vw, 110px);
+        background:
+          linear-gradient(rgba(255, 255, 255, .18), rgba(255, 255, 255, .18)) 50% 50% / 100% 1px no-repeat,
+          linear-gradient(rgba(255, 255, 255, .18), rgba(255, 255, 255, .18)) 31.9% 0 / 1px 100% no-repeat,
+          linear-gradient(rgba(255, 255, 255, .18), rgba(255, 255, 255, .18)) 68.1% 0 / 1px 100% no-repeat;
+      }
+
+      .reason-card {
+        display: grid;
+        min-width: 0;
+        grid-template-columns: 55px minmax(0, 1fr);
+        grid-template-rows: 68px auto;
+        column-gap: clamp(24px, 2.65vw, 38px);
+        row-gap: 24px;
+      }
+
+      .reason-card__icon {
+        display: block;
+        width: 55px;
+        height: 68px;
+        object-fit: contain;
+      }
+
+      .reason-card__title {
+        align-self: center;
+        margin: 0;
+        font-size: clamp(19px, 1.65vw, 23.8px);
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -.025em;
+      }
+
+      .reason-card__description {
+        grid-column: 1 / -1;
+        max-width: 333px;
+        margin: 0;
+        color: rgba(255, 255, 255, .58);
+        font-size: clamp(14px, 1.1vw, 15.84px);
+        line-height: 1.6;
+      }
+
+      .love-section {
+        position: relative;
+        overflow: clip;
+        padding: clamp(56px, 5.5vw, 79.2px) clamp(24px, 4.9vw, 70.5px);
+        background: linear-gradient(180deg, var(--love-gradient-start) 0%, #123d80 55%, var(--love-gradient-end) 100%);
+        color: #02021e;
+      }
+
+      .love-container {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-start;
+        width: min(1299px, 100%);
+        height: clamp(800px, 66.8vw, 962px);
+        min-height: 0;
+        margin: 0 auto;
+      }
+
+      .love-heading {
+        position: absolute;
+        z-index: 10;
+        top: 4.95rem;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: clamp(6rem, 8.25vw, 8.5rem);
+        font-style: italic;
+        font-weight: 400;
+        line-height: .9;
+        letter-spacing: -.03ch;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .love-swiper {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: visible;
+      }
+
+      .love-swiper .swiper-slide { overflow: visible !important; border-radius: 2px; }
+
+      .letter-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+        padding: clamp(300px, 26.4vw, 380px) 9vw 15rem;
+        border-radius: 2px;
+        background: #747481;
+        text-align: center;
+        transition: background-color .8s;
+      }
+
+      .love-swiper .swiper-slide-prev .letter-card,
+      .love-swiper .swiper-slide-next .letter-card { background: #becde2; }
+      .love-swiper .swiper-slide-active .letter-card { background: #fff; }
+      .love-swiper .swiper-slide-prev-second .letter-card,
+      .love-swiper .swiper-slide-next-second .letter-card { background: #788faf; }
+
+      .letter-rating { display: flex; gap: .65rem; align-items: center; font-size: 1.5rem; font-weight: 500; line-height: 1; }
+      .letter-stars { color: #ffbf3f; font-size: 1.35rem; letter-spacing: .02em; }
+      .letter-quote { width: min(63.25vw, 56.925rem); max-width: 100%; margin: 1.5rem auto 2.5rem; font-size: clamp(1.8rem, 2.75vw, 2.65rem); line-height: 1.3; letter-spacing: -.8px; }
+      .letter-author { display: flex; gap: .8rem; align-items: center; text-align: left; }
+      .letter-avatar { width: 3.5rem; height: 3.5rem; object-fit: cover; border-radius: 50%; }
+      .letter-author strong { font-size: 1rem; font-weight: 500; }
+      .letter-author small { display: block; margin-top: .3rem; color: #747481; font-size: .875rem; }
+
+      .love-awards {
+        position: absolute;
+        z-index: 10;
+        right: 5rem;
+        bottom: 6.2rem;
+        left: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid rgba(2, 2, 30, .3);
+        pointer-events: none;
+      }
+
+      .love-awards img { display: block; width: auto; height: 3rem; }
+
+      .love-navigation {
+        position: absolute;
+        z-index: 12;
+        inset: 0 auto 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 6rem 5rem 0;
+        pointer-events: none;
+      }
+
+      .love-nav {
+        display: grid;
+        width: 55px;
+        height: 55px;
+        place-items: center;
+        border: .5px solid rgba(2, 2, 30, .3);
+        border-radius: 50%;
+        color: #02021e;
+        background: transparent;
+        font: inherit;
+        cursor: pointer;
+        outline: none;
+        pointer-events: auto;
+      }
+
+      .love-nav svg {
+        width: 24px;
+        height: 24px;
+        transition: transform 260ms cubic-bezier(.22, .8, .24, 1);
+      }
+
+      .love-prev svg { transform: rotate(180deg); }
+      .love-next:hover svg { transform: translateX(2px); }
+      .love-prev:hover svg { transform: rotate(180deg) translateX(2px); }
+
+      .love-nav.swiper-button-disabled { opacity: 0; pointer-events: none; }
+      .love-swiper .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next):not(.swiper-slide-prev-second):not(.swiper-slide-next-second) { visibility: hidden; }
+
       .final-cta {
         position: relative;
         isolation: isolate;
-        min-height: 790px;
+        min-height: 100svh;
         overflow: hidden;
-        background: linear-gradient(180deg, #4e7fd4 0%, #9db7e3 30%, #f5f5f7 68%, #f5f5f7 100%);
+        background: linear-gradient(180deg, var(--love-gradient-end) 0%, #4e7fd4 18%, #9db7e3 38%, #f5f5f7 72%, #f5f5f7 100%);
         color: #08081d;
       }
 
       .final-cta__orbit {
         position: absolute;
-        z-index: -1;
+        z-index: 1;
         top: 14.4%;
         left: 50%;
         width: max(112.35vw, 1180px);
@@ -323,13 +827,34 @@
         pointer-events: none;
       }
 
-      .final-cta__orbit img {
+      .final-cta__wheel {
+        position: absolute;
+        inset: 0;
+        animation: final-cta-spin 200s linear infinite;
+        will-change: transform;
+      }
+
+      .final-cta__shot {
+        position: absolute;
+        top: var(--y);
+        left: var(--x);
+        width: var(--w);
+        height: var(--h);
+        --lift-x: 0px;
+        --lift-y: -10px;
+        pointer-events: auto;
+        transition: transform 420ms cubic-bezier(.22, .8, .24, 1);
+        will-change: transform;
+      }
+
+      .final-cta__shot:hover { transform: translate(var(--lift-x), var(--lift-y)); }
+
+      .final-cta__shot img {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: contain;
-        animation: final-cta-spin 200s linear infinite;
-        will-change: transform;
+        pointer-events: none;
       }
 
       .final-cta__content {
@@ -363,29 +888,82 @@
         align-items: center;
         justify-content: center;
         min-width: 132px;
-        height: 44px;
+        height: 42px;
         margin-top: 36px;
         padding: 0 24px;
+        overflow: hidden;
         border-radius: 999px;
-        background: #f6c752;
+        background: #fdc448;
         color: #08081d;
         font-size: 13px;
         font-weight: 500;
         letter-spacing: .01em;
         text-decoration: none;
-        transition: transform 300ms cubic-bezier(.22, .8, .24, 1), background 200ms ease;
       }
 
-      .final-cta__button:hover {
-        background: #ffd267;
-        transform: scale(1.04);
+      .final-cta__button-text {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        line-height: 1.4;
       }
+
+      .final-cta__button-text span {
+        display: block;
+        transition: transform 300ms ease;
+      }
+
+      .final-cta__button-text span:last-child {
+        position: absolute;
+        right: 0;
+        bottom: -150%;
+        left: 0;
+        width: 100%;
+      }
+
+      .final-cta__button:hover .final-cta__button-text span { transform: translateY(-150%); }
 
       @keyframes final-cta-spin {
         to { transform: rotate(360deg); }
       }
 
+      @media (min-width: 801px) and (max-width: 1199px) {
+        .love-section { min-height: 55rem; padding-bottom: 4rem; }
+        .love-container { min-height: 50rem; }
+        .love-heading { top: 4rem; font-size: 4rem; }
+        .love-swiper { height: 50rem; }
+        .letter-card { justify-content: center; padding: 13rem 2rem 12rem; }
+        .letter-rating { font-size: 1.25rem; }
+        .letter-stars { font-size: 1.15rem; }
+        .letter-quote { width: auto; max-width: 50rem; margin: 1.25rem auto 1.5rem; font-size: 1.75rem; }
+        .love-awards { right: calc(15.5vw + 2.5rem); bottom: 4rem; left: 2.5rem; gap: 2.5rem; padding-top: 1.5rem; }
+        .love-awards img { height: 2.5rem; }
+        .love-navigation { padding: 6rem 3rem 0; }
+        .love-nav { width: 3rem; height: 3rem; }
+
+        .final-cta { min-height: max(50rem, 100svh); }
+        .final-cta__orbit { width: max(145vw, 1100px); }
+      }
+
       @media (max-width: 800px), (pointer: coarse) {
+        .values-section { padding: 78px 19.5px 107px; }
+        .values-intro { display: flex; flex-direction: column-reverse; gap: 29px; }
+        .values-copy { font-size: 21.94px; line-height: 1.2; }
+        .values-badge { flex-direction: row; align-items: flex-start; gap: 14.6px; width: auto; font-size: 14.63px; line-height: 1.4; }
+        .values-badge img { width: 48.75px; }
+        .values-grid { grid-template-columns: 1fr; gap: 9.75px; margin-top: 48.75px; }
+        .values-card { min-height: 85.8px; padding: 19.5px; border-radius: 9.75px; }
+        .values-card__label { font-size: 14.63px; line-height: 1.6; }
+        .values-card__value { margin-left: 16px; font-size: 41.44px; }
+
+        .products-section { padding: 116px 20px 64px; }
+        .products-crystal { top: -70px; width: 250px; }
+        .products-heading { margin-bottom: 58px; font-size: clamp(42px, 11vw, 58px); }
+        .services-columns { flex-direction: column; gap: 64px; }
+        .services-head__title { font-size: 54px; }
+        .service-row { min-height: 64px; }
+        .service-row__preview { display: none; }
+
         .case-stage { cursor: auto; }
 
         .case-copy {
@@ -408,7 +986,40 @@
         .case-title__arrow { opacity: 1; transform: none; }
         .native-cursor, .scroll-hint { display: none; }
 
-        .final-cta { min-height: 720px; }
+        .reasons-section { padding: 72px 20px 58px; }
+        .reasons-heading-wrap { margin-bottom: 50px; }
+        .reasons-grid { grid-template-columns: 1fr; gap: 0; background: none; }
+        .reason-card,
+        .reason-card:not(:nth-child(3n + 1)),
+        .reason-card:nth-child(n + 4) {
+          display: block;
+          min-height: 0;
+          padding: 30px 0 34px;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, .18);
+          border-left: 0;
+        }
+        .reason-card:first-child { padding-top: 0; }
+        .reason-card:last-child { border-bottom: 0; }
+        .reason-card__icon { width: 46px; height: 46px; margin-bottom: 24px; }
+        .reason-card__title { margin-bottom: 18px; }
+
+        .love-section { min-height: max(42rem, 100svh); padding: 0; }
+        .love-container { min-height: max(42rem, 100svh); }
+        .love-heading { top: 2rem; width: 100%; font-size: 2.5rem; }
+        .love-swiper { width: 100vw; height: max(42rem, 100svh); }
+        .letter-card { justify-content: center; padding: 9rem 1rem; }
+        .letter-rating { font-size: 1rem; }
+        .letter-stars { font-size: 1rem; }
+        .letter-quote { width: auto; max-width: none; margin: .75rem auto 1rem; font-size: 1.125rem; }
+        .letter-avatar { width: 2.75rem; height: 2.75rem; }
+        .letter-author strong { font-size: .75rem; }
+        .letter-author small { font-size: .625rem; }
+        .love-awards { right: auto; bottom: 5rem; left: 50%; display: grid; width: 16rem; grid-template-columns: 1fr 1fr; gap: .65rem 1rem; padding-top: 1rem; transform: translateX(-50%); }
+        .love-awards img { height: 2rem; margin: auto; }
+        .love-navigation { display: none; }
+
+        .final-cta { min-height: max(720px, 100svh); }
         .final-cta__orbit {
           top: 18%;
           width: max(190vw, 900px);
@@ -419,13 +1030,38 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .case-title__arrow, .case-cta, .case-counter__digits { transition: none; }
+        .services-head *, .service-row *, .case-title__arrow, .case-cta, .case-counter__digits { transition: none; }
         .scroll-hint__wheel { animation: none; }
-        .final-cta__orbit img { animation: none; }
+        .final-cta__wheel { animation: none; }
+        .final-cta__shot, .final-cta__button-text span { transition: none; }
       }
     </style>
   </head>
   <body>
+    <section class="values-section" aria-labelledby="values-title">
+      <div class="values-container">
+        <div class="values-intro">
+          <div class="values-badge">
+            <img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a310b43e39195ab4c5a9eb4_values-ico-mark.avif" alt="" aria-hidden="true" />
+            <div>Crafted by Humans.<br />Accelerated by AI</div>
+          </div>
+          <h2 class="values-copy" id="values-title">Over 13 years, we’ve refined our Design &amp; Development expertise and combined it with <span class="values-inline-icon is-workflows" aria-hidden="true"></span>AI-workflows and our own <span class="values-inline-icon is-products" aria-hidden="true"></span>AI-products to help ambitious teams move faster, build smarter, and raise the bar.</h2>
+        </div>
+        <div class="values-grid" aria-label="Halo Lab in numbers">
+          <article class="values-card"><div class="values-card__label">Completed projects<br />across industries</div><div class="values-card__value">500+</div></article>
+          <article class="values-card"><div class="values-card__label">Typical time from kickoff<br />to product launch</div><div class="values-card__value">2-3mo</div></article>
+          <article class="values-card"><div class="values-card__label">Total funds raised<br />by our clients</div><div class="values-card__value">$1B+</div></article>
+          <article class="values-card"><div class="values-card__label">Recent market cap of<br />our biggest client</div><div class="values-card__value">$321B</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section" aria-labelledby="products-title">
+      <img class="products-crystal" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a312d32d71af1f8109e994c_crystal.avif" alt="" aria-hidden="true" />
+      <h1 class="products-heading" id="products-title">We take products from<br />vision to brilliance</h1>
+      <div class="services-columns" id="services-columns" aria-label="Design and development services"></div>
+    </section>
+
     <main class="case-scroll">
       <section class="case-stage" aria-label="Selected case studies">
         <div class="case-backgrounds" aria-hidden="true">
@@ -461,10 +1097,10 @@
         <figure class="case-preview">
           <figcaption class="case-preview__label">VIEW CASE STUDY</figcaption>
           <div class="case-preview__viewport">
-            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1161111533?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Pluto case preview"></iframe></div>
-            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1202430101?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Vixiv case preview"></iframe></div>
-            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1191460791?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Stay case preview"></iframe></div>
-            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1003505375?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" allow="autoplay; fullscreen; picture-in-picture" title="Relocate Now case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1161111533?autoplay=1&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" title="Pluto case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1202430101?autoplay=0&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" title="Vixiv case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1191460791?autoplay=0&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" title="Stay case preview"></iframe></div>
+            <div class="case-preview__media"><iframe src="https://player.vimeo.com/video/1003505375?autoplay=0&loop=1&muted=1&autopause=0&title=0&byline=0&portrait=0&controls=0" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" title="Relocate Now case preview"></iframe></div>
           </div>
           <p class="case-preview__count">0<span class="case-counter__window"><span class="case-counter__digits"><span>1</span><span>2</span><span>3</span><span>4</span></span></span> / 04</p>
         </figure>
@@ -485,19 +1121,225 @@
       </div>
     </main>
 
+    <section class="reasons-section" aria-labelledby="reasons-title">
+      <div class="reasons-heading-wrap">
+        <div class="reasons-eyebrow">Our key advantages</div>
+        <h2 class="reasons-title" id="reasons-title">6 reasons why clients<br />choose Halo Lab</h2>
+      </div>
+      <div class="reasons-grid">
+        <article class="reason-card">
+          <img class="reason-card__icon" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6935cb8245ff5fd86628acd2_icon-service-team.svg" alt="" />
+          <h3 class="reason-card__title">Team with industry depth</h3>
+          <p class="reason-card__description">120+ experts and 500+ projects provide insights into solutions that fit the market.</p>
+        </article>
+        <article class="reason-card">
+          <img class="reason-card__icon" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6935cb8226d4b4fcf23c7644_icon-service-strategy.svg" alt="" />
+          <h3 class="reason-card__title">Strategy before design</h3>
+          <p class="reason-card__description">Projects start with research, positioning, and clear goals for data-driven decisions.</p>
+        </article>
+        <article class="reason-card">
+          <img class="reason-card__icon" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6935cbe29239297e22822a03_icon-service-custom.avif" alt="" />
+          <h3 class="reason-card__title">Custom-only approach</h3>
+          <p class="reason-card__description">No templates or generic patterns — only custom design shaped for your objectives.</p>
+        </article>
+        <article class="reason-card">
+          <img class="reason-card__icon" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/68eccfb78add2232e0b41003_icon-service-healthcare.svg" alt="" />
+          <h3 class="reason-card__title">Expertise for complex needs</h3>
+          <p class="reason-card__description">We turn complex ideas into clear, scalable designs for SaaS, B2B, and tech companies.</p>
+        </article>
+        <article class="reason-card">
+          <img class="reason-card__icon" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6935cb8248580ea17247bba9_icon-healthcare.svg" alt="" />
+          <h3 class="reason-card__title">Clear, collaborative process</h3>
+          <p class="reason-card__description">Structured communication and transparent workflows keep you aligned at every step.</p>
+        </article>
+        <article class="reason-card">
+          <img class="reason-card__icon" src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6935cb8271a7628e57a63199_icon-service-budget.svg" alt="" />
+          <h3 class="reason-card__title">Flexible value for any budget</h3>
+          <p class="reason-card__description">Clear pricing and adaptable scopes help you stay on budget and ensure top quality.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="love-section" aria-labelledby="love-title">
+      <div class="love-container">
+        <h2 class="love-heading" id="love-title">100+ verified<br />love letters</h2>
+        <div class="swiper love-swiper">
+          <div class="swiper-wrapper" id="love-slides"></div>
+        </div>
+        <div class="love-awards" aria-label="Review platforms">
+          <img src="love-assets/6a19881c1ef50c762404fd5b_award-clutch_grey.svg" alt="Clutch" />
+          <img src="love-assets/6a19881ceaf2c953021c5053_award-trustpilot_grey.svg" alt="Trustpilot" />
+          <img src="love-assets/6a19881ca0aff33bf2f8f8ea_award-sortlist_grey.svg" alt="Sortlist" />
+          <img src="love-assets/6a19881c4b2dd9612572f476_award-goodfirms_grey.svg" alt="GoodFirms" />
+        </div>
+        <div class="love-navigation">
+          <button class="love-nav love-prev" aria-label="Previous slide"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M9.293 5.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L14.586 12 9.293 6.707a1 1 0 0 1 0-1.414Z" /></svg></button>
+          <button class="love-nav love-next" aria-label="Next slide"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M9.293 5.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L14.586 12 9.293 6.707a1 1 0 0 1 0-1.414Z" /></svg></button>
+        </div>
+      </div>
+    </section>
+
     <section class="final-cta" aria-labelledby="final-cta-title">
       <div class="final-cta__orbit" aria-hidden="true">
-        <img src="https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a00877b6353604e2daa98d2_shots-circle.avif" alt="" />
+        <div class="final-cta__wheel">
+          <div class="final-cta__shot" style="--x:3.6697%;--y:63.4862%;--w:16.8807%;--h:18.2263%"><img src="assets/final-cta/shot-01.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:17.8593%;--y:3.7920%;--w:18.3486%;--h:17.1254%"><img src="assets/final-cta/shot-02.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:76.6972%;--y:66.9113%;--w:17.6147%;--h:18.2263%"><img src="assets/final-cta/shot-03.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:66.7890%;--y:5.6269%;--w:18.3486%;--h:17.4924%"><img src="assets/final-cta/shot-04.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:63.6086%;--y:79.1437%;--w:18.3486%;--h:17.0031%"><img src="assets/final-cta/shot-05.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:79.0214%;--y:17.7370%;--w:17.1254%;--h:18.2263%"><img src="assets/final-cta/shot-06.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:14.5566%;--y:76.5749%;--w:18.3486%;--h:17.4924%"><img src="assets/final-cta/shot-07.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:5.5046%;--y:14.8012%;--w:17.6147%;--h:18.2263%"><img src="assets/final-cta/shot-08.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:30.5810%;--y:85.5046%;--w:17.2477%;--h:14.4343%"><img src="assets/final-cta/shot-09.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:51.8654%;--y:0%;--w:16.8807%;--h:14.1896%"><img src="assets/final-cta/shot-10.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:0%;--y:30.9480%;--w:14.1896%;--h:17.0031%"><img src="assets/final-cta/shot-11.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:85.7492%;--y:52.2324%;--w:14.1896%;--h:16.8807%"><img src="assets/final-cta/shot-12.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:34.9847%;--y:0%;--w:16.3914%;--h:13.0887%"><img src="assets/final-cta/shot-13.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:48.4404%;--y:86.8502%;--w:16.2691%;--h:13.1498%"><img src="assets/final-cta/shot-14.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:0%;--y:48.4404%;--w:12.8440%;--h:16.1468%"><img src="assets/final-cta/shot-15.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div class="final-cta__shot" style="--x:87.0948%;--y:35.1070%;--w:12.9052%;--h:16.1468%"><img src="assets/final-cta/shot-16.webp" alt="" loading="lazy" decoding="async" /></div>
+        </div>
       </div>
       <div class="final-cta__content">
         <h2 class="final-cta__title" id="final-cta-title">Ready to discuss your<br />project with us?</h2>
         <p class="final-cta__description">Let’s discuss how we can craft a distinctive brand identity<br />that captivates, connects, and converts.</p>
-        <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts">BOOK A CALL</a>
+        <a class="final-cta__button" href="https://halo-lab.webflow.io/contacts"><span class="final-cta__button-text"><span>BOOK A CALL</span><span>BOOK A CALL</span></span></a>
       </div>
     </section>
 
+    <script src="vendor/swiper-bundle.min.js"></script>
     <script>
       (() => {
+        const reviews = [
+          ["Halo Lab is very organized in planning to achieve the goals within the set deadlines. We feel they were part of our internal team project.", "Alvaro Araujo", "Founder & CEO, Relocate Now", "671f8415c64a592b60341289_review-ava_Alvaro-Araujo.avif"],
+          ["Their experts have a very diverse range of skills and always find a solution to exposed issues. The communication process was clear.", "Saidou Soumare", "CTO, Vehicle Operation Platform", "67e5100e2eed105d01a8cc6b_review-ava_Saidou-Soumare2.avif"],
+          ["During the collaboration, Halo Lab prioritized our people, always taking into account our input and ideas and giving all team members a voice.", "Justin Lopez", "Demand Generation Manager, WeSpire", "663ce80856bd18de6c04d4eb_review-ava_Justin-Lopez.avif"],
+          ["The Halo Lab team unified branding across our patients’ app, showcasing professionalism, convenience, and consistency.", "Mario Zusag", "CTO, nyra health", "663ce808d9ada3c120697131_review-ava_Mario-Zusag.avif"],
+          ["Halo recreated our existing portal with a modern and beautiful experience, greatly increasing usability and delight for the end user.", "Steve Chapman", "VP Marketing, NCF", "663ce808c9077bf746cc2ccf_4b21ebecb566d6bf364474eb1ca54722_review-ava_Steve-Chapman.avif"],
+          ["Halo Lab is brilliant. We were impressed with their timely delivery, cost-effectiveness, and the people who knew what they were doing!", "Sarthak Sharma", "Digital Marketing, Glenveagh Properties", "67409a0a4462d01047015145_review-ava_Sarthak-Sharma.avif"],
+          ["The value we get from Halo Lab and their quality designs sets them apart from others. They are the right mix of price, talent, and style.", "Marshall Haas", "CEO & Co-Founder, Need/Want", "676030f7320a6c237f7a7863_review-ava_Marshall-Haas.avif"],
+          ["We gave the Halo Lab team a chance, and we immediately knew they were the ones we wanted to work with.", "David Matthews", "CEO, Dotcal", "64c2722f19f2bd196643ab54_review-ava_David-Matthews.avif"],
+          ["The Halo Lab work pleasantly surprised us, and bringing in their professional design team has been a worthy investment for us.", "Rohit Das", "CEO, Vondy", "65a0139742fe9ad22a920d23_review-ava_Rohit-Das.avif"],
+          ["When collaborating with Halo Lab, we felt that communication was straightforward and that the deliverables fit what we expected.", "Hanna Retana", "Marketing specialist, Umso", "69271cb970ebd798406b7110_review-ava_placeholder-1.avif"],
+          ["Halo Lab has helped us with a rebrand and defined a new name, logo, and color palette. We’ve had a great experience working with them.", "Ahmed S.", "CTO, Spotbills", "69271cb9244dcbd2ad48b72d_review-ava_placeholder-2.avif"]
+        ];
+
+        const loveSlides = document.querySelector('#love-slides');
+        loveSlides.innerHTML = reviews.map(([quote, name, role, avatar]) => `
+          <article class="swiper-slide">
+            <div class="letter-card">
+              <div class="letter-rating"><span>5.0</span><span class="letter-stars">★★★★★</span></div>
+              <p class="letter-quote">“${quote}”</p>
+              <div class="letter-author"><img class="letter-avatar" src="love-assets/${avatar}" alt="${name}" /><div><strong>${name}</strong><small>${role}</small></div></div>
+            </div>
+          </article>
+        `).join('');
+
+        const updateLoveLayers = instance => {
+          instance.slides.forEach(slide => slide.classList.remove('swiper-slide-prev-second', 'swiper-slide-next-second'));
+          if (instance.activeIndex >= 2) instance.slides[instance.activeIndex - 2].classList.add('swiper-slide-prev-second');
+          if (instance.activeIndex + 2 < instance.slides.length) instance.slides[instance.activeIndex + 2].classList.add('swiper-slide-next-second');
+        };
+
+        new Swiper('.love-swiper', {
+          speed: 500,
+          slidesPerView: 'auto',
+          effect: 'cards',
+          cardsEffect: { rotate: true, slideShadows: false, perSlideOffset: 6, perSlideRotate: 3 },
+          grabCursor: false,
+          watchSlidesProgress: false,
+          navigation: { nextEl: '.love-next', prevEl: '.love-prev' },
+          on: { init() { updateLoveLayers(this); }, slideChange() { updateLoveLayers(this); } }
+        });
+
+        const finalCtaWheel = document.querySelector('.final-cta__wheel');
+        const finalCtaShots = [...document.querySelectorAll('.final-cta__shot')];
+        const setFinalCtaLiftDirections = () => {
+          const centerX = finalCtaWheel.clientWidth / 2;
+          const centerY = finalCtaWheel.clientHeight / 2;
+          const distance = 18;
+
+          finalCtaShots.forEach(shot => {
+            const x = shot.offsetLeft + shot.offsetWidth / 2 - centerX;
+            const y = shot.offsetTop + shot.offsetHeight / 2 - centerY;
+            const length = Math.hypot(x, y) || 1;
+            shot.style.setProperty('--lift-x', `${x / length * distance}px`);
+            shot.style.setProperty('--lift-y', `${y / length * distance}px`);
+          });
+        };
+
+        setFinalCtaLiftDirections();
+        addEventListener('resize', setFinalCtaLiftDirections);
+
+        const serviceArrow = '<svg class="services-head__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.51 4.57v11.98h-2V7.985L6.277 19.217l-1.414-1.414L16.096 6.57H7.37v-2z" /></svg>';
+        const serviceArrowClone = '<svg class="services-head__arrow is-clone" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.51 4.57v11.98h-2V7.985L6.277 19.217l-1.414-1.414L16.096 6.57H7.37v-2z" /></svg>';
+        const serviceChevron = '<span class="service-row__chevron-mask"><svg class="service-row__chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 12 10 8 6 4" fill="none" stroke="currentColor" stroke-width="2" /></svg></span>';
+        const serviceGroups = [
+          {
+            title: 'Design',
+            href: 'https://halo-lab.webflow.io/services/design',
+            icon: 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6449421486eae3cf4d387564_development-Illustration.svg',
+            items: [
+              ['UI/UX design', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a323221a0ecc59658221d7d_ui-ux-service-img.avif'],
+              ['Web design', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a323222bbfd9c5242a4f4e1_web-design-img.avif'],
+              ['Mobile app design', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e026495ce9e86759e80a_Mobile%20app%20design.avif'],
+              ['Landing page design', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e02f4b268056486a4714_Landing%20page%20design.avif'],
+              ['Branding', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e0304b4f2244a0031b8f_Branding.avif']
+            ]
+          },
+          {
+            title: 'Development',
+            href: 'https://halo-lab.webflow.io/services/development',
+            icon: 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/69b0556456b24a8d17ae0618_services%20ijon.svg',
+            items: [
+              ['Web development', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e02f44a41cf968549a0a_Web%20development.avif'],
+              ['Software development', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e02fcbfa285f357bc04c_Software%20development.avif'],
+              ['CMS development', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e02e110cbb9a4dd90580_CMS%20development.avif'],
+              ['Webflow development', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e02f64581dfad32e2b9b_Webflow%20development.avif'],
+              ['Mobile development', 'https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/6a33e031e44d48b27d39d9fe_Mobile%20development.avif']
+            ]
+          }
+        ];
+        const servicesColumns = document.querySelector('#services-columns');
+        servicesColumns.innerHTML = serviceGroups.map(group => `
+          <section class="services-column">
+            <a class="services-head" href="${group.href}">
+              <h2 class="services-head__title">${group.title}</h2>
+              <span class="services-head__icons">
+                <span class="services-head__round"><span class="services-head__arrow-track">${serviceArrow}${serviceArrowClone}</span></span>
+                <img class="services-head__icon" src="${group.icon}" alt="" />
+              </span>
+            </a>
+            <div class="services-list">
+              ${group.items.map(([name, image]) => `<a class="service-row" href="#"><span class="service-row__label">${name}${serviceChevron}</span><span class="service-row__preview"><img src="${image}" alt="" loading="lazy" /></span></a>`).join('')}
+            </div>
+          </section>
+        `).join('');
+
+        document.querySelectorAll('.service-row').forEach(link => {
+          const preview = link.querySelector('.service-row__preview');
+          const label = link.querySelector('.service-row__label');
+          let previewFrame = 0;
+          let previewX = 0;
+          let previewY = 0;
+          link.addEventListener('pointerenter', () => link.classList.add('is-hovered'));
+          link.addEventListener('pointerleave', () => link.classList.remove('is-hovered', 'is-over-label'));
+          link.addEventListener('pointermove', event => {
+            const labelBounds = label.getBoundingClientRect();
+            link.classList.toggle('is-over-label', event.clientX <= labelBounds.right);
+            previewX = event.clientX;
+            previewY = event.clientY;
+            if (!previewFrame) {
+              previewFrame = requestAnimationFrame(() => {
+                preview.style.left = `${previewX}px`;
+                preview.style.top = `${previewY}px`;
+                previewFrame = 0;
+              });
+            }
+          });
+          link.addEventListener('click', event => event.preventDefault());
+        });
+
         const scrollRoot = document.querySelector('.case-scroll');
         const stage = document.querySelector('.case-stage');
         const preview = document.querySelector('.case-preview');
@@ -505,6 +1347,7 @@
         const copyItems = [...document.querySelectorAll('.case-copy__item')];
         const backgrounds = [...document.querySelectorAll('.case-background')];
         const medias = [...document.querySelectorAll('.case-preview__media')];
+        const videoFrames = medias.map(layer => layer.querySelector('iframe'));
         const digits = document.querySelector('.case-counter__digits');
         const counter = document.querySelector('.case-preview__count');
         const cursor = document.querySelector('.native-cursor');
@@ -525,6 +1368,23 @@
         let scrollFrame = 0;
 
         const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+        const syncVideoPlayback = index => {
+          videoFrames.forEach((frame, frameIndex) => {
+            frame.contentWindow?.postMessage(JSON.stringify({ method: frameIndex === index ? 'play' : 'pause' }), 'https://player.vimeo.com');
+          });
+        };
+
+        videoFrames.forEach((frame, index) => {
+          frame.addEventListener('load', () => syncVideoPlayback(activeIndex), { once: true });
+        });
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            videoFrames.forEach(frame => frame.contentWindow?.postMessage(JSON.stringify({ method: 'pause' }), 'https://player.vimeo.com'));
+          } else {
+            syncVideoPlayback(activeIndex);
+          }
+        });
 
         const clampPreviewTarget = (x, y) => {
           const width = preview.offsetWidth;
@@ -601,7 +1461,9 @@
           if (nextActive !== activeIndex) {
             activeIndex = nextActive;
             digits.style.transform = `translateY(-${activeIndex * 12}px)`;
+            syncVideoPlayback(activeIndex);
           }
+
         };
 
         const requestScroll = () => {
@@ -640,6 +1502,7 @@
 
         preview.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(1)`;
         renderScroll();
+        syncVideoPlayback(activeIndex);
       })();
     </script>
   </body>
