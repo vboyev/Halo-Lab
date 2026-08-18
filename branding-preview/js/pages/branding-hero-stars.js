@@ -59,7 +59,9 @@
     for (let row = 0; row < rows; row += 1) {
       for (let column = 0; column < columns; column += 1) {
         const createStar = (cursorAccent = false) => {
-          const cycleDuration = 12000 + random() * 12000;
+          // Shorter and more frequent than the original slow 12–24s drift, so
+          // the ambient twinkle reads as active rather than barely-there.
+          const cycleDuration = 4000 + random() * 5000;
 
           return {
             x: (column + .14 + random() * .72) * cellWidth,
@@ -77,7 +79,9 @@
             cursorAccent,
             glint: !cursorAccent && random() > .9,
             blue: random() > .52,
-            dynamic: random() > .45,
+            // More of the field blinks now (up from ~55%), which reads as a
+            // livelier sky rather than a handful of scattered stars fading.
+            dynamic: random() > .22,
             cycleDuration,
             cycleOffset: random() * cycleDuration,
             relocatedCycle: -1,
@@ -105,17 +109,36 @@
     const cycle = Math.floor(elapsed / star.cycleDuration);
     const phase = elapsed / star.cycleDuration - cycle;
 
-    if (phase < .64) return 1;
-    if (phase < .78) return 1 - smoothstep((phase - .64) / .14);
+    // Snappier fade in/out than before (was 14%/16% of the cycle) so each
+    // blink reads as a distinct flicker instead of a slow dimming.
+    if (phase < .7) return 1;
+    if (phase < .78) return 1 - smoothstep((phase - .7) / .08);
 
     if (star.relocatedCycle !== cycle) {
-      star.x = star.cellX + (.14 + relocationRandom() * .72) * star.cellWidth;
-      star.y = star.cellY + (.14 + relocationRandom() * .72) * star.cellHeight;
+      // Jumping several cells away, not just resettling in the same spot,
+      // is what makes this read as one star vanishing and a different one
+      // appearing elsewhere rather than the same star quietly drifting.
+      const jumpX = (relocationRandom() * 2 - 1) * star.cellWidth * 3;
+      const jumpY = (relocationRandom() * 2 - 1) * star.cellHeight * 3;
+      star.x = clamp(star.cellX + (.14 + relocationRandom() * .72) * star.cellWidth + jumpX, 0, width);
+      star.y = clamp(star.cellY + (.14 + relocationRandom() * .72) * star.cellHeight + jumpY, 0, height);
       star.relocatedCycle = cycle;
+
+      // Re-rolling size, brightness, and color sells the same illusion: the
+      // star that fades back in should look like a new one, not a clone.
+      if (star.cursorAccent) {
+        star.radius = .25 + relocationRandom() * .55;
+        star.alpha = .025 + relocationRandom() * .035;
+      } else {
+        star.radius = .38 + relocationRandom() * 1.08;
+        star.alpha = .17 + relocationRandom() * .34;
+        star.glint = relocationRandom() > .9;
+      }
+      star.blue = relocationRandom() > .52;
     }
 
-    if (phase < .84) return 0;
-    return smoothstep((phase - .84) / .16);
+    if (phase < .86) return 0;
+    return smoothstep((phase - .86) / .14);
   };
 
   const resize = () => {
