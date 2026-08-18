@@ -1,0 +1,37 @@
+
+  [data-change-color-delay='bg'] {
+    transition-delay: 0.4s;
+  }
+  [data-change-color-delay='bg'].is--anim-color {
+    transition-delay: 0s;
+  }
+  [data-services-input='list-slides'] a[href^='#'] .overflow-hidden {
+    display: none;
+  }
+  [data-cases-input='slide'] [video-src=''] {
+    display: none;
+  }
+  [data-cases-input='slide'] [video-src]:not([video-src='']) ~ [data-cases-input='img'] {
+    display: none;
+  }
+  [data-process-btn].active ~ .process-nav__dot {
+    opacity: 0.1;
+  }
+  [data-process-btn].active .process-nav__numb-wrap {
+    max-width: 2rem;
+  }
+  [data-swiper-pagination-style='load'] .swiper-pagination-bullet.swiper-pagination-bullet-active::after {
+    transition: all 7000ms linear !important;
+  }
+  /** Splide start  **/
+  .splide__track {
+    overflow: visible;
+  }
+  .splide__slide {
+    width: max-content !important;
+  }
+  @media screen and (max-width: 767px) {
+    .swiper-solutions2__text-wrap.is-open {
+      max-height: 3.6rem;
+    }
+  }

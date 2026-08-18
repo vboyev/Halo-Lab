@@ -1,0 +1,507 @@
+/* Matches the homepage: elements that reveal start hidden so the script can
+   animate them in rather than letting them flash unstyled first. Gated on
+   Webflow's `w-mod-js` flag, so the hero stays readable if scripts never run. */
+.w-mod-js .page-branding-redesign [data-gsap-line],
+.w-mod-js .page-branding-redesign [data-gsap-blur],
+.w-mod-js .page-branding-redesign .line {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w-mod-js .page-branding-redesign [data-gsap-line],
+  .w-mod-js .page-branding-redesign [data-gsap-blur],
+  .w-mod-js .page-branding-redesign .line {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* Remodal only hides its dialogs once its script has run, so on a slow
+   connection the video dialog — poster, play and close controls — shows up in
+   the page flow first. */
+.page-branding-redesign .modals [data-remodal-id]:not(.remodal-is-initialized) {
+  display: none;
+}
+
+/* The background comes from the homepage's shared `bg-home-gradient`, so the
+   intro must not paint over it. Hero copy carries its own colours. */
+.page-branding-redesign .branding-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-bottom: 12.5rem;
+}
+
+/* The homepage runs that gradient across four sections, so its logos sit at 50%
+   of the wrapper and 65% along the dark-to-blue ramp. This block ends just below
+   the logos, so the original stops would drop them onto the near-white end.
+   These stops hold the dark for the same 541px as the homepage at 1440px wide
+   and stretch the ramp so the logos again land at 65% of it, which keeps the
+   colours and the transition identical. Recompute if the block's height changes
+   materially or more sections move under the gradient. */
+.page-branding-redesign .branding-intro.bg-home-gradient {
+  background-image: linear-gradient(#000218 34%, #1964d1 114%, #f5f5f7 179%);
+}
+
+/* The service-page colour switcher targets `[data-change-color="elem"]`, which
+   the homepage block carries but never reacts to. Here it would turn the logos
+   dark on top of the blue ramp. */
+.page-branding-redesign .branding-intro .trusted-light.is--anim-color {
+  color: #fff;
+}
+
+/* Animating the gradient angle keeps the ring mask still while the highlight
+   travels, so the effect needs no extra markup. Browsers without @property
+   support simply render the highlight parked at its starting angle. */
+@property --branding-glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --branding-glow-halo {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes branding-glow-turn {
+  to {
+    --branding-glow-angle: 360deg;
+  }
+}
+
+/* Page-scoped glass treatment for the shared header CTA: no fill, a highlight
+   running around the contour, a blurred copy of it glowing underneath, and a
+   halo on hover. The header component itself is untouched, so every other route
+   keeps the solid white button. Promote site-wide only after approval. */
+.page-branding-redesign .header .button.mod--header {
+  background:
+    radial-gradient(107.5% 107.5% at 50% 215%, rgba(151, 185, 255, .22) 0%, rgba(151, 185, 255, 0) 100%),
+    rgba(223, 228, 248, .05);
+  background-color: transparent;
+  color: #f2f2f2;
+}
+
+/* The shared `.button:hover` rule repaints the pill brand-blue; the glass has to
+   survive hover so only the glow layers respond. */
+.page-branding-redesign .header .button.mod--header:hover {
+  background-color: transparent;
+  color: #fff;
+}
+
+/* Contour: a static hairline with the travelling highlight on top, drawn as a
+   1px ring *inside* the pill. Keeping it inside means the button can go on
+   clipping its own content, which is what hides the outgoing label copy. */
+.page-branding-redesign .header .button.mod--header::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background:
+    conic-gradient(
+      from var(--branding-glow-angle),
+      rgba(232, 238, 255, .62) 0deg,
+      rgba(232, 238, 255, 0) 60deg,
+      rgba(232, 238, 255, 0) 310deg,
+      rgba(232, 238, 255, .62) 360deg),
+    rgba(223, 228, 248, .14);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: branding-glow-turn 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Blurred copy of the same highlight plus the hover lift, stacked behind the
+   label and clipped by the pill, so the glow stays inside the button instead of
+   bleeding into the header. The blur is deliberately larger than the pill is
+   tall and the arc's falloff is wide, so the travelling highlight reads as a
+   soft drift of light rather than a visible fan sweeping across it. */
+.page-branding-redesign .header .button.mod--header::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(85% 120% at 50% 120%, rgba(151, 185, 255, var(--branding-glow-halo, 0)) 0%, rgba(151, 185, 255, 0) 100%),
+    conic-gradient(
+      from var(--branding-glow-angle),
+      rgba(151, 185, 255, .3) 0deg,
+      rgba(151, 185, 255, 0) 110deg,
+      rgba(151, 185, 255, 0) 250deg,
+      rgba(151, 185, 255, .3) 360deg);
+  filter: blur(18px);
+  opacity: .4;
+  transition: opacity 1s, --branding-glow-halo 1s;
+  animation: branding-glow-turn 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Same as the reference: hover lifts a soft glow from the bottom edge over 1s
+   instead of repainting the pill. */
+.page-branding-redesign .header .button.mod--header:hover::after,
+.page-branding-redesign .header .button.mod--header:focus-visible::after {
+  --branding-glow-halo: .55;
+  opacity: 1;
+}
+
+/* The reference gradient label is deliberately not reproduced here: clipping a
+   background to the text makes the glyphs escape the wrapper that hides the
+   outgoing copy of the shared swap animation, which left a ghost label on
+   hover. A flat label keeps that animation intact. */
+.page-branding-redesign .header .button.mod--header .button__txt {
+  color: #f2f2f2;
+}
+
+/* Icon disc starts white and turns brand blue on hover, swapping the shared
+   component's two states. The animation itself is untouched: the same disc still
+   scales up from the centre, it just paints blue instead of white. */
+/* White disc with a black pen at rest. Hover keeps the component's own scale-up
+   animation and fills it brand blue; the disc itself is repainted with it so no
+   white ring is left around the circle. */
+.page-branding-redesign .header .button.mod--header .button__icons {
+  border-color: #fff;
+  background-color: #fff;
+  color: #02021e;
+}
+
+.page-branding-redesign .header .button.mod--header .button__icons.active {
+  border-color: #3827c7;
+  background-color: #3827c7;
+  color: #fff;
+}
+
+.page-branding-redesign .header .button.mod--header .button__bg.bg-color-white {
+  background-color: #3827c7;
+}
+
+/* The pen artwork is brand blue, so it is forced to black on the white disc and
+   inverted to white once the blue fill covers it. */
+.page-branding-redesign .header .button.mod--header .button__icon-lottie {
+  filter: brightness(0%);
+}
+
+.page-branding-redesign .header .button.mod--header .button__icon-lottie.active {
+  filter: brightness(0%) invert();
+}
+
+/* `css/pages/new-home.css` is homepage-only, so its cursor sizing has to be
+   repeated here for the follower to match the reference. */
+.page-branding-redesign .cursor-move {
+  width: 9.25rem;
+  height: 9.25rem;
+}
+
+.page-branding-redesign .cursor-icons {
+  padding: 1.5rem;
+}
+
+/* Page-scoped preview; promote this treatment to the shared cookie component after approval. */
+.page-branding-redesign .banner-cookie {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background-color: #fff;
+  color: #02021e;
+  opacity: 1;
+}
+
+.page-branding-redesign .banner-cookie .banner-terms__text {
+  color: #02021e;
+}
+
+@media screen and (min-width: 992px) {
+  .page-branding-redesign .banner-cookie .banner-terms__text {
+    font-size: calc(.875rem + 2px);
+  }
+}
+
+.page-branding-redesign .banner-cookie .button.is-tiny-simple.is-deny {
+  background-color: #ececf2;
+  color: #02021e;
+}
+
+.page-branding-redesign .branding-intro__stars {
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 51.3125rem;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
+  pointer-events: none;
+}
+
+.page-branding-redesign .branding-hero {
+  position: relative;
+  z-index: 1;
+  height: 38.875rem;
+  padding: 0 1.25rem;
+}
+
+.page-branding-redesign .branding-hero__container {
+  justify-content: flex-start;
+  height: 100%;
+  padding-top: 20.9375rem;
+}
+
+.page-branding-redesign .branding-hero__content {
+  display: grid;
+  grid-template-columns: minmax(0, 61.625rem) 17.5625rem;
+  gap: 2.8125rem;
+  align-items: start;
+  width: 100%;
+}
+
+.page-branding-redesign .branding-hero__title {
+  max-width: 61.625rem;
+  color: #f2f2f2;
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.08rem;
+  text-transform: none;
+}
+
+.page-branding-redesign .branding-hero__aside {
+  padding-top: 3.1875rem;
+}
+
+.page-branding-redesign .branding-hero__lead {
+  width: 13.25rem;
+  margin: 0 0 2.0625rem .25rem;
+  color: #dfe4f8;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: .02rem;
+  opacity: .75;
+}
+
+.page-branding-redesign .branding-hero__action {
+  display: flex;
+  align-items: center;
+}
+
+.page-branding-redesign .branding-hero__avatars {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.page-branding-redesign .branding-hero__avatar {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  background: #d9d9d9;
+  object-fit: cover;
+}
+
+.page-branding-redesign .branding-hero__cta {
+  display: inline-flex;
+  flex: 0 0 11.5625rem;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  border-radius: 7.5rem;
+  background: #3827c7;
+  color: #fff;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: .02em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.page-branding-redesign .branding-hero__cta-text {
+  white-space: nowrap;
+}
+
+.page-branding-redesign .branding-hero__cta:focus-visible,
+.page-branding-redesign .branding-showreel__trigger:focus-visible {
+  outline: 2px solid #fdc448;
+  outline-offset: 4px;
+}
+
+.page-branding-redesign .branding-showreel {
+  position: relative;
+  z-index: 1;
+  padding: 0 1.25rem 4rem;
+}
+
+.page-branding-redesign .branding-showreel__container {
+  flex-flow: row;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 42rem;
+}
+
+.page-branding-redesign .branding-showreel__trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 42rem;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: .75rem;
+  background: #17172f;
+  color: #02021e;
+  cursor: pointer;
+  appearance: none;
+}
+
+.page-branding-redesign .branding-showreel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.page-branding-redesign .branding-showreel__trigger:hover .branding-showreel__image {
+  transform: scale(1.015);
+}
+
+@media screen and (max-width: 1199px) {
+  .page-branding-redesign .branding-hero {
+    height: auto;
+    min-height: 38.875rem;
+  }
+
+  .page-branding-redesign .branding-hero__container {
+    padding-top: 18rem;
+    padding-bottom: 4rem;
+  }
+
+  .page-branding-redesign .branding-hero__content {
+    grid-template-columns: minmax(0, 1fr) 15.5rem;
+    gap: 2rem;
+  }
+
+  .page-branding-redesign .branding-hero__title {
+    font-size: clamp(3.25rem, 5vw, 4rem);
+  }
+
+  .page-branding-redesign .branding-hero__aside {
+    padding-top: 2.5rem;
+  }
+
+  .page-branding-redesign .branding-hero__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .page-branding-redesign .branding-hero__cta {
+    flex-basis: 10.5rem;
+  }
+
+  .page-branding-redesign .branding-showreel__container,
+  .page-branding-redesign .branding-showreel__trigger {
+    height: 25rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page-branding-redesign .branding-intro {
+    padding-bottom: 6rem;
+  }
+
+  .page-branding-redesign .branding-intro__stars {
+    height: 46rem;
+  }
+
+  .page-branding-redesign .branding-hero {
+    min-height: 39rem;
+    padding: 0 1rem;
+  }
+
+  .page-branding-redesign .branding-hero__container {
+    padding-top: 10.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .page-branding-redesign .branding-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .page-branding-redesign .branding-hero__title {
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    line-height: 1.04;
+    letter-spacing: -.05rem;
+  }
+
+  .page-branding-redesign .branding-hero__aside {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .page-branding-redesign .branding-hero__lead {
+    width: min(18rem, 100%);
+    margin: 0 0 1.5rem;
+  }
+
+  .page-branding-redesign .branding-hero__action {
+    justify-content: space-between;
+  }
+
+  .page-branding-redesign .branding-hero__avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .page-branding-redesign .branding-hero__cta {
+    flex-basis: auto;
+    min-width: 10.75rem;
+    height: 2.75rem;
+  }
+
+  .page-branding-redesign .branding-showreel {
+    padding: 0 1rem 2.5rem;
+  }
+
+  .page-branding-redesign .branding-showreel__trigger {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: .5rem;
+  }
+
+  .page-branding-redesign .branding-showreel__container {
+    height: auto;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-branding-redesign .branding-hero__cta,
+  .page-branding-redesign .branding-hero__cta [data-button-text] > div,
+  .page-branding-redesign .branding-showreel__image {
+    transition: none;
+  }
+
+  .page-branding-redesign .branding-hero__cta:hover [data-button-text] > div,
+  .page-branding-redesign .branding-showreel__trigger:hover .branding-showreel__image {
+    transform: none;
+  }
+
+  /* The highlight parks at its starting angle instead of travelling. */
+  .page-branding-redesign .header .button.mod--header::before,
+  .page-branding-redesign .header .button.mod--header::after {
+    animation: none;
+    transition: none;
+  }
+}
