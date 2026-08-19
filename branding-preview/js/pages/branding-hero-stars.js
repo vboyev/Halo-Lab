@@ -34,6 +34,13 @@
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
+  // Real starfields skew toward many small, dim points with only a few large,
+  // bright ones. A uniform random radius made most stars land near the same
+  // size, which read as a field of same-sized dots instead.
+  const starRadius = (roll, cursorAccent) => (cursorAccent
+    ? .18 + (roll ** 2.2) * .9
+    : .28 + (roll ** 2.6) * 2);
+
   const createRandom = (seed) => () => {
     seed |= 0;
     seed = seed + 0x6d2b79f5 | 0;
@@ -70,10 +77,7 @@
             cellY: row * cellHeight,
             cellWidth,
             cellHeight,
-            // Sized up from the original .25–1.46px range (twice, the first
-            // pass wasn't enough) so the field reads as small stars rather
-            // than dust specks on the screen.
-            radius: cursorAccent ? .55 + random() * 1.2 : .85 + random() * 2.15,
+            radius: starRadius(random(), cursorAccent),
             alpha: cursorAccent ? .025 + random() * .035 : .17 + random() * .34,
             glow: 0,
             flare: 0,
@@ -129,11 +133,10 @@
 
       // Re-rolling size, brightness, and color sells the same illusion: the
       // star that fades back in should look like a new one, not a clone.
+      star.radius = starRadius(relocationRandom(), star.cursorAccent);
       if (star.cursorAccent) {
-        star.radius = .55 + relocationRandom() * 1.2;
         star.alpha = .025 + relocationRandom() * .035;
       } else {
-        star.radius = .85 + relocationRandom() * 2.15;
         star.alpha = .17 + relocationRandom() * .34;
         star.glint = relocationRandom() > .9;
       }
@@ -227,9 +230,26 @@
         context.fill();
       }
 
+      const bodyRadius = star.radius + proximity * .7;
+
+      // A soft bloom under the solid core is what reads as a point of light;
+      // the core alone is a flat, printed-looking dot.
+      const bloomRadius = bodyRadius * 2.4;
+
+      if (bloomRadius > 1 && alpha > .03) {
+        const bloomColor = star.blue ? '151, 185, 255' : '231, 237, 255';
+        const bloom = context.createRadialGradient(x, y, 0, x, y, bloomRadius);
+        bloom.addColorStop(0, `rgba(${bloomColor}, ${alpha * .5})`);
+        bloom.addColorStop(1, `rgba(${bloomColor}, 0)`);
+        context.beginPath();
+        context.fillStyle = bloom;
+        context.arc(x, y, bloomRadius, 0, Math.PI * 2);
+        context.fill();
+      }
+
       context.beginPath();
       context.fillStyle = `rgba(${color})`;
-      context.arc(x, y, star.radius + proximity * .7, 0, Math.PI * 2);
+      context.arc(x, y, bodyRadius, 0, Math.PI * 2);
       context.fill();
 
       // Decorative stars keep their static cross; the highlighted one grows its
