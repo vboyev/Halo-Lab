@@ -41,6 +41,12 @@
     ? .18 + (roll ** 2.2) * .9
     : .28 + (roll ** 2.6) * 2);
 
+  // Same skew as starRadius, applied to brightness: a lower floor and a
+  // higher ceiling than the old flat .17–.51 range, so most stars stay quiet
+  // and a few read as distinctly brighter. That spread is what makes the
+  // field feel more contrasty, not just brighter across the board.
+  const starAlpha = (roll) => .1 + (roll ** 2.2) * .65;
+
   const createRandom = (seed) => () => {
     seed |= 0;
     seed = seed + 0x6d2b79f5 | 0;
@@ -78,7 +84,7 @@
             cellWidth,
             cellHeight,
             radius: starRadius(random(), cursorAccent),
-            alpha: cursorAccent ? .025 + random() * .035 : .17 + random() * .34,
+            alpha: cursorAccent ? .025 + random() * .035 : starAlpha(random()),
             glow: 0,
             flare: 0,
             activeSince: -1,
@@ -137,7 +143,7 @@
       if (star.cursorAccent) {
         star.alpha = .025 + relocationRandom() * .035;
       } else {
-        star.alpha = .17 + relocationRandom() * .34;
+        star.alpha = starAlpha(relocationRandom());
         star.glint = relocationRandom() > .9;
       }
       star.blue = relocationRandom() > .52;
