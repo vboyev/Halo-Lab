@@ -70,9 +70,10 @@
             cellY: row * cellHeight,
             cellWidth,
             cellHeight,
-            // Sized up from the original .25–1.46px range so the field reads
-            // as small stars rather than dust specks on the screen.
-            radius: cursorAccent ? .38 + random() * .7 : .55 + random() * 1.35,
+            // Sized up from the original .25–1.46px range (twice, the first
+            // pass wasn't enough) so the field reads as small stars rather
+            // than dust specks on the screen.
+            radius: cursorAccent ? .55 + random() * 1.2 : .85 + random() * 2.15,
             alpha: cursorAccent ? .025 + random() * .035 : .17 + random() * .34,
             glow: 0,
             flare: 0,
@@ -129,10 +130,10 @@
       // Re-rolling size, brightness, and color sells the same illusion: the
       // star that fades back in should look like a new one, not a clone.
       if (star.cursorAccent) {
-        star.radius = .38 + relocationRandom() * .7;
+        star.radius = .55 + relocationRandom() * 1.2;
         star.alpha = .025 + relocationRandom() * .035;
       } else {
-        star.radius = .55 + relocationRandom() * 1.35;
+        star.radius = .85 + relocationRandom() * 2.15;
         star.alpha = .17 + relocationRandom() * .34;
         star.glint = relocationRandom() > .9;
       }
