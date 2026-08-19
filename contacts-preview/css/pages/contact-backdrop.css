@@ -1,0 +1,121 @@
+/* Contacts screens: the animated backdrop slot, and the surfaces sitting over it.
+
+   The host is an opaque layer that fades in over the static gradient once an
+   effect has a context, so the swap is a crossfade rather than a cut. The
+   `.section` keeps its `background-image` on purpose: it is the fallback that
+   stays visible on phones, under `prefers-reduced-motion`, and on devices the
+   effect cannot run on, where the script never adds `.has-contact-backdrop`.
+
+   Whichever effect script the page loads drives this same element, so swapping
+   concepts is a one-line change in `contacts.njk`. */
+
+.contact-backdrop {
+  z-index: 0;
+  pointer-events: none;
+  touch-action: none;
+  opacity: 0;
+  background-color: var(--blue-dark);
+  transition: opacity .8s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.has-contact-backdrop .contact-backdrop {
+  opacity: 1;
+}
+
+.contact-backdrop canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Review cards. The base rule in halo-lab.css paints an opaque
+   #13132b -> #1a1a33 gradient, which reads as a flat panel now that there is a
+   moving backdrop behind it. Same two stops at 80% so the veil tints the card
+   as it drifts past; only the background is translucent, so the logo, quote,
+   and author stay at full strength. */
+
+.contact-reviews__card {
+  background-image: linear-gradient(270deg, rgba(19, 19, 43, .8) 23%, rgba(26, 26, 51, .8));
+}
+
+/* Step counter beside the first step's button. `.form__field` lays its children
+   out as stretched flex items, so without this the "1/2" would sit at the top of
+   the button's 3rem row rather than level with its label. */
+
+.contact-form__step {
+  align-self: center;
+}
+
+/* `.form__field` separates its children by 2rem, which is the right rhythm
+   between the button row and the policy text below it but too wide to read as a
+   counter attached to the button. Only the column gap is narrowed, so the
+   vertical spacing in the block is untouched. */
+
+.form__field.is--bottom {
+  column-gap: .75rem;
+}
+
+/* Review card author. Name and role both inherit .875rem from
+   `.contact-reviews__author-text-wrap`, so the role carries the same weight as
+   the name it belongs to. An em rather than a rem keeps the step proportional at
+   the smaller size the wrap switches to below 991px. */
+
+.contact-reviews__author-text-wrap .opacity-60 {
+  font-size: .9em;
+}
+
+/* FAQ close button. The shared component ships with `transition: all .4s`, an
+   icon already lifted to `z-index: 2`, and a `:hover` that only resets an
+   opacity it never lowered — the slot for a backdrop was there and nothing
+   filled it, so the control gave no feedback at all. On hover a tinted disc
+   scales up behind the glyph and the glyph turns a quarter turn. Scoped to
+   `.contact-faq` so the video and image modals keep their own close button. */
+
+.contact-faq .button-close {
+  border-radius: 50%;
+}
+
+.contact-faq .button-close:before {
+  content: "";
+  background-color: var(--blue-dark-10);
+  border-radius: 50%;
+  opacity: 0;
+  transition: transform .4s cubic-bezier(.14, 0, 0, 1.01), opacity .3s ease;
+  position: absolute;
+  inset: -.375rem;
+  transform: scale(.4);
+}
+
+.contact-faq .button-close__icon {
+  transition: transform .4s cubic-bezier(.14, 0, 0, 1.01);
+}
+
+.contact-faq .button-close:hover:before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.contact-faq .button-close:hover .button-close__icon {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the disc as the hover cue, drop the travel. */
+
+  .contact-faq .button-close:before {
+    transition: opacity .3s ease;
+    transform: none;
+  }
+
+  .contact-faq .button-close__icon,
+  .contact-faq .button-close:hover .button-close__icon {
+    transition: none;
+    transform: none;
+  }
+}
