@@ -243,6 +243,19 @@
   pointer-events: none;
 }
 
+/* The site's root font-size stops growing past 1801px (see
+   css/global-styles.css) so every rem-based dimension, including this
+   canvas's height, is capped there too. On very wide monitors the viewport
+   keeps growing past that cap while the star field doesn't, so the extra
+   vw term restores proportional growth and keeps the lower portion of the
+   hero from reading as empty. The mask above scales with this element's own
+   height, so the fade point moves down with it automatically. */
+@media screen and (min-width: 1801px) {
+  .page-branding-redesign .branding-intro__stars {
+    height: calc(51.3125rem + 7vw);
+  }
+}
+
 .page-branding-redesign .branding-hero {
   position: relative;
   z-index: 1;

@@ -45,7 +45,7 @@
   // higher ceiling than the old flat .17–.51 range, so most stars stay quiet
   // and a few read as distinctly brighter. That spread is what makes the
   // field feel more contrasty, not just brighter across the board.
-  const starAlpha = (roll) => .1 + (roll ** 2.2) * .65;
+  const starAlpha = (roll) => .06 + (roll ** 2.2) * .8;
 
   const createRandom = (seed) => () => {
     seed |= 0;
