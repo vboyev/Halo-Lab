@@ -39,6 +39,8 @@
       autoplay: {
         delay: 0,
         disableOnInteraction: false,
+        // Run the marquee toward the form on the right rather than away from it.
+        reverseDirection: true,
       },
     });
   }

@@ -119,3 +119,24 @@
     transform: none;
   }
 }
+
+/* Short viewports. The site's rem is tied to viewport width (1.1vw), but the
+   height of a laptop screen does not grow with its width, so on a wide-but-short
+   display the card's 40.875rem floor plus the section and container padding asks
+   for more room than there is and the page scrolls — a page built to fill exactly
+   one screen. The rem caps at 20px, so the layout wants roughly 958px of height on
+   a wide display, while a Windows laptop offers about 750px once tabs, address bar
+   and taskbar are subtracted. Below 1000px the card falls back to its content
+   height and the vertical rhythm tightens just enough to fit. */
+
+@media screen and (max-height: 1000px) {
+  .contact-steps {
+    min-height: 0;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .container.mod--new-contact {
+    padding-bottom: 2.5rem;
+  }
+}
