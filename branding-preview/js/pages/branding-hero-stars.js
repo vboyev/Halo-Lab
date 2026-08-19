@@ -70,7 +70,9 @@
             cellY: row * cellHeight,
             cellWidth,
             cellHeight,
-            radius: cursorAccent ? .25 + random() * .55 : .38 + random() * 1.08,
+            // Sized up from the original .25–1.46px range so the field reads
+            // as small stars rather than dust specks on the screen.
+            radius: cursorAccent ? .38 + random() * .7 : .55 + random() * 1.35,
             alpha: cursorAccent ? .025 + random() * .035 : .17 + random() * .34,
             glow: 0,
             flare: 0,
@@ -127,10 +129,10 @@
       // Re-rolling size, brightness, and color sells the same illusion: the
       // star that fades back in should look like a new one, not a clone.
       if (star.cursorAccent) {
-        star.radius = .25 + relocationRandom() * .55;
+        star.radius = .38 + relocationRandom() * .7;
         star.alpha = .025 + relocationRandom() * .035;
       } else {
-        star.radius = .38 + relocationRandom() * 1.08;
+        star.radius = .55 + relocationRandom() * 1.35;
         star.alpha = .17 + relocationRandom() * .34;
         star.glint = relocationRandom() > .9;
       }
@@ -336,9 +338,13 @@
   scheduleDraw();
 })();
 
-/* Match the homepage showreel's responsive scroll reveal. */
+/* Match the homepage showreel's responsive scroll reveal, and give the
+   starfield a matching sense of depth: as the showreel grows toward the
+   viewer, the stars recede and fade over the exact same scroll span, so the
+   two read as one push forward rather than two unrelated animations. */
 (() => {
   const reveal = document.querySelector('[data-branding-showreel-reveal]');
+  const starfield = document.querySelector('[data-branding-starfield]');
 
   if (!reveal || !window.gsap || !window.ScrollTrigger) return;
 
@@ -358,28 +364,58 @@
 
       if (isMobile || reduceMotion) return;
 
-      const animation = gsap.fromTo(
-        reveal,
-        {
-          width: '50%',
-          height: isDesktop ? '20rem' : '8rem',
-        },
-        {
-          width: '100%',
-          height: isDesktop ? '42rem' : '25rem',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: reveal,
-            start: 'top 80%',
-            end: 'top 10%',
-            scrub: true,
+      // Each tween gets its own ScrollTrigger config object — sharing one
+      // instance across tweens isn't a documented pattern, and a matching
+      // trigger/start/end pair scrubs them in perfect sync regardless.
+      const animations = [
+        gsap.fromTo(
+          reveal,
+          {
+            width: '50%',
+            height: isDesktop ? '20rem' : '8rem',
           },
-        },
-      );
+          {
+            width: '100%',
+            height: isDesktop ? '42rem' : '25rem',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: reveal,
+              start: 'top 80%',
+              end: 'top 10%',
+              scrub: true,
+            },
+          },
+        ),
+      ];
+
+      if (starfield) {
+        animations.push(
+          gsap.fromTo(
+            starfield,
+            {
+              scale: 1,
+              opacity: 1,
+            },
+            {
+              scale: .8,
+              opacity: 0,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: reveal,
+                start: 'top 80%',
+                end: 'top 10%',
+                scrub: true,
+              },
+            },
+          ),
+        );
+      }
 
       return () => {
-        animation.scrollTrigger?.kill();
-        animation.kill();
+        animations.forEach((animation) => {
+          animation.scrollTrigger?.kill();
+          animation.kill();
+        });
       };
     },
   );

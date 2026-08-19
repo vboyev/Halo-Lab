@@ -75,10 +75,15 @@
 /* Page-scoped glass treatment for the shared header CTA: no fill, a highlight
    running around the contour, a blurred copy of it glowing underneath, and a
    halo on hover. The header component itself is untouched, so every other route
-   keeps the solid white button. Promote site-wide only after approval. */
+   keeps the solid white button. Promote site-wide only after approval.
+
+   The glow color, rgb(140, 128, 222), is the brand blue #3827c7 lightened
+   toward white at the same hue (~247°) rather than the paler, more cyan
+   rgb(151, 185, 255) used earlier, so the glow reads as light coming off the
+   header's blue icon disc instead of an unrelated, washed-out blue. */
 .page-branding-redesign .header .button.mod--header {
   background:
-    radial-gradient(107.5% 107.5% at 50% 215%, rgba(151, 185, 255, .22) 0%, rgba(151, 185, 255, 0) 100%),
+    radial-gradient(107.5% 107.5% at 50% 215%, rgba(140, 128, 222, .22) 0%, rgba(140, 128, 222, 0) 100%),
     rgba(223, 228, 248, .05);
   background-color: transparent;
   color: #f2f2f2;
@@ -130,13 +135,13 @@
   inset: 0;
   border-radius: inherit;
   background:
-    radial-gradient(85% 120% at 50% 120%, rgba(151, 185, 255, var(--branding-glow-halo, 0)) 0%, rgba(151, 185, 255, 0) 100%),
+    radial-gradient(85% 120% at 50% 120%, rgba(140, 128, 222, var(--branding-glow-halo, 0)) 0%, rgba(140, 128, 222, 0) 100%),
     conic-gradient(
       from var(--branding-glow-angle),
-      rgba(151, 185, 255, .3) 0deg,
-      rgba(151, 185, 255, 0) 110deg,
-      rgba(151, 185, 255, 0) 250deg,
-      rgba(151, 185, 255, .3) 360deg);
+      rgba(140, 128, 222, .3) 0deg,
+      rgba(140, 128, 222, 0) 110deg,
+      rgba(140, 128, 222, 0) 250deg,
+      rgba(140, 128, 222, .3) 360deg);
   filter: blur(18px);
   opacity: .4;
   transition: opacity 1s, --branding-glow-halo 1s;
