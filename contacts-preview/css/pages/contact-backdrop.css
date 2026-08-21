@@ -57,7 +57,8 @@
    counter attached to the button. Only the column gap is narrowed, so the
    vertical spacing in the block is untouched. */
 
-.form__field.is--bottom {
+.form__field.is--bottom,
+.form__field.is--submit {
   column-gap: .75rem;
 }
 
@@ -130,13 +131,33 @@
    height and the vertical rhythm tightens just enough to fit. */
 
 @media screen and (max-height: 1000px) {
+  /* Fill the space that is actually available instead of collapsing to content.
+     The FAQ panel and the reviews strip are absolutely positioned against this
+     card's box, so a card that shrinks to its own content leaves the FAQ shorter
+     than its five questions and they spill out of the white panel. */
+
   .contact-steps {
-    min-height: 0;
+    min-height: min(40.875rem, calc(100vh - 6rem));
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
 
   .container.mod--new-contact {
     padding-bottom: 2.5rem;
+  }
+
+  /* The FAQ panel is sized by the card behind it and its five questions have no
+     room to spare — they already spill by a few pixels on the live site at this
+     height, and the shorter card here turns that into a visible overflow, since
+     the panel does not clip. Reclaim the space from its own padding and the gap
+     between questions. */
+
+  .contact-faq {
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .contact-faq__list {
+    grid-row-gap: .75rem;
   }
 }
