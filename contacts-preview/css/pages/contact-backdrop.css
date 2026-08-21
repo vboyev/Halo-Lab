@@ -62,6 +62,15 @@
   column-gap: .75rem;
 }
 
+/* Validation messages sit at `bottom: -1.5rem` on the field above, outside the
+   flow, so they hang into the 2rem gap and leave only 8px before whatever
+   follows. Above the submit button that reads as the error touching the CTA.
+   The textarea above absorbs the extra room, so the card's height is unchanged. */
+
+.form__field.is--submit {
+  margin-top: .75rem;
+}
+
 /* Review card author. Name and role both inherit .875rem from
    `.contact-reviews__author-text-wrap`, so the role carries the same weight as
    the name it belongs to. An em rather than a rem keeps the step proportional at
@@ -159,5 +168,28 @@
 
   .contact-faq__list {
     grid-row-gap: .75rem;
+  }
+}
+
+/* About project textarea. The base component sets only `padding-top` and
+   `padding-left`, so text runs flush into the right border and sits on the
+   bottom one. Mirror the left value at each breakpoint. */
+
+.input.is--textarea-contact {
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 991px) {
+  .input.is--textarea-contact {
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .input.is--textarea-contact {
+    padding-right: .75rem;
+    padding-bottom: .75rem;
   }
 }
