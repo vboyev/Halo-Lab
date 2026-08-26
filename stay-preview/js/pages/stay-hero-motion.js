@@ -7,8 +7,7 @@
   const heading = hero.querySelector('h1');
   const logo = hero.querySelector('.project-new-hero__logo-wrap');
   const lead = hero.querySelector('.branding-hero__lead');
-  const action = hero.querySelector('.branding-hero__action');
-  const blocks = [logo, heading, lead, action].filter(Boolean);
+  const blocks = [logo, heading, lead].filter(Boolean);
   gsap.set(blocks, { visibility: 'hidden' });
 
   // Don't leave content hidden if fonts take unusually long to load.
@@ -22,7 +21,7 @@
         split = new window.SplitText(heading, { type: 'lines' });
       }
       const lines = split?.lines || [heading].filter(Boolean);
-      const targets = [logo, ...lines, lead, action].filter(Boolean);
+      const targets = [logo, ...lines, lead].filter(Boolean);
       const finalOpacity = targets.map(element => getComputedStyle(element).opacity);
       gsap.set(blocks, { clearProps: 'visibility' });
       gsap.fromTo(targets,
