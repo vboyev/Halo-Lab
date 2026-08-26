@@ -1,0 +1,59 @@
+/* Light frosted-glass counterpart to the shared header. */
+.banner-cookie {
+  background-color: #fff;
+  color: #02021e;
+  opacity: 1;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .banner-cookie {
+    background-color: rgba(255, 255, 255, .78);
+    -webkit-backdrop-filter: blur(40px) saturate(1.7);
+    backdrop-filter: blur(40px) saturate(1.7);
+  }
+}
+
+.banner-cookie .banner-terms__text {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  color: #02021e;
+}
+.banner-cookie .banner-terms__icon {
+  display: block;
+  flex: none;
+  position: relative;
+  width: 2.5rem;
+  height: 1rem;
+  overflow: hidden;
+  transform: translateY(2px);
+}
+/* Trim the supplied logo's transparent canvas without changing the asset. */
+.banner-cookie .banner-terms__icon img {
+  position: absolute;
+  width: 2.824rem;
+  max-width: none;
+  height: 1.765rem;
+  left: -.147rem;
+  top: -.441rem;
+}
+
+@media screen and (min-width: 992px) {
+  .banner-cookie .banner-terms__text { font-size: calc(.875rem + 2px); }
+}
+
+.banner-cookie .button.is-tiny-simple.is-deny {
+  background-color: #ececf2;
+  color: #02021e;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.banner-cookie .button.is-tiny-simple.is-deny:hover,
+.banner-cookie .button.is-tiny-simple.is-deny:focus-visible {
+  background-color: #000;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-cookie .button.is-tiny-simple.is-deny { transition: none; }
+}

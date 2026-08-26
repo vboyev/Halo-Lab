@@ -1,0 +1,82 @@
+/* Ordinary project template: Webflow rich-text layout and responsive media rules. */
+.project-simple__rich-main ol > li { padding-left: 0; background-image: none; }
+.project-simple__rich-main ul > li { padding-top: 0; padding-bottom: 0; border: 0; }
+.project-simple__rich-main p + figure { margin-top: 3.5rem; }
+[data-component="about-2"] h2 { margin-top: 3rem; }
+[data-component="media"] figure > div { display: block; }
+
+.project__rich-main > figure,
+.project__rich-main > figure > div,
+.project__rich-main > .w-embed.is-iframe {
+  position: relative;
+  z-index: 1;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.project__rich-main > figure.w-richtext-align-center,
+.project__rich-main > figure.w-richtext-align-center > div,
+.project-simple__rich-main > figure.w-richtext-align-center,
+.project-simple__rich-main > figure.w-richtext-align-center > div { width: 100%; max-width: 100%; }
+
+.project__rich-main > figure.w-richtext-align-floatleft {
+  display: flex;
+  width: 47%;
+  clear: none;
+  float: none;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-right: 0;
+  margin-bottom: 2rem;
+}
+
+.project__rich-main > figure.w-richtext-align-floatleft > div { width: 3rem; max-width: 3rem; flex-shrink: 0; }
+.project__rich-main > figure.w-richtext-align-floatleft figcaption strong { font-size: 1.125rem; }
+.project__rich-main figure div { color: var(--black); }
+.project__rich-main h2 > a,
+.project-simple__rich-main h2 > a { pointer-events: none; color: var(--black); }
+.project__rich-main ol { list-style: none; counter-reset: ordinary-project-counter; }
+.project__rich-main ol li { counter-increment: ordinary-project-counter; }
+.project__rich-main ol li::before { position: absolute; top: 0; left: 0; color: rgb(2 2 30 / 65%); content: counter(ordinary-project-counter) '. '; }
+[data-component="review"] figure.w-richtext-align-floatleft { max-width: 4rem; max-height: 4rem; margin-right: 0; }
+.project-nav__desktop { display: none; }
+
+@media screen and (min-width: 992px) {
+  .project-nav__desktop { display: block; }
+  [data-component="workflow"] > figure:nth-of-type(2),
+  [data-component="workflow"] > figure:nth-of-type(3),
+  [data-component="review"] > figure.w-richtext-align-center:nth-of-type(3) { display: none; }
+}
+
+@media screen and (max-width: 991px) {
+  [data-component="workflow"] > figure:nth-of-type(1),
+  [data-component="workflow"] > figure:nth-of-type(3) { display: none; }
+  [data-component="workflow"] > figure:nth-of-type(2) { display: block; }
+  [data-component="review"] > figure.w-richtext-align-center:nth-of-type(2) { display: none; }
+  [data-component="review"] > figure.w-richtext-align-center:nth-of-type(3) { display: block; max-width: 100%; }
+  .project__rich-main > figure.w-richtext-align-floatleft { width: 100%; margin-bottom: 1.5rem; }
+  .project__rich-main > figure.w-richtext-align-floatleft > div { width: 2.5rem; max-width: 2.5rem; }
+  .project__rich-main > p + p,
+  [data-component="about"] p + p { margin-top: 2rem; }
+}
+
+@media screen and (max-width: 767px) {
+  .project__rich-main > figure.w-richtext-align-floatleft { margin-bottom: 1rem; }
+  .project__rich-main > p + p,
+  [data-component="about"] p + p { margin-top: 1rem; }
+  .project-simple__rich-main p + figure,
+  [data-component="about-2"] h2 { margin-top: 2rem; }
+}
+
+@media screen and (max-width: 479px) {
+  .project__rich-main > figure.w-richtext-align-floatleft { width: 100% !important; }
+  [data-component="workflow"] figure:nth-of-type(1),
+  [data-component="workflow"] figure:nth-of-type(2) { display: none; }
+  [data-component="workflow"] figure:nth-of-type(3) { display: block; }
+  [data-component="review"] figure.w-richtext-align-floatleft { max-width: 3rem; max-height: 3rem; }
+  [data-component="review"] > figure.w-richtext-align-center:nth-of-type(3) { display: none; }
+  [data-component="review"] > figure.w-richtext-align-center:nth-of-type(2) { display: block; max-width: 100%; }
+  .project__rich-main > figure.w-richtext-align-floatleft figcaption strong { font-size: 1rem; }
+}

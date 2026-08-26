@@ -1,0 +1,145 @@
+/* Stay-only preview styles. */
+[data-project-slug="stay"] .collection__list.mod--project-new-about {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .5rem;
+}
+[data-project-slug="stay"] .project-new__services {
+  margin-right: 0;
+}
+@media (min-width: 992px) {
+  [data-project-slug="stay"] .mod--project-new-about > .container {
+    display: grid;
+    grid-template-columns: 24.5rem minmax(0, 1fr) max-content;
+    gap: 3rem 2rem;
+    align-items: start;
+  }
+  [data-project-slug="stay"] .project-new__rich-about {
+    display: contents;
+  }
+  [data-project-slug="stay"] .project-new__rich-about h2 {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: auto;
+    margin: 0;
+  }
+  [data-project-slug="stay"] .project-new__rich-about p {
+    grid-column: 2;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  [data-project-slug="stay"] .project-new__services {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+}
+
+[data-project-slug="stay"] .collection__item.mod--project-new-about {
+  height: auto;
+  min-height: 2.5rem;
+  padding: .5rem 1rem;
+  font-size: .875rem;
+  line-height: 1.4;
+  transition: background-color .2s ease, color .2s ease;
+}
+@media (max-width: 479px) {
+  [data-project-slug="stay"] .collection__item.mod--project-new-about {
+    min-height: 2rem;
+    padding: .375rem .75rem;
+    font-size: .6875rem;
+  }
+}
+[data-project-slug="stay"] .collection__item.mod--project-new-about:hover,
+[data-project-slug="stay"] .collection__item.mod--project-new-about:focus-within {
+  background-color: #000;
+  color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-project-slug="stay"] .collection__item.mod--project-new-about {
+    transition: none;
+  }
+}
+
+/* Process layout enabled after the progressive enhancement initializes. */
+.stay-process { width: 100%; margin-top: 3rem; }
+.project-new__rich-main .stay-process__title {
+  width: auto;
+  padding: 0;
+  margin: 0 0 1rem;
+  font-family: 'Instrument Serif', Arial, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+.stay-process + .w-embed,
+.stay-process + figure { margin-top: 3rem; }
+
+@media (min-width: 992px) {
+  .main.stay-process-experiment,
+  .section.stay-process-host { overflow: clip; }
+  .stay-process {
+    display: grid;
+    grid-template-columns: 24.5rem minmax(0, 1fr);
+    gap: 2rem;
+    margin-top: 6rem;
+  }
+  .stay-process__rail,
+  .stay-process__content { min-width: 0; }
+  .stay-process__sidebar { position: sticky; top: 7rem; }
+  .project-new__rich-main .stay-process__title { margin: 0; }
+  .stay-process__content > p { margin: 0; }
+  .stay-process__content > .project-new__drops { margin-left: 0; }
+  .stay-process + .w-embed,
+  .stay-process + figure { margin-top: 6rem; }
+}
+
+/* Keep the original inline pills, with a smaller type size and footprint. */
+.stay-process__deliverables-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: .5rem .75rem;
+  margin: 1.5rem 0;
+}
+.stay-process .project-new__rich-dropdown .stay-process__deliverables-label {
+  display: flex;
+  align-items: center;
+  flex: none;
+  min-height: 2.5rem;
+  margin: 0;
+}
+.stay-process .project-new__rich-dropdown .stay-process__tags {
+  flex: 1 1 12rem;
+  min-width: 0;
+  margin: 0;
+}
+.stay-process .project-new__rich-dropdown .stay-process__tags li {
+  height: auto;
+  min-height: 2.5rem;
+  padding: .5rem 1rem .5rem 2rem !important;
+  background-position: .75rem center;
+  background-size: .875rem;
+  font-size: .875rem !important;
+  line-height: 1.4;
+}
+.stay-process .project-new__rich-dropdown .stay-process__deliverables-row + figure {
+  margin-top: 0;
+}
+@media (max-width: 479px) {
+  .stay-process .project-new__rich-dropdown .stay-process__deliverables-label {
+    min-height: 2rem;
+  }
+  .stay-process .project-new__rich-dropdown .stay-process__tags li {
+    min-height: 2rem;
+    padding: .375rem .75rem .375rem 1.65rem !important;
+    background-position: .625rem center;
+    background-size: .75rem;
+    font-size: .6875rem !important;
+  }
+}
