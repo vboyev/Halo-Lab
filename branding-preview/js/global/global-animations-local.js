@@ -59,6 +59,12 @@ $(document).ready(() => {
   //
   {
     function animRun() {
+      // Stay's entrance sequence is limited to its hero; keep hover/form states intact.
+      if (document.body.hasAttribute('data-hero-only-reveal')) {
+        $('[data-anim-trigger]:not([data-anim-trigger=load]) [data-anim-delay]')
+          .css('transition', 'none').removeClass('anim');
+        return;
+      }
       const elements = $('[data-anim-trigger]').not('[data-anim-trigger=load]');
 
       function isInViewport(elem) {

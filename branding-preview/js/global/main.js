@@ -17,6 +17,25 @@ $(document).ready(() => {
   };
   const formspreeSelector = 'form[target="form-order"], form[target="form-subs"]';
   const formspreeExcludedPaths = new Set(['/components.html', '/style-guide.html']);
+  const turnstileSiteKey = '0x4AAAAAAEP0QWTQ2U47oHyP';
+  const turnstileScriptUrl = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  const turnstileWidgets = new WeakMap();
+  let turnstileScriptPromise;
+  let turnstileWidgetIndex = 0;
+  const brandScoreFormId = 'wf-form-Brand-Score';
+  const brandScoreFieldNames = [
+    'Full-Name',
+    'Email',
+    'Position',
+    'Survey-score',
+    'Survey-result',
+    'Country',
+    'Page of submit',
+    'Lifecycle',
+    'Lead ID',
+    'Referrer',
+    'Initial Source',
+  ];
 
   function getAnalyticsContext(element) {
     const contextElement = element?.closest?.('[data-analytics-service], [data-analytics-page-type]')
@@ -135,11 +154,138 @@ $(document).ready(() => {
     formData.set('Form group', formGroup);
     formData.set('Page title', document.title);
     formData.set('Page URL', window.location.href);
+    formData.set('publishedPath', window.location.pathname);
 
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach((key) => {
       const value = query.get(key);
       if (value) formData.set(key, value);
     });
+  }
+
+  async function syncInternationalPhoneFields(form) {
+    const getIntlTelInputInstance = window.intlTelInputGlobals?.getInstance;
+    if (typeof getIntlTelInputInstance !== 'function') return;
+
+    const phoneInputs = form.querySelectorAll('input[type="tel"]');
+
+    await Promise.all([...phoneInputs].map(async (phoneInput) => {
+      const iti = getIntlTelInputInstance(phoneInput);
+      if (!iti) return;
+
+      try {
+        await iti.promise;
+      } catch (error) {
+        console.warn('International phone input did not finish loading', error);
+        return;
+      }
+
+      const inputWrapper = phoneInput.closest('.iti') || form;
+      const fullPhoneInput = inputWrapper.querySelector('input[name="phone_full"]');
+      const countryCodeInput = inputWrapper.querySelector('input[name="country_code"]');
+      const countryCode = iti.getSelectedCountryData()?.iso2 || '';
+
+      if (fullPhoneInput) fullPhoneInput.value = iti.getNumber() || '';
+      if (countryCodeInput) countryCodeInput.value = countryCode;
+    }));
+  }
+
+  function getFormspreeFormData(form) {
+    const sourceFormData = new FormData(form);
+
+    // The survey radios are only used to calculate the final score. Leads
+    // receives the three contact fields, score, result, and attribution fields.
+    if (form.id === brandScoreFormId) {
+      const formData = new FormData();
+      brandScoreFieldNames.forEach((fieldName) => {
+        if (sourceFormData.has(fieldName)) {
+          formData.set(fieldName, sourceFormData.get(fieldName));
+        }
+      });
+      return formData;
+    }
+
+    appendFormspreeMetadata(form, sourceFormData);
+    return sourceFormData;
+  }
+
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (turnstileScriptPromise) return turnstileScriptPromise;
+
+    turnstileScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = turnstileScriptUrl;
+      script.async = true;
+      script.onload = () => {
+        if (window.turnstile) {
+          resolve(window.turnstile);
+          return;
+        }
+        reject(new Error('Cloudflare Turnstile did not initialize'));
+      };
+      script.onerror = () => reject(new Error('Cloudflare Turnstile failed to load'));
+      document.head.appendChild(script);
+    });
+
+    return turnstileScriptPromise;
+  }
+
+  function createTurnstileContainer(form) {
+    const container = document.createElement('div');
+    container.id = `turnstile-widget-${turnstileWidgetIndex += 1}`;
+    container.dataset.turnstileContainer = '';
+
+    const submitWrapper = form.querySelector('[data-submit-wrap], .form-sbtn__wrap');
+    if (submitWrapper) {
+      submitWrapper.insertAdjacentElement('afterend', container);
+    } else {
+      form.appendChild(container);
+    }
+
+    return container;
+  }
+
+  async function getTurnstileToken(form) {
+    const turnstile = await loadTurnstile();
+    let state = turnstileWidgets.get(form);
+
+    if (!state) {
+      const container = createTurnstileContainer(form);
+      state = { container, pending: null, widgetId: null };
+      state.widgetId = turnstile.render(`#${container.id}`, {
+        sitekey: turnstileSiteKey,
+        theme: 'auto',
+        appearance: 'interaction-only',
+        execution: 'execute',
+        callback(token) {
+          if (!state.pending) return;
+          state.pending.resolve(token);
+          state.pending = null;
+        },
+        'error-callback'(errorCode) {
+          if (!state.pending) return;
+          state.pending.reject(new Error(`Cloudflare Turnstile failed: ${errorCode}`));
+          state.pending = null;
+        },
+      });
+      turnstileWidgets.set(form, state);
+    }
+
+    if (state.pending) return state.pending.promise;
+
+    const pending = {};
+    pending.promise = new Promise((resolve, reject) => {
+      pending.resolve = resolve;
+      pending.reject = reject;
+    });
+    state.pending = pending;
+    turnstile.execute(`#${state.container.id}`);
+    return pending.promise;
+  }
+
+  function resetTurnstile(form) {
+    const state = turnstileWidgets.get(form);
+    if (state && window.turnstile) window.turnstile.reset(state.widgetId);
   }
 
   async function submitFormspreeForm(form, event) {
@@ -158,8 +304,10 @@ $(document).ready(() => {
     setFormLoadingState(form, true);
 
     try {
-      const formData = new FormData(form);
-      appendFormspreeMetadata(form, formData);
+      const turnstileToken = await getTurnstileToken(form);
+      await syncInternationalPhoneFields(form);
+      const formData = getFormspreeFormData(form);
+      formData.set('cf-turnstile-response', turnstileToken);
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -169,10 +317,12 @@ $(document).ready(() => {
 
       if (!response.ok) throw new Error(`Formspree request failed with ${response.status}`);
 
+      resetTurnstile(form);
       setFormLoadingState(form, false);
       $(form).trigger('halo:form-success');
     } catch (error) {
       console.error('Formspree submission failed', error);
+      resetTurnstile(form);
       setFormLoadingState(form, false);
       showFormErrorState(form);
       $(form).trigger('halo:form-error');

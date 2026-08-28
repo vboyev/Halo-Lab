@@ -208,30 +208,6 @@
   padding: 1.5rem;
 }
 
-/* Page-scoped preview; promote this treatment to the shared cookie component after approval. */
-.page-branding-redesign .banner-cookie {
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  background-color: #fff;
-  color: #02021e;
-  opacity: 1;
-}
-
-.page-branding-redesign .banner-cookie .banner-terms__text {
-  color: #02021e;
-}
-
-@media screen and (min-width: 992px) {
-  .page-branding-redesign .banner-cookie .banner-terms__text {
-    font-size: calc(.875rem + 2px);
-  }
-}
-
-.page-branding-redesign .banner-cookie .button.is-tiny-simple.is-deny {
-  background-color: #ececf2;
-  color: #02021e;
-}
-
 .page-branding-redesign .branding-intro__stars {
   position: absolute;
   z-index: 0;

@@ -1,0 +1,41 @@
+/* Shared case-study interactions, identical on Home and Branding. */
+.section.mod--case-study { overflow: clip; }
+@media (max-width: 479px) {
+  /* Keep the mobile static preview after resizing from the desktop follower. */
+  .case-study__wrap { transform: none !important; }
+}
+  .section-wrap.mod--case::-webkit-scrollbar {
+    display: none;
+  }
+  .section.mod--case-study:hover .case-study__videos {
+    clip-path: inset(0% 0rem 0rem 0rem);
+  }
+  .section.mod--case-study:hover .case-study__counts,
+  .section.mod--case-study:hover .case-study__title {
+    opacity: 1;
+  }
+  .cases-study__text.is-active {
+    top: 0rem !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+  .cases-study__text.is-prev {
+    top: -20rem !important;
+    opacity: 0 !important;
+  }
+  .case-study__video-wrap.is-active {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+@keyframes scroll-wheel {
+0%, 100% {
+  transform: translateY(0);
+}
+50% {
+  transform: translateY(0.3rem);
+}
+}
+.scroll-hint__wheel {
+animation: scroll-wheel 1.35s cubic-bezier(.76, 0, .24, 1) infinite alternate;
+}
