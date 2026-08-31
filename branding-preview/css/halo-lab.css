@@ -1,6 +1,6 @@
 @font-face {
   font-family: Instrument Serif;
-  src: url('../fonts/InstrumentSerif-Italic.woff2') format("woff2");
+  src: url("/Halo-Lab/branding-preview/fonts/InstrumentSerif-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: Suisse;
-  src: url('../fonts/SuisseIntl-Light-WebS.woff') format("woff");
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Light-WebS.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: Suisse;
-  src: url('../fonts/SuisseIntl-Regular-WebS.woff') format("woff");
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Regular-WebS.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: Suisse;
-  src: url('../fonts/SuisseIntl-Medium-WebS.woff') format("woff");
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Medium-WebS.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: Suisse;
-  src: url('../fonts/SuisseIntl-Bold-WebS.woff') format("woff");
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Bold-WebS.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: Suisse;
-  src: url('../fonts/SuisseIntl-SemiBold.woff') format("woff");
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -137,7 +137,7 @@
 
 .w-checkbox-input--inputType-custom.w--redirected-checked {
   background-color: #3898ec;
-  background-image: url('https://d3e54v103j8qbb.cloudfront.net/static/custom-checkbox-checkmark.589d534424.svg');
+  background-image: url("https://d3e54v103j8qbb.cloudfront.net/static/custom-checkbox-checkmark.589d534424.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -823,7 +823,7 @@ figcaption {
 }
 
 .section.mod--new-contact {
-  background-image: url('../images/bg-contact.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-contact.avif");
   background-position: 100% 100%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -836,7 +836,7 @@ figcaption {
 }
 
 .section.mod--new-contact.is--success {
-  background-image: url('../images/bg-contact-success.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-contact-success.avif");
   background-position: 0 100%;
 }
 
@@ -894,7 +894,7 @@ figcaption {
 
 .section.mod--brand-score {
   background-color: #000218;
-  background-image: url('../images/survey-bg.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/survey-bg.avif");
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -1029,7 +1029,7 @@ figcaption {
   max-width: 70rem;
   color: var(--blue-dark);
   text-align: left;
-  background-image: linear-gradient(#fff0 20%, #fff 21%), url('../images/card-discuss_laptop.svg');
+  background-image: linear-gradient(#fff0 20%, #fff 21%), url("/Halo-Lab/branding-preview/images/card-discuss_laptop.svg");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -1377,7 +1377,7 @@ figcaption {
   min-height: 41.2rem;
   color: var(--blue-dark);
   text-align: left;
-  background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-discuss_laptop.svg');
+  background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-discuss_laptop.svg");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 150%;
@@ -2150,7 +2150,7 @@ figcaption {
 
 .columns__col.mod--contact-success {
   border-radius: var(--24);
-  background-image: url('../images/card-ContactSuccess_laptop.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/card-ContactSuccess_laptop.avif");
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -2279,8 +2279,8 @@ figcaption {
   border-radius: 1.5rem;
   max-width: 43.125rem;
   height: 31.75rem;
-  -webkit-mask-image: url('../images/features_onboarding_1.avif');
-  mask-image: url('../images/features_onboarding_1.avif');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/features_onboarding_1.avif");
+  mask-image: url("/Halo-Lab/branding-preview/images/features_onboarding_1.avif");
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
   -webkit-mask-size: 100% 100%;
@@ -2598,7 +2598,7 @@ figcaption {
 
 .swiper.mod--shots {
   z-index: 0;
-  background-image: url('../images/slider-bg_dark-invert_1.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/slider-bg_dark-invert_1.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -2844,7 +2844,7 @@ figcaption {
 .swiper-slide.mod--post-big {
   opacity: 1;
   transform-origin: 0 0;
-  background-image: url('../images/bg-card-postBig_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -2859,7 +2859,7 @@ figcaption {
 }
 
 .swiper-slide.mod--post-big:last-child {
-  background-image: url('../images/bg-card-postBig2_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig2_laptop.webp");
 }
 
 .swiper-slide.mod--post-big.anim {
@@ -3001,7 +3001,7 @@ figcaption {
   width: 100%;
   height: 49rem;
   transform-style: preserve-3d;
-  background-image: url('../images/slider-bg_dark_1.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/slider-bg_dark_1.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -3015,7 +3015,7 @@ figcaption {
 }
 
 .swiper-slide.mod--dashboard.is--light {
-  background-image: url('../images/slider-bg_light2_1.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/slider-bg_light2_1.avif");
 }
 
 .swiper-slide.mod--dashboard.is--has-text {
@@ -4525,7 +4525,7 @@ figcaption {
 
 .text-rich li {
   color: #02021eb3;
-  background-image: url('../images/post-list-bullet.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/post-list-bullet.svg");
   background-position: 0 33%;
   background-repeat: no-repeat;
   background-size: auto;
@@ -4549,7 +4549,7 @@ figcaption {
   grid-row-gap: 1.5rem;
   min-height: auto;
   color: var(--blue-dark);
-  background-image: url('../images/icon-quotes.svg'), url('../images/bg-card-quote.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-quotes.svg"), url("/Halo-Lab/branding-preview/images/bg-card-quote.svg");
   background-position: 96% 2rem, 100% 100%;
   background-repeat: no-repeat, no-repeat;
   background-size: 1.5rem, cover;
@@ -4955,7 +4955,7 @@ figcaption {
 .discuss__sidebar {
   height: 100%;
   color: var(--blue-dark);
-  background-image: url('../images/card-discussReview_laptop.webp'), linear-gradient(#e9e9eb00 49%, #f5f5f7 50%);
+  background-image: url("/Halo-Lab/branding-preview/images/card-discussReview_laptop.webp"), linear-gradient(#e9e9eb00 49%, #f5f5f7 50%);
   background-position: 100% 0, 0 0;
   background-repeat: no-repeat, repeat;
   background-size: 100%, auto;
@@ -5275,7 +5275,7 @@ figcaption {
 
 .list__item.mod--contact {
   opacity: 1;
-  background-image: url('../images/list-icon.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/list-icon.svg");
   background-position: 0%;
   background-repeat: no-repeat;
   background-size: 1.25rem;
@@ -5510,7 +5510,7 @@ figcaption {
 .home__container {
   grid-column-gap: 2rem;
   grid-row-gap: 2rem;
-  background-image: url('../images/bg-card-hero_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-hero_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -5573,7 +5573,7 @@ figcaption {
 }
 
 .card__container {
-  background-image: linear-gradient(180deg, transparent 19%, var(--white) 20%), url('../images/card-works_laptop_1.avif');
+  background-image: linear-gradient(180deg, transparent 19%, var(--white) 20%), url("/Halo-Lab/branding-preview/images/card-works_laptop_1.avif");
   opacity: 1;
   transform-origin: 50% 0;
   color: var(--blue-dark);
@@ -5593,7 +5593,7 @@ figcaption {
 }
 
 .card__container.mod--upsell {
-  background-image: linear-gradient(to bottom, transparent 30%, var(--white) 31%), url('../images/card-upsell_laptop.webp');
+  background-image: linear-gradient(to bottom, transparent 30%, var(--white) 31%), url("/Halo-Lab/branding-preview/images/card-upsell_laptop.webp");
 }
 
 .works__more {
@@ -5684,8 +5684,8 @@ figcaption {
   padding: 2.5rem;
   display: flex;
   position: relative;
-  -webkit-mask-image: url('../images/bg-card-reviews_laptop.webp');
-  mask-image: url('../images/bg-card-reviews_laptop.webp');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_laptop.webp");
+  mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_laptop.webp");
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
@@ -5698,7 +5698,7 @@ figcaption {
 .reviews__card.is--grey-border {
   color: var(--blue-dark);
   background-color: #3719ca00;
-  background-image: url('../images/bg-card-reviewsBorder_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-reviewsBorder_laptop.webp");
   background-size: 100% 100%;
   border-radius: 0;
   align-items: flex-start;
@@ -5976,7 +5976,7 @@ figcaption {
 
 .post-card__img-link.is-big {
   background-color: var(--transparent);
-  background-image: url('../images/bg-card-postBig2_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig2_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -5990,7 +5990,7 @@ figcaption {
 }
 
 .post-card__img-link.is-big.is-big-border {
-  background-image: url('../images/bg-card-postBorderBig_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBorderBig_laptop.webp");
   align-items: stretch;
   height: 100%;
   padding-top: 4.5rem;
@@ -6312,7 +6312,7 @@ figcaption {
 }
 
 .post__style-link a {
-  background-image: url('../images/post-redirect-icon.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/post-redirect-icon.svg");
   background-position: 2rem;
   background-repeat: no-repeat;
   background-size: auto;
@@ -6330,7 +6330,7 @@ figcaption {
 
 .post__estimation {
   z-index: 1;
-  background-image: url('../images/bg-card-exeprt_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -6346,8 +6346,8 @@ figcaption {
   display: flex;
   position: relative;
   overflow: hidden;
-  -webkit-mask-image: url('../images/bg-card-exeprt_laptop.webp');
-  mask-image: url('../images/bg-card-exeprt_laptop.webp');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_laptop.webp");
+  mask-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_laptop.webp");
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
   -webkit-mask-size: 100% 100%;
@@ -6475,7 +6475,7 @@ figcaption {
   grid-row-gap: 0rem;
   min-height: 28.25rem;
   color: var(--blue-dark);
-  background-image: linear-gradient(#fff0 20%, #fff 21%), url('../images/bg-card-benefits_laptop.webp');
+  background-image: linear-gradient(#fff0 20%, #fff 21%), url("/Halo-Lab/branding-preview/images/bg-card-benefits_laptop.webp");
   background-position: 0 0, 0 0;
   background-size: auto, 100%;
   border-bottom-right-radius: 1.5rem;
@@ -6491,7 +6491,7 @@ figcaption {
   grid-row-gap: 0rem;
   height: 100%;
   color: var(--blue-dark);
-  background-image: url('../images/bg-card-benefits_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_laptop.webp");
   background-size: 100% 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -6509,7 +6509,7 @@ figcaption {
   grid-row-gap: 0rem;
   min-height: 31.25rem;
   color: var(--blue-dark);
-  background-image: url('../images/bg-card-benefits_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_laptop.webp");
   background-size: 100% 100%;
   flex-direction: column;
   justify-content: space-between;
@@ -6626,7 +6626,7 @@ figcaption {
   transform: scale3d(1none, 1none, 1none);
   object-fit: cover;
   transform-style: preserve-3d;
-  background-image: linear-gradient(#e9e9ea, #e9e9ea), url('../images/bg-card-worksSlide_laptop.webp');
+  background-image: linear-gradient(#e9e9ea, #e9e9ea), url("/Halo-Lab/branding-preview/images/bg-card-worksSlide_laptop.webp");
   background-position: 0 0, 0 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100% 100%;
@@ -6803,7 +6803,7 @@ figcaption {
 .faq-cta {
   grid-column-gap: var(--32);
   grid-row-gap: var(--32);
-  background-image: url('../images/bg-card-askBlue_laptop.webp'), linear-gradient(#3a23bb00 49%, #3a23bb 50%);
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-askBlue_laptop.webp"), linear-gradient(#3a23bb00 49%, #3a23bb 50%);
   background-position: 0 0, 0 0;
   background-repeat: no-repeat, repeat;
   background-size: 100%, auto;
@@ -6819,7 +6819,7 @@ figcaption {
 }
 
 .faq-cta.is-border {
-  background-image: url('../images/card-askBorder_laptop_1.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/card-askBorder_laptop_1.avif");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -6838,7 +6838,7 @@ figcaption {
 }
 
 .faq-cta.is--linkedin {
-  background-image: url('../images/card-askBorder_laptop_1.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/card-askBorder_laptop_1.avif");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -7177,7 +7177,7 @@ figcaption {
 }
 
 .button__bg.mod--instagram {
-  background-image: url('../images/bg-Instagram.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-Instagram.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: cover;
@@ -7553,7 +7553,7 @@ figcaption {
 .toc__collar {
   z-index: 1;
   background-color: var(--white);
-  background-image: url('../images/toc-collar_laptop.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/toc-collar_laptop.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: contain;
@@ -7580,7 +7580,7 @@ figcaption {
   grid-row-gap: 1.5rem;
   max-width: 34.6875rem;
   color: var(--blue-dark);
-  background-image: url('../images/error__bg.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/error__bg.svg");
   background-position: 50% 100%;
   background-size: cover;
   flex-direction: column;
@@ -7641,7 +7641,7 @@ figcaption {
   grid-row-gap: 2rem;
   opacity: 1;
   transform-origin: 50% 0;
-  background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/card-serviceHero_laptop.svg');
+  background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/card-serviceHero_laptop.svg");
   background-position: 0 0, 0 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -7664,7 +7664,7 @@ figcaption {
 }
 
 .service-hero__card.is--style-3 {
-  background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/card-serviceHero3.svg');
+  background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/card-serviceHero3.svg");
 }
 
 .service-hero__video {
@@ -7903,7 +7903,7 @@ figcaption {
 .post__rich-text blockquote {
   color: var(--blue-dark);
   background-color: #fff3db;
-  background-image: url('../images/quote-corall-laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/quote-corall-laptop.webp");
   background-position: 0 101%;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -8132,7 +8132,7 @@ figcaption {
 
 .case__rich-text blockquote {
   grid-row-gap: 3rem;
-  background-image: url('../images/icon-quote.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-quote.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 2.5rem;
@@ -8555,7 +8555,7 @@ figcaption {
 .case__rich-result li {
   grid-row-gap: 1rem;
   color: #02021eb3;
-  background-image: url('../images/bg-card-caseResults_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-caseResults_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -8579,7 +8579,7 @@ figcaption {
 
 .case__rich-result blockquote {
   grid-row-gap: 1.5rem;
-  background-image: url('../images/icon-quote.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-quote.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: auto;
@@ -8746,7 +8746,7 @@ figcaption {
 
 .case__rich-steps blockquote {
   grid-row-gap: 1.5rem;
-  background-image: url('../images/icon-quote.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-quote.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: auto;
@@ -9207,7 +9207,7 @@ figcaption {
 }
 
 .service-other__card.is-first {
-  background-image: url('../images/bg-card-servOther_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-servOther_laptop.webp");
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -9580,7 +9580,7 @@ figcaption {
 }
 
 .expertise__card {
-  background-image: url('../images/bg-card-expertise_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertise_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -9598,7 +9598,7 @@ figcaption {
   width: 22rem;
   color: var(--white);
   cursor: auto;
-  background-image: url('../images/bg-card-expertiseBlue_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertiseBlue_laptop.webp");
   justify-content: space-between;
   align-items: stretch;
   margin-right: auto;
@@ -9715,7 +9715,7 @@ figcaption {
 }
 
 .service-releted__card {
-  background-image: url('../images/card-benefitsBorder.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -10104,7 +10104,7 @@ figcaption {
 }
 
 .span.mod--donation-flag {
-  background-image: url('../images/icon-flag-Ukraine.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-flag-Ukraine.webp");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -10157,7 +10157,7 @@ figcaption {
 }
 
 .dribble-card__border {
-  background-image: url('../images/bg-card-reviewsBorder_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-reviewsBorder_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -10201,7 +10201,7 @@ figcaption {
 }
 
 .project-card-big__img-wrap.mod--cases-cta {
-  background-image: url('../images/clutch-cases-cta.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/clutch-cases-cta.webp");
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -10380,7 +10380,7 @@ figcaption {
 .service-other__link {
   z-index: 2;
   opacity: .8;
-  background-image: url('../images/card-benefitsBorder.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -10433,7 +10433,7 @@ figcaption {
 
 .solutions__card.is--cta {
   color: var(--blue-dark);
-  background-image: url('../images/card-solution.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/card-solution.webp");
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -10442,7 +10442,7 @@ figcaption {
 }
 
 .solutions__card.is--cta-blue {
-  background-image: url('../images/bg-card-expertiseBlue_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertiseBlue_laptop.webp");
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -10489,7 +10489,7 @@ figcaption {
 }
 
 .solutions__rich.is--dropdown li {
-  background-image: url('../images/icon-check-white.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-check-white.svg");
   background-position: 0 2px;
   background-repeat: no-repeat;
   background-size: 1.25rem;
@@ -10513,7 +10513,7 @@ figcaption {
 
 .solutions__rich.is--rhombus-list li {
   color: var(--white-70);
-  background-image: url('../images/icon-rhombus.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-rhombus.svg");
   background-position: 0 5px;
   background-repeat: no-repeat;
   background-size: 1rem;
@@ -10883,7 +10883,7 @@ figcaption {
 }
 
 .cookie__rich-text sub {
-  background-image: url('../images/post-list-bullet.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/post-list-bullet.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -10960,7 +10960,7 @@ figcaption {
 }
 
 .dribble-card__video {
-  background-image: url('../images/bg-card-onDribble_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-onDribble_laptop.webp");
   background-position: 0 0;
   background-size: auto;
   width: 100%;
@@ -11006,7 +11006,7 @@ figcaption {
 }
 
 .emoji-pray {
-  background-image: url('../images/emoji-pray.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/emoji-pray.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -11837,7 +11837,7 @@ figcaption {
 .solutions__border {
   z-index: -1;
   opacity: .8;
-  background-image: url('../images/card-solutionBorder.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/card-solutionBorder.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -12120,7 +12120,7 @@ figcaption {
   transform-origin: 100% 0;
   height: 100%;
   transform-style: preserve-3d;
-  background-image: url('../images/card-getBorder_laptop.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/card-getBorder_laptop.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -12138,7 +12138,7 @@ figcaption {
 .get-card.is--right-white {
   transform-origin: 0 0;
   color: var(--blue-dark);
-  background-image: url('../images/card-get_laptop.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/card-get_laptop.svg");
   background-size: 100%;
   border-bottom-style: none;
   border-bottom-width: 0;
@@ -12152,7 +12152,7 @@ figcaption {
 
 .get-card.is--left-white {
   color: var(--blue-dark);
-  background-image: url('../images/card-get-left_laptop.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/card-get-left_laptop.svg");
 }
 
 .get-card__title-wrap {
@@ -12188,7 +12188,7 @@ figcaption {
 }
 
 .list__icon-checked {
-  background-image: url('../images/icon-checked-green.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-checked-green.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -12868,7 +12868,7 @@ figcaption {
 }
 
 .refer-hero__card {
-  background-image: url('../images/card-postBig-blue_laptop.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/card-postBig-blue_laptop.svg");
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -12881,7 +12881,7 @@ figcaption {
 }
 
 .refer-hero__card.is--1 {
-  background-image: linear-gradient(#371aca00 29%, #371aca 30%), url('../images/card-postBig-blue_laptop.svg');
+  background-image: linear-gradient(#371aca00 29%, #371aca 30%), url("/Halo-Lab/branding-preview/images/card-postBig-blue_laptop.svg");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -12892,7 +12892,7 @@ figcaption {
 
 .refer-hero__card.is--2 {
   color: var(--blue-dark);
-  background-image: linear-gradient(#fff0 24%, #fff 30%), url('../images/card-postBig2-white_laptop.svg');
+  background-image: linear-gradient(#fff0 24%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-postBig2-white_laptop.svg");
   background-position: 0 0, 0 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -13081,7 +13081,7 @@ figcaption {
   min-height: 32rem;
   color: var(--blue-dark);
   transform-style: preserve-3d;
-  background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-postBig-white_laptop.svg');
+  background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-postBig-white_laptop.svg");
   background-position: 0 0, 0 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -13097,7 +13097,7 @@ figcaption {
 
 .dedicated-start__card.is--2 {
   transform-origin: 0 0;
-  background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-postBig2-white_laptop.svg');
+  background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-postBig2-white_laptop.svg");
 }
 
 .dedicated-start__card.anim {
@@ -13189,7 +13189,7 @@ figcaption {
 }
 
 .roles__nav {
-  background-image: url('../images/roles-dash.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/roles-dash.svg");
   background-position: 50%;
   background-repeat: repeat-x;
   background-size: auto .125rem;
@@ -13583,7 +13583,7 @@ figcaption {
 }
 
 .discuss__sidebar-emoji {
-  background-image: url('../images/emoji-boom.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/emoji-boom.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -13594,7 +13594,7 @@ figcaption {
 }
 
 .list__icon-plus {
-  background-image: url('../images/icon-plus-green.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-plus-green.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -13713,7 +13713,7 @@ figcaption {
 }
 
 .shots__color.is--all {
-  background-image: url('../images/icon-colors.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-colors.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -13740,7 +13740,7 @@ figcaption {
 
 .shots__industry.current {
   background-color: #f5f5f7;
-  background-image: url('../images/icon-checked-blue.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-checked-blue.svg");
   background-position: 90%;
   background-repeat: no-repeat;
   background-size: 1rem;
@@ -13948,7 +13948,7 @@ figcaption {
 }
 
 .block-offer__lightning {
-  background-image: url('../images/emoji-lightning.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/emoji-lightning.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -13986,7 +13986,7 @@ figcaption {
   width: 26rem;
   height: 100%;
   color: var(--blue-dark);
-  background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-3services_laptop.svg');
+  background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-3services_laptop.svg");
   background-position: 0 0, 0 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -14038,7 +14038,7 @@ figcaption {
 
 .designrush-discuss__list-dash {
   z-index: -1;
-  background-image: url('../images/discuss-list-dash.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/discuss-list-dash.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: auto;
@@ -14060,7 +14060,7 @@ figcaption {
 
 .dropdown__rich-portfolio li {
   color: var(--white);
-  background-image: url('../images/yellow-dot.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/yellow-dot.svg");
   background-position: 0%;
   background-repeat: no-repeat;
   background-size: .5rem;
@@ -14282,7 +14282,7 @@ figcaption {
 }
 
 .steps__rich li {
-  background-image: url('../images/yellow-dot.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/yellow-dot.svg");
   background-position: 0%;
   background-repeat: no-repeat;
   background-size: .5rem;
@@ -15201,7 +15201,7 @@ figcaption {
 
 .project-estimation {
   z-index: 1;
-  background-image: url('../images/bg-card-exeprt_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -15218,8 +15218,8 @@ figcaption {
   display: flex;
   position: relative;
   overflow: hidden;
-  -webkit-mask-image: url('../images/card-exeprtBig_laptop.webp');
-  mask-image: url('../images/card-exeprtBig_laptop.webp');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/card-exeprtBig_laptop.webp");
+  mask-image: url("/Halo-Lab/branding-preview/images/card-exeprtBig_laptop.webp");
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
   -webkit-mask-size: 100% 100%;
@@ -15251,7 +15251,7 @@ figcaption {
 }
 
 .form__icon-assets {
-  background-image: url('../images/icon-TelInput-arrow.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-TelInput-arrow.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -15260,16 +15260,16 @@ figcaption {
 }
 
 .form__icon-assets.is--checked {
-  background-image: url('../images/icon-TelInput-checked.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-TelInput-checked.svg");
   background-size: contain;
 }
 
 .form__icon-assets.is--flag {
-  background-image: url('../images/icon-flag-unknown.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-flag-unknown.svg");
 }
 
 .form__icon-assets.is--search {
-  background-image: url('../images/icon-TelInput-search.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-TelInput-search.svg");
   background-size: 1rem;
 }
 
@@ -15446,7 +15446,7 @@ figcaption {
 
 .project-cta__logo {
   z-index: 0;
-  background-image: url('../images/icon-halo.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-halo.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -15673,8 +15673,8 @@ figcaption {
   background-color: #ffffff4d;
   position: absolute;
   inset: 0%;
-  -webkit-mask-image: url('../images/card-contact-office_1.webp');
-  mask-image: url('../images/card-contact-office_1.webp');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/card-contact-office_1.webp");
+  mask-image: url("/Halo-Lab/branding-preview/images/card-contact-office_1.webp");
 }
 
 .contact-office__border:hover {
@@ -15889,7 +15889,7 @@ figcaption {
 .audit-example__rich-text em {
   color: var(--blue-dark);
   letter-spacing: .04375rem;
-  background-image: url('../images/icon-lamp-yellow.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-lamp-yellow.svg");
   background-position: 100% 10%;
   background-repeat: no-repeat;
   background-size: 1.5rem;
@@ -15903,7 +15903,7 @@ figcaption {
 }
 
 .audit-example__rich-text sub {
-  background-image: url('../images/post-list-bullet.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/post-list-bullet.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -16075,7 +16075,7 @@ figcaption {
 }
 
 .catalog-card-border {
-  background-image: url('../images/bg-card-postBorderBig_laptop.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBorderBig_laptop.webp");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -16251,7 +16251,7 @@ figcaption {
 }
 
 .clutch-hero__logo {
-  background-image: url('../images/icon-clutch-white.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-clutch-white.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -16457,7 +16457,7 @@ figcaption {
   border-radius: var(--40);
   color: var(--blue-dark);
   text-align: center;
-  background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-discuss_laptop.svg');
+  background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-discuss_laptop.svg");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 100%;
@@ -16495,7 +16495,7 @@ figcaption {
 .tabs-wrap.mod--contact {
   z-index: 3;
   background-color: #0000;
-  background-image: linear-gradient(180deg, #fff0 14%, var(--white) 15%), url('../images/bg-card-contact2_desk.svg');
+  background-image: linear-gradient(180deg, #fff0 14%, var(--white) 15%), url("/Halo-Lab/branding-preview/images/bg-card-contact2_desk.svg");
   opacity: 1;
   transform-origin: 50% 0;
   width: 54rem;
@@ -16514,7 +16514,7 @@ figcaption {
 .remodal__prelaoder {
   z-index: 0;
   pointer-events: none;
-  background-image: url('../images/icon-load-blue.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-load-blue.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: auto;
@@ -16563,7 +16563,7 @@ figcaption {
 }
 
 .form__policy-icon {
-  background-image: url('../images/icon-shield.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-shield.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -16751,8 +16751,8 @@ figcaption {
   padding: 2.5rem;
   display: flex;
   position: relative;
-  -webkit-mask-image: url('../images/bg-card-reviews_laptop.webp');
-  mask-image: url('../images/bg-card-reviews_laptop.webp');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_laptop.webp");
+  mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_laptop.webp");
   -webkit-mask-size: 100%;
   mask-size: 100%;
 }
@@ -17148,7 +17148,7 @@ figcaption {
 
 .modal-leave__progress-pattern {
   z-index: 1;
-  background-image: url('../images/modal-offer-progress-pattern.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/modal-offer-progress-pattern.svg");
   background-position: 0%;
   background-repeat: repeat-x;
   background-size: auto 100%;
@@ -17161,7 +17161,7 @@ figcaption {
   width: var(--32);
   height: var(--32);
   background-color: var(--white);
-  background-image: url('../images/emoji-fire.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/emoji-fire.avif");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 1rem;
@@ -17272,7 +17272,7 @@ figcaption {
 .button-label__star {
   width: var(--12);
   height: var(--12);
-  background-image: url('../images/icon-label-star.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-label-star.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -17373,8 +17373,8 @@ figcaption {
   width: 100%;
   height: 100%;
   display: block;
-  -webkit-mask-image: url('../images/custom-solution_1.avif');
-  mask-image: url('../images/custom-solution_1.avif');
+  -webkit-mask-image: url("/Halo-Lab/branding-preview/images/custom-solution_1.avif");
+  mask-image: url("/Halo-Lab/branding-preview/images/custom-solution_1.avif");
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
   -webkit-mask-size: 100% 100%;
@@ -17660,7 +17660,7 @@ figcaption {
   background-color: var(--white);
   min-height: 1.875rem;
   font-size: var(--14);
-  background-image: url('../images/emoji-money-wings.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/emoji-money-wings.avif");
   background-position: 12px;
   background-repeat: no-repeat;
   background-size: 1.125rem;
@@ -17763,7 +17763,7 @@ figcaption {
   border-radius: var(--40);
   color: var(--blue-dark);
   text-align: center;
-  background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-discuss_laptop.svg');
+  background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-discuss_laptop.svg");
   background-position: 0 0, 100% 0;
   background-repeat: repeat, no-repeat;
   background-size: auto, 70rem;
@@ -17866,7 +17866,7 @@ figcaption {
   width: 100%;
   height: 100%;
   color: var(--white-70);
-  background-image: url('../images/bg-card-result-purple_laptop_1.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/bg-card-result-purple_laptop_1.avif");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -18348,7 +18348,7 @@ figcaption {
 .form-improve__checkbox.w--redirected-checked {
   border-color: var(--blue);
   background-color: var(--blue);
-  background-image: url('../images/icon-checked-white.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-checked-white.svg");
   background-position: 50%;
   background-size: .75rem;
 }
@@ -19187,7 +19187,7 @@ figcaption {
 
 .home-workshop__arrow {
   vertical-align: sub;
-  background-image: url('../images/arrow-up-right.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/arrow-up-right.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -19278,7 +19278,7 @@ figcaption {
 .project-simple__rich-main li {
   grid-column-gap: .5rem;
   grid-row-gap: .5rem;
-  background-image: url('../images/post-list-bullet.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/post-list-bullet.svg");
   background-position: 0 7px;
   background-repeat: no-repeat;
   background-size: .75rem;
@@ -20972,7 +20972,7 @@ figcaption {
 }
 
 .project-new__rich-main li {
-  background-image: url('../images/icon-check-blue-filed.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-check-blue-filed.svg");
   background-position: 0 6px;
   background-repeat: no-repeat;
   background-size: 1.25rem 1.25rem;
@@ -21021,7 +21021,7 @@ figcaption {
 
 .project-new__rich-dropdown li {
   background-color: #f5f5f7;
-  background-image: url('../images/icon-check-blue-filed.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-check-blue-filed.svg");
   background-position: 16px;
   background-repeat: no-repeat;
   background-size: 1rem;
@@ -21885,7 +21885,7 @@ figcaption {
 }
 
 .contact-footer__list-item {
-  background-image: url('../images/icon-checked-yellow_filled.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/icon-checked-yellow_filled.svg");
   background-position: 0%;
   background-repeat: no-repeat;
   background-size: 1.25rem;
@@ -22594,7 +22594,7 @@ figcaption {
   grid-column-gap: .25rem;
   grid-row-gap: .25rem;
   background-color: #3827c7;
-  background-image: url('../images/banner-bg-loop.avif'), url('../images/post-sidebar-bg-desktop.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/banner-bg-loop.avif"), url("/Halo-Lab/branding-preview/images/post-sidebar-bg-desktop.avif");
   background-position: 100%, 50%;
   background-repeat: no-repeat, no-repeat;
   background-size: auto 100%, cover;
@@ -22971,7 +22971,7 @@ figcaption {
 
 .survey-form__block {
   background-color: #0c1e38;
-  background-image: url('../images/survey__form-bg.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/survey__form-bg.avif");
   background-position: 100% 100%;
   background-repeat: no-repeat;
   background-size: 30.8125rem;
@@ -22981,7 +22981,7 @@ figcaption {
 
 .survey-form__block.mod--success {
   background-color: #0c1e38;
-  background-image: url('../images/survey-succes.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/survey-succes.avif");
   background-position: 80% 100%;
   background-size: 14.375rem;
 }
@@ -23284,7 +23284,7 @@ figcaption {
 }
 
 .values-text__ico {
-  background-image: url('https://d3e54v103j8qbb.cloudfront.net/img/background-image.svg');
+  background-image: url("https://d3e54v103j8qbb.cloudfront.net/img/background-image.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: 3rem 3rem;
@@ -23292,11 +23292,11 @@ figcaption {
 }
 
 .values-text__ico.is--workflows {
-  background-image: url('../images/ai-workflows-ico.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/ai-workflows-ico.svg");
 }
 
 .values-text__ico.is--products {
-  background-image: url('../images/ai-products-ico.svg');
+  background-image: url("/Halo-Lab/branding-preview/images/ai-products-ico.svg");
 }
 
 .values-text__link {
@@ -23657,7 +23657,7 @@ figcaption {
 
 .branding-banner {
   color: var(--white);
-  background-image: url('../images/branding-banner_desktop.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/branding-banner_desktop.avif");
   background-position: 50% 100%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23671,7 +23671,7 @@ figcaption {
 .branding-banner.mod--v2 {
   grid-column-gap: 7.3rem;
   grid-row-gap: 7.3rem;
-  background-image: url('../images/branding-banner-v2_desktop.avif');
+  background-image: url("/Halo-Lab/branding-preview/images/branding-banner-v2_desktop.avif");
   background-position: 100%;
   justify-content: flex-start;
   align-items: flex-start;
@@ -24181,7 +24181,7 @@ figcaption {
 }
 
 .ai-products__ico {
-  background-image: url('../images/ai-products-hero-ico.webp');
+  background-image: url("/Halo-Lab/branding-preview/images/ai-products-hero-ico.webp");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -24565,7 +24565,7 @@ figcaption {
   .section.mod--new-contact {
     grid-column-gap: 6.25rem;
     grid-row-gap: 6.25rem;
-    background-image: url('../images/bg-contact_tablet.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-contact_tablet.avif");
     background-position: 100% 0;
     flex-flow: column;
     justify-content: flex-start;
@@ -24669,7 +24669,7 @@ figcaption {
 
   .columns.mod--discuss {
     grid-column-gap: 2.5rem;
-    background-image: linear-gradient(#fff0 20%, #fff 21%), url('../images/card-discuss_tablet.svg');
+    background-image: linear-gradient(#fff0 20%, #fff 21%), url("/Halo-Lab/branding-preview/images/card-discuss_tablet.svg");
     border-bottom-right-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
     padding: 1.5rem 2.5rem;
@@ -25808,11 +25808,11 @@ figcaption {
   }
 
   .swiper-slide.mod--post-big {
-    background-image: url('../images/bg-card-postBig_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig_tablet.webp");
   }
 
   .swiper-slide.mod--post-big:last-child {
-    background-image: url('../images/bg-card-postBig2_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig2_tablet.webp");
   }
 
   .swiper-slide.mod--service-hero {
@@ -26544,7 +26544,7 @@ figcaption {
   }
 
   .discuss__sidebar {
-    background-image: linear-gradient(#f5f5f700 24%, #f5f5f7 25%), url('../images/card-discussReview_tablet.webp');
+    background-image: linear-gradient(#f5f5f700 24%, #f5f5f7 25%), url("/Halo-Lab/branding-preview/images/card-discussReview_tablet.webp");
     background-position: 0 0, 100% 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, 100%;
@@ -26757,7 +26757,7 @@ figcaption {
   }
 
   .home__container {
-    background-image: url('../images/bg-card-hero_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-hero_tablet.webp");
     padding: 2.5rem 1.5rem 1.5rem;
   }
 
@@ -26792,18 +26792,18 @@ figcaption {
   }
 
   .card__container {
-    background-image: linear-gradient(180deg, transparent 19%, var(--white) 20%), url('../images/card-works_tablet_1.avif');
+    background-image: linear-gradient(180deg, transparent 19%, var(--white) 20%), url("/Halo-Lab/branding-preview/images/card-works_tablet_1.avif");
     border-bottom-right-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
     padding: 1.5rem;
   }
 
   .card__container.mod--reviews-white {
-    background-image: linear-gradient(to bottom, transparent 49%, var(--white) 50%), url('../images/bg-card-works2_tablet.webp');
+    background-image: linear-gradient(to bottom, transparent 49%, var(--white) 50%), url("/Halo-Lab/branding-preview/images/bg-card-works2_tablet.webp");
   }
 
   .card__container.mod--upsell {
-    background-image: linear-gradient(to bottom, transparent 30%, var(--white) 31%), url('../images/card-upsell_tablet.webp');
+    background-image: linear-gradient(to bottom, transparent 30%, var(--white) 31%), url("/Halo-Lab/branding-preview/images/card-upsell_tablet.webp");
   }
 
   .works__more {
@@ -26814,7 +26814,7 @@ figcaption {
   }
 
   .works__more.mod--ondribble {
-    background-image: url('../images/icon-btnDribble.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/icon-btnDribble.svg");
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 2rem;
@@ -26950,13 +26950,13 @@ figcaption {
   }
 
   .post-card__img-link.is-big {
-    background-image: url('../images/bg-card-postBig2_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig2_tablet.webp");
     height: 100%;
     padding: 1.5rem;
   }
 
   .post-card__img-link.is-big.is-big-border {
-    background-image: url('../images/bg-card-postBorderBig_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBorderBig_tablet.webp");
     padding-top: 2.5rem;
   }
 
@@ -27134,7 +27134,7 @@ figcaption {
   .benefits__block {
     grid-column-gap: 1.5rem;
     grid-row-gap: 1.5rem;
-    background-image: url('../images/card-benefitsBorder_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_tablet.svg");
     background-position: 100% 0;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -27152,7 +27152,7 @@ figcaption {
   }
 
   .benefits__block.is--white {
-    background-image: url('../images/bg-card-benefits_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_tablet.webp");
     background-size: 100% 100%;
     border-bottom-style: none;
     border-bottom-right-radius: 1rem;
@@ -27164,7 +27164,7 @@ figcaption {
   }
 
   .benefits__block.mod--designrush-white {
-    background-image: url('../images/bg-card-benefits_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_tablet.webp");
     border-bottom-style: none;
     border-bottom-width: 0;
     flex-direction: row;
@@ -27178,7 +27178,7 @@ figcaption {
   }
 
   .benefits__block.mod--swiper {
-    background-image: url('../images/bg-card-benefits_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_tablet.webp");
     border-bottom-style: none;
     border-bottom-width: 0;
     min-height: auto;
@@ -27221,7 +27221,7 @@ figcaption {
   }
 
   .works__video-case {
-    background-image: linear-gradient(#e9e9ea, #e9e9ea), url('../images/bg-card-worksSlide_tablet.webp');
+    background-image: linear-gradient(#e9e9ea, #e9e9ea), url("/Halo-Lab/branding-preview/images/bg-card-worksSlide_tablet.webp");
     background-position: 0 0, 0 0;
     background-repeat: repeat, repeat;
     background-size: auto, auto;
@@ -27279,7 +27279,7 @@ figcaption {
   }
 
   .faq-cta {
-    background-image: url('../images/bg-card-askBlue_tablet.webp'), linear-gradient(#3a23bb00 49%, #3a23bb 50%);
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-askBlue_tablet.webp"), linear-gradient(#3a23bb00 49%, #3a23bb 50%);
     background-size: 100%, auto;
     border-radius: 1rem;
     flex-direction: row;
@@ -27291,7 +27291,7 @@ figcaption {
   }
 
   .faq-cta.is-border {
-    background-image: url('../images/card-askBorder_tablet_1.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/card-askBorder_tablet_1.avif");
   }
 
   .faq-cta.is-border.mod--linkedin {
@@ -27303,7 +27303,7 @@ figcaption {
   }
 
   .faq-cta.is--linkedin {
-    background-image: url('../images/card-askBorder_tablet_1.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/card-askBorder_tablet_1.avif");
     width: 100%;
   }
 
@@ -27566,7 +27566,7 @@ figcaption {
   }
 
   .toc__collar {
-    background-image: url('../images/toc-collar_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/toc-collar_tablet.svg");
     width: 3.0625rem;
     height: 3.0625rem;
   }
@@ -27585,7 +27585,7 @@ figcaption {
   .service-hero__card {
     grid-column-gap: 1.75rem;
     grid-row-gap: 1.75rem;
-    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/card-serviceHero_tablet.svg');
+    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/card-serviceHero_tablet.svg");
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     min-height: auto;
@@ -27593,7 +27593,7 @@ figcaption {
   }
 
   .service-hero__card.is--style-3 {
-    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/card-serviceHero3_tablet.svg');
+    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/card-serviceHero3_tablet.svg");
   }
 
   .process__fill {
@@ -27870,7 +27870,7 @@ figcaption {
 
   .case__rich-result li {
     grid-row-gap: 1rem;
-    background-image: url('../images/bg-card-caseResults_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-caseResults_tablet.webp");
     padding: 1.5rem;
   }
 
@@ -28145,7 +28145,7 @@ figcaption {
   }
 
   .service-other__card.is-first {
-    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/bg-card-servOther_tablet.webp');
+    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/bg-card-servOther_tablet.webp");
     background-position: 0 0, 100% 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, 100% 100%;
@@ -28292,13 +28292,13 @@ figcaption {
   }
 
   .expertise__card {
-    background-image: url('../images/bg-card-expertise_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertise_tablet.webp");
     height: 22.5rem;
     padding: 1.5rem;
   }
 
   .expertise__card.is--cta {
-    background-image: url('../images/bg-card-expertiseBlue_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertiseBlue_tablet.webp");
     width: 17rem;
   }
 
@@ -28358,7 +28358,7 @@ figcaption {
   }
 
   .service-releted__card {
-    background-image: url('../images/card-benefitsBorder_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_tablet.svg");
     background-position: 100% 0;
     background-size: 100%;
     border-bottom: .0625rem solid #fffc;
@@ -28494,7 +28494,7 @@ figcaption {
   .opensource-card__border {
     opacity: .3;
     background-color: #0000;
-    background-image: url('../images/bg-card-servOtherBorder_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-servOtherBorder_tablet.webp");
     background-size: 100% 100%;
   }
 
@@ -28531,7 +28531,7 @@ figcaption {
   }
 
   .dribble-card__border {
-    background-image: url('../images/bg-card-reviewsBorder_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-reviewsBorder_tablet.webp");
     padding: 1.5rem;
   }
 
@@ -28609,7 +28609,7 @@ figcaption {
   }
 
   .service-other__link {
-    background-image: url('../images/card-benefitsBorder_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_tablet.svg");
     background-size: 100%;
     border-bottom: .0625rem solid #fffc;
     border-bottom-right-radius: 1rem;
@@ -28645,12 +28645,12 @@ figcaption {
   }
 
   .solutions__card.is--cta {
-    background-image: url('../images/card-solution_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/card-solution_tablet.webp");
     padding: 3rem 2rem 2rem;
   }
 
   .solutions__card.is--cta-blue {
-    background-image: url('../images/bg-card-expertiseBlue_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertiseBlue_tablet.webp");
     padding-bottom: 2rem;
   }
 
@@ -28792,7 +28792,7 @@ figcaption {
   }
 
   .dribble-card__video {
-    background-image: url('../images/bg-card-onDribble_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-onDribble_tablet.webp");
     justify-content: center;
     align-items: center;
     width: 70vw;
@@ -29047,7 +29047,7 @@ figcaption {
   }
 
   .solutions__border {
-    background-image: url('../images/card-solutionBorder_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/card-solutionBorder_tablet.webp");
   }
 
   .upsell__soon {
@@ -29163,7 +29163,7 @@ figcaption {
   }
 
   .get-card {
-    background-image: url('../images/card-getBorder_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-getBorder_tablet.svg");
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     padding: 2.5rem 1.3rem 1.5rem 1.4rem;
@@ -29171,12 +29171,12 @@ figcaption {
   }
 
   .get-card.is--right-white {
-    background-image: url('../images/card-get_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-get_tablet.svg");
     background-size: 100%;
   }
 
   .get-card.is--left-white {
-    background-image: url('../images/card-get-left_tablet.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-get-left_tablet.svg");
   }
 
   .get-card__title-wrap {
@@ -29499,7 +29499,7 @@ figcaption {
   .refer-hero__card.is--1 {
     grid-column-gap: 2.5rem;
     grid-row-gap: 2.5rem;
-    background-image: linear-gradient(#3f27c700 25%, #3f27c7 31%), url('../images/card-serviceHero_tablet.svg');
+    background-image: linear-gradient(#3f27c700 25%, #3f27c7 31%), url("/Halo-Lab/branding-preview/images/card-serviceHero_tablet.svg");
     background-position: 0 0, 0 0;
     padding: 3rem 1.5rem 1.5rem;
   }
@@ -29545,7 +29545,7 @@ figcaption {
   .numb-steps__block {
     grid-column-gap: 1.5rem;
     grid-row-gap: 1.5rem;
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
     background-position: 100% 0;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -30639,7 +30639,7 @@ figcaption {
   }
 
   .catalog-card-border {
-    background-image: url('../images/bg-card-postBorderBig_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBorderBig_tablet.webp");
     padding: 2.5rem 1.5rem 1.5rem;
   }
 
@@ -30730,7 +30730,7 @@ figcaption {
   .ref-steps__block {
     grid-column-gap: 1.5rem;
     grid-row-gap: 1.5rem;
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
     background-position: 100% 0;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -30803,7 +30803,7 @@ figcaption {
   }
 
   .tabs-wrap.mod--contact {
-    background-image: linear-gradient(180deg, #fff0 14%, var(--white) 15%), url('../images/bg-card-contact2_tablet.svg');
+    background-image: linear-gradient(180deg, #fff0 14%, var(--white) 15%), url("/Halo-Lab/branding-preview/images/bg-card-contact2_tablet.svg");
     width: 100%;
     padding-bottom: 2.5rem;
     padding-left: 2.5rem;
@@ -31215,7 +31215,7 @@ figcaption {
     min-height: 20rem;
     padding: var(--24) var(--32);
     border-radius: var(--24);
-    background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-discuss_tablet.svg');
+    background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-discuss_tablet.svg");
     background-size: auto, 60rem;
   }
 
@@ -32126,7 +32126,7 @@ figcaption {
     grid-column-gap: var(--24);
     grid-row-gap: var(--24);
     border-radius: var(--8);
-    background-image: url('../images/banner-bg-tablet.avif'), linear-gradient(45deg, #b5dfff, #eee8ff 32%, #e5e1ff);
+    background-image: url("/Halo-Lab/branding-preview/images/banner-bg-tablet.avif"), linear-gradient(45deg, #b5dfff, #eee8ff 32%, #e5e1ff);
     margin-left: 0;
     margin-right: 0;
   }
@@ -32907,7 +32907,7 @@ figcaption {
   }
 
   .survey-form__block {
-    background-image: url('../images/survey__form-bg-tablet.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/survey__form-bg-tablet.avif");
     background-size: 19rem;
     padding: 1.25rem 1.5rem 1.5rem;
   }
@@ -33159,7 +33159,7 @@ figcaption {
   }
 
   .branding-banner {
-    background-image: url('../images/branding-banner_tablet.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/branding-banner_tablet.avif");
     background-position: 100% 100%;
     border-radius: .5rem;
     padding-top: 1.5rem;
@@ -33170,7 +33170,7 @@ figcaption {
   .branding-banner.mod--v2 {
     grid-column-gap: .75rem;
     grid-row-gap: .75rem;
-    background-image: url('../images/branding-banner-v2_tablet.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/branding-banner-v2_tablet.avif");
     flex-flow: column;
     justify-content: center;
     align-items: flex-start;
@@ -33797,7 +33797,7 @@ figcaption {
   }
 
   .columns__col.mod--contact-success {
-    background-image: linear-gradient(90deg, #f5f5f7 79%, #f5f5f700 80%), url('../images/card-ContactSuccess_mobile_1.avif');
+    background-image: linear-gradient(90deg, #f5f5f7 79%, #f5f5f700 80%), url("/Halo-Lab/branding-preview/images/card-ContactSuccess_mobile_1.avif");
     background-position: 0 0, 100% 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, contain;
@@ -34388,7 +34388,7 @@ figcaption {
   }
 
   .reviews__card.is--grey-border {
-    background-image: url('../images/bg-card-reviewsBorder_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-reviewsBorder_tablet.webp");
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -34518,7 +34518,7 @@ figcaption {
   }
 
   .benefits__block.is--white {
-    background-image: url('../images/bg-card-benefits_tablet.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_tablet.webp");
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -34966,7 +34966,7 @@ figcaption {
 
   .case__rich-result li {
     grid-row-gap: .5rem;
-    background-image: url('../images/bg-card-caseResults_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-caseResults_mobile.webp");
     padding: 1rem;
     font-size: .875rem;
   }
@@ -37319,7 +37319,7 @@ figcaption {
   }
 
   .section.mod--new-contact {
-    background-image: url('../images/bg-contact_mobile.jpg');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-contact_mobile.jpg");
   }
 
   .section.mod--new-contact.is--success {
@@ -37388,7 +37388,7 @@ figcaption {
   }
 
   .columns.mod--discuss {
-    background-image: linear-gradient(#fff0 20%, #fff 21%), url('../images/card-discuss_mobile.svg');
+    background-image: linear-gradient(#fff0 20%, #fff 21%), url("/Halo-Lab/branding-preview/images/card-discuss_mobile.svg");
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     padding-left: 1rem;
@@ -37572,7 +37572,7 @@ figcaption {
   }
 
   .columns.mod--form-audit {
-    background-image: url('../images/card-discuss_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-discuss_mobile.svg");
     background-position: 100% 0;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -37930,7 +37930,7 @@ figcaption {
   }
 
   .columns__col.mod--contact-success {
-    background-image: url('../images/card-ContactSuccess_mobile_1.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/card-ContactSuccess_mobile_1.avif");
     background-position: 100% 0;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -38215,12 +38215,12 @@ figcaption {
   }
 
   .swiper-slide.mod--post-big {
-    background-image: url('../images/bg-card-postBig_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig_mobile.webp");
     flex: none;
   }
 
   .swiper-slide.mod--post-big:last-child {
-    background-image: url('../images/bg-card-postBig_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig_mobile.webp");
   }
 
   .swiper-slide.mod--expertise, .swiper-slide.mod--service-releted {
@@ -38300,7 +38300,7 @@ figcaption {
   }
 
   .remodal__container {
-    background-image: linear-gradient(#fff0 30%, #fff 31%), url('../images/bg-modalJoin_mobile.webp');
+    background-image: linear-gradient(#fff0 30%, #fff 31%), url("/Halo-Lab/branding-preview/images/bg-modalJoin_mobile.webp");
     border-radius: 1rem;
     max-width: 18.125rem;
     padding: 1.5rem 1rem 1rem;
@@ -38689,7 +38689,7 @@ figcaption {
 
   .text-rich blockquote {
     background-color: #fff3db;
-    background-image: url('../images/icon-quotes.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/icon-quotes.svg");
     background-position: 1.5rem 100%;
     background-repeat: no-repeat;
     background-size: 1.5rem;
@@ -38799,7 +38799,7 @@ figcaption {
   }
 
   .discuss__sidebar {
-    background-image: linear-gradient(#f5f5f700 24%, #f5f5f7 25%), url('../images/card-discussReview_mobile.webp');
+    background-image: linear-gradient(#f5f5f700 24%, #f5f5f7 25%), url("/Halo-Lab/branding-preview/images/card-discussReview_mobile.webp");
     background-position: 0 0, 100% 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, 100%;
@@ -38946,7 +38946,7 @@ figcaption {
   }
 
   .home__container {
-    background-image: url('../images/bg-card-hero_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-hero_mobile.webp");
     padding-top: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -38969,7 +38969,7 @@ figcaption {
   }
 
   .card__container {
-    background-image: linear-gradient(180deg, transparent 19%, var(--white) 20%), url('../images/card-works_mobile_1.avif');
+    background-image: linear-gradient(180deg, transparent 19%, var(--white) 20%), url("/Halo-Lab/branding-preview/images/card-works_mobile_1.avif");
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     margin-left: -1rem;
@@ -38978,11 +38978,11 @@ figcaption {
   }
 
   .card__container.mod--reviews-white {
-    background-image: linear-gradient(to bottom, transparent 49%, var(--white) 50%), url('../images/bg-card-works2_mobile.webp');
+    background-image: linear-gradient(to bottom, transparent 49%, var(--white) 50%), url("/Halo-Lab/branding-preview/images/bg-card-works2_mobile.webp");
   }
 
   .card__container.mod--upsell {
-    background-image: linear-gradient(to bottom, transparent 30%, var(--white) 31%), url('../images/card-upsell_mobile.webp');
+    background-image: linear-gradient(to bottom, transparent 30%, var(--white) 31%), url("/Halo-Lab/branding-preview/images/card-upsell_mobile.webp");
   }
 
   .works__more {
@@ -39016,12 +39016,12 @@ figcaption {
   }
 
   .reviews__card {
-    -webkit-mask-image: url('../images/bg-card-reviews_mobile.webp');
-    mask-image: url('../images/bg-card-reviews_mobile.webp');
+    -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_mobile.webp");
+    mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_mobile.webp");
   }
 
   .reviews__card.is--grey-border {
-    background-image: url('../images/bg-card-reviewsBorder_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-reviewsBorder_mobile.webp");
   }
 
   .author__ava {
@@ -39059,12 +39059,12 @@ figcaption {
   }
 
   .post-card__img-link.is-big {
-    background-image: url('../images/bg-card-postBig2_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBig2_mobile.webp");
     padding-top: 2rem;
   }
 
   .post-card__img-link.is-big.is-big-border {
-    background-image: url('../images/bg-card-postBorderBig_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBorderBig_mobile.webp");
   }
 
   .post-card__img-link.is-big.mod--hot, .heading-wrap.is--margin-80 {
@@ -39136,14 +39136,14 @@ figcaption {
     padding-left: var(--24);
     border-radius: var(--16);
     font-size: var(--16);
-    background-image: url('../images/icon-post-link_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/icon-post-link_mobile.svg");
     background-position: 91% 19%;
     background-size: 2rem;
     line-height: 1.6;
   }
 
   .post__estimation {
-    background-image: url('../images/bg-card-exeprt_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_mobile.webp");
     flex-direction: column;
     justify-content: flex-end;
     align-items: stretch;
@@ -39151,8 +39151,8 @@ figcaption {
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    -webkit-mask-image: url('../images/bg-card-exeprt_mobile.webp');
-    mask-image: url('../images/bg-card-exeprt_mobile.webp');
+    -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_mobile.webp");
+    mask-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_mobile.webp");
   }
 
   .dropdown__title-wrap.mod--faq {
@@ -39179,7 +39179,7 @@ figcaption {
   }
 
   .benefits__block {
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
     background-position: 100% 0;
     background-size: 100%;
     height: auto;
@@ -39191,7 +39191,7 @@ figcaption {
   }
 
   .benefits__block.is--white {
-    background-image: linear-gradient(#fff0 20%, #fff 21%), url('../images/bg-card-benefits_mobile.webp');
+    background-image: linear-gradient(#fff0 20%, #fff 21%), url("/Halo-Lab/branding-preview/images/bg-card-benefits_mobile.webp");
     background-position: 0 0, 0 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, 100%;
@@ -39201,7 +39201,7 @@ figcaption {
   }
 
   .benefits__block.mod--designrush-white {
-    background-image: url('../images/bg-card-benefits_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_mobile.webp");
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem;
@@ -39213,7 +39213,7 @@ figcaption {
   }
 
   .benefits__block.mod--swiper {
-    background-image: url('../images/bg-card-benefits_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-benefits_mobile.webp");
     min-height: 12.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -39282,7 +39282,7 @@ figcaption {
 
   .works__video-case {
     object-fit: cover;
-    background-image: linear-gradient(#0000, #0000), url('../images/bg-card-worksSlide_mobile.webp');
+    background-image: linear-gradient(#0000, #0000), url("/Halo-Lab/branding-preview/images/bg-card-worksSlide_mobile.webp");
     overflow: visible;
   }
 
@@ -39325,7 +39325,7 @@ figcaption {
   .faq-cta {
     grid-column-gap: 1.5rem;
     grid-row-gap: 1.5rem;
-    background-image: url('../images/bg-card-askBlue_mobile.webp'), linear-gradient(#3a23bb00 49%, #3a23bb 50%);
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-askBlue_mobile.webp"), linear-gradient(#3a23bb00 49%, #3a23bb 50%);
     background-size: 100%, auto;
     flex-direction: column;
     grid-template-columns: min-content 1fr;
@@ -39335,7 +39335,7 @@ figcaption {
 
   .faq-cta.is-border {
     border-bottom: var(--1) solid var(--white-30);
-    background-image: url('../images/card-askBorder2_mobile_1.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/card-askBorder2_mobile_1.avif");
     background-position: 0 0;
     background-size: 100%;
   }
@@ -39346,7 +39346,7 @@ figcaption {
 
   .faq-cta.is--linkedin {
     border-bottom: var(--1) solid var(--white-30);
-    background-image: url('../images/card-askBorder2_mobile_1.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/card-askBorder2_mobile_1.avif");
     background-position: 0 0;
     background-size: 100%;
   }
@@ -39455,7 +39455,7 @@ figcaption {
   }
 
   .toc__collar {
-    background-image: url('../images/toc-collar_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/toc-collar_mobile.svg");
     width: 2.0625rem;
     height: 2.0625rem;
   }
@@ -39466,7 +39466,7 @@ figcaption {
   }
 
   .error-popup {
-    background-image: url('../images/error__bg-mobile.svg'), url('../images/error__bg.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/error__bg-mobile.svg"), url("/Halo-Lab/branding-preview/images/error__bg.svg");
     background-position: 0 0, 50% 100%;
     background-repeat: no-repeat, no-repeat;
     background-size: cover, contain;
@@ -39483,7 +39483,7 @@ figcaption {
   .service-hero__card {
     grid-column-gap: 1.5rem;
     grid-row-gap: 1.5rem;
-    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/card-serviceHero_mobile.svg');
+    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/card-serviceHero_mobile.svg");
     background-position: 0 0, 100% 0;
     min-height: 18.5rem;
   }
@@ -39518,7 +39518,7 @@ figcaption {
   }
 
   .post__rich-text blockquote {
-    background-image: url('../images/quote-corall-mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/quote-corall-mobile.webp");
     background-position: 100% 101%;
     border-radius: .5rem;
     padding: 1rem 1rem 1.5rem;
@@ -39610,7 +39610,7 @@ figcaption {
   }
 
   .case__rich-result li {
-    background-image: url('../images/bg-card-caseResults_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-caseResults_mobile.webp");
   }
 
   .case__rich-steps img {
@@ -39831,7 +39831,7 @@ figcaption {
   }
 
   .service-other__card.is-first {
-    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url('../images/bg-card-servOther_mobile.webp');
+    background-image: linear-gradient(#3827c700 29%, #3827c7 30%), url("/Halo-Lab/branding-preview/images/bg-card-servOther_mobile.webp");
   }
 
   .service-features__block {
@@ -39942,12 +39942,12 @@ figcaption {
   }
 
   .expertise__card {
-    background-image: url('../images/bg-card-expertise_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertise_mobile.webp");
     height: 17.8125rem;
   }
 
   .expertise__card.is--cta {
-    background-image: url('../images/bg-card-expertiseBlue_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertiseBlue_mobile.webp");
     width: auto;
   }
 
@@ -39975,7 +39975,7 @@ figcaption {
   }
 
   .service-releted__card {
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
     min-height: 11.75rem;
   }
 
@@ -40061,7 +40061,7 @@ figcaption {
   }
 
   .opensource-card__border {
-    background-image: url('../images/bg-card-servOtherBorder_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-servOtherBorder_mobile.webp");
     background-repeat: no-repeat;
   }
 
@@ -40104,7 +40104,7 @@ figcaption {
   }
 
   .dribble-card__border {
-    background-image: url('../images/bg-card-onDribbleBorder_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-onDribbleBorder_mobile.webp");
   }
 
   .dribble-card__label-dribble {
@@ -40157,7 +40157,7 @@ figcaption {
   }
 
   .service-other__link {
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
   }
 
   .slider-pagin-wrap.mod--works {
@@ -40173,12 +40173,12 @@ figcaption {
   }
 
   .solutions__card.is--cta {
-    background-image: url('../images/card-solution_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/card-solution_mobile.webp");
     padding-top: 2.5rem;
   }
 
   .solutions__card.is--cta-blue {
-    background-image: url('../images/bg-card-expertiseBlue_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-expertiseBlue_mobile.webp");
     padding-bottom: 1.5rem;
   }
 
@@ -40276,7 +40276,7 @@ figcaption {
   }
 
   .dribble-card__video {
-    background-image: url('../images/bg-card-onDribble_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-onDribble_mobile.webp");
     width: 120%;
     height: 110%;
   }
@@ -40428,7 +40428,7 @@ figcaption {
   }
 
   .solutions__border {
-    background-image: url('../images/card-solutionBorder_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/card-solutionBorder_mobile.webp");
   }
 
   .upsell__soon {
@@ -40531,21 +40531,21 @@ figcaption {
   }
 
   .get-card {
-    background-image: url('../images/card-3servicesBorder_laptop.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-3servicesBorder_laptop.svg");
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
   .get-card.is--right-white {
-    background-image: linear-gradient(#fff0 10%, #fff 11%), url('../images/card-get_tablet.svg');
+    background-image: linear-gradient(#fff0 10%, #fff 11%), url("/Halo-Lab/branding-preview/images/card-get_tablet.svg");
     background-position: 0 0, 0 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, 100%;
   }
 
   .get-card.is--left-white {
-    background-image: linear-gradient(#fff0 9%, #fff 10%), url('../images/card-get_tablet.svg');
+    background-image: linear-gradient(#fff0 9%, #fff 10%), url("/Halo-Lab/branding-preview/images/card-get_tablet.svg");
     background-position: 0 0, 0 0;
     background-repeat: repeat, no-repeat;
     background-size: auto, 100%;
@@ -40770,7 +40770,7 @@ figcaption {
   .refer-hero__card.is--1 {
     grid-column-gap: 2rem;
     grid-row-gap: 2rem;
-    background-image: linear-gradient(#3f27c700 25%, #3f27c7 30%), url('../images/card-serviceHero_mobile.svg');
+    background-image: linear-gradient(#3f27c700 25%, #3f27c7 30%), url("/Halo-Lab/branding-preview/images/card-serviceHero_mobile.svg");
     background-position: 0 0, 100% 0;
     padding-top: 2.5rem;
     padding-left: 1rem;
@@ -40787,7 +40787,7 @@ figcaption {
   }
 
   .numb-steps__block {
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
     height: auto;
     min-height: 12.5rem;
   }
@@ -40831,12 +40831,12 @@ figcaption {
   }
 
   .dedicated-start__card {
-    background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-postBig2-white_mobile.svg');
+    background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-postBig2-white_mobile.svg");
     padding: 2rem 1rem 1rem;
   }
 
   .dedicated-start__card.is--2 {
-    background-image: linear-gradient(#fff0 29%, #fff 30%), url('../images/card-postBig2-white_mobile.svg');
+    background-image: linear-gradient(#fff0 29%, #fff 30%), url("/Halo-Lab/branding-preview/images/card-postBig2-white_mobile.svg");
   }
 
   .roles__block {
@@ -41477,7 +41477,7 @@ figcaption {
   }
 
   .project-estimation {
-    background-image: url('../images/bg-card-exeprt_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_mobile.webp");
     flex-direction: column;
     justify-content: flex-end;
     align-items: stretch;
@@ -41486,8 +41486,8 @@ figcaption {
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    -webkit-mask-image: url('../images/bg-card-exeprt_mobile.webp');
-    mask-image: url('../images/bg-card-exeprt_mobile.webp');
+    -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_mobile.webp");
+    mask-image: url("/Halo-Lab/branding-preview/images/bg-card-exeprt_mobile.webp");
   }
 
   .project-hero__img.is--tablet {
@@ -41692,7 +41692,7 @@ figcaption {
   }
 
   .catalog-card-border {
-    background-image: url('../images/bg-card-postBorderBig_mobile.webp');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-postBorderBig_mobile.webp");
   }
 
   .catalog-card-fill__img-wrap {
@@ -41776,7 +41776,7 @@ figcaption {
   }
 
   .ref-steps__block {
-    background-image: url('../images/card-benefitsBorder_mobile.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/card-benefitsBorder_mobile.svg");
     height: auto;
     min-height: 12.5rem;
   }
@@ -41816,7 +41816,7 @@ figcaption {
   }
 
   .tabs-wrap.mod--contact {
-    background-image: linear-gradient(180deg, #fff0 14%, var(--white) 15%), url('../images/bg-card-contact2_mob.svg');
+    background-image: linear-gradient(180deg, #fff0 14%, var(--white) 15%), url("/Halo-Lab/branding-preview/images/bg-card-contact2_mob.svg");
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     width: auto;
@@ -41915,8 +41915,8 @@ figcaption {
 
   .block-card {
     width: 100%;
-    -webkit-mask-image: url('../images/bg-card-reviews_mobile.webp');
-    mask-image: url('../images/bg-card-reviews_mobile.webp');
+    -webkit-mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_mobile.webp");
+    mask-image: url("/Halo-Lab/branding-preview/images/bg-card-reviews_mobile.webp");
   }
 
   .problems__label {
@@ -42056,8 +42056,8 @@ figcaption {
 
   .custom-solution__img {
     display: none;
-    -webkit-mask-image: url('../images/custom-solution_mobile_1.avif');
-    mask-image: url('../images/custom-solution_mobile_1.avif');
+    -webkit-mask-image: url("/Halo-Lab/branding-preview/images/custom-solution_mobile_1.avif");
+    mask-image: url("/Halo-Lab/branding-preview/images/custom-solution_mobile_1.avif");
   }
 
   .custom-solution__img.is--mobile {
@@ -42218,7 +42218,7 @@ figcaption {
   }
 
   .results-numb-card-purple {
-    background-image: url('../images/bg-card-result-purple_mobile_1.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/bg-card-result-purple_mobile_1.avif");
     width: 100%;
   }
 
@@ -42860,7 +42860,7 @@ figcaption {
   .post-banner {
     grid-column-gap: var(--16);
     grid-row-gap: var(--16);
-    background-image: url('../images/banner-bg-mob.avif'), linear-gradient(45deg, #b5dfff, #eee8ff 32%, #e5e1ff);
+    background-image: url("/Halo-Lab/branding-preview/images/banner-bg-mob.avif"), linear-gradient(45deg, #b5dfff, #eee8ff 32%, #e5e1ff);
     padding: 1.5rem 1rem 1rem;
   }
 
@@ -43201,7 +43201,7 @@ figcaption {
   }
 
   .swiper-process__timeline {
-    background-image: url('../images/dark-dot.svg');
+    background-image: url("/Halo-Lab/branding-preview/images/dark-dot.svg");
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: .25rem;
@@ -43240,7 +43240,7 @@ figcaption {
   }
 
   .post-sidebar__link {
-    background-image: url('../images/banner-bg-loop.avif'), url('../images/post-sidebar-bg-mob.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/banner-bg-loop.avif"), url("/Halo-Lab/branding-preview/images/post-sidebar-bg-mob.avif");
     padding: .875rem 1rem;
   }
 
@@ -43334,7 +43334,7 @@ figcaption {
   }
 
   .survey-form__block {
-    background-image: url('../images/survey__form-bg-mob.avif');
+    background-image: url("/Halo-Lab/branding-preview/images/survey__form-bg-mob.avif");
     background-position: 50% 100%;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -43936,42 +43936,42 @@ figcaption {
 
 @font-face {
   font-family: 'Instrument Serif';
-  src: url('../fonts/InstrumentSerif-Italic.woff2') format('woff2');
+  src: url("/Halo-Lab/branding-preview/fonts/InstrumentSerif-Italic.woff2") format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Suisse';
-  src: url('../fonts/SuisseIntl-Light-WebS.woff') format('woff');
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Light-WebS.woff") format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Suisse';
-  src: url('../fonts/SuisseIntl-Regular-WebS.woff') format('woff');
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Regular-WebS.woff") format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Suisse';
-  src: url('../fonts/SuisseIntl-Medium-WebS.woff') format('woff');
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Medium-WebS.woff") format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Suisse';
-  src: url('../fonts/SuisseIntl-Bold-WebS.woff') format('woff');
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-Bold-WebS.woff") format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Suisse';
-  src: url('../fonts/SuisseIntl-SemiBold.woff') format('woff');
+  src: url("/Halo-Lab/branding-preview/fonts/SuisseIntl-SemiBold.woff") format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;

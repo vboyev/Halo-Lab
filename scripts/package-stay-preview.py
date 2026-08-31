@@ -7,8 +7,10 @@ import sys
 from urllib.parse import urlsplit
 
 source = pathlib.Path(sys.argv[1]).resolve()
-output = pathlib.Path(__file__).resolve().parents[1] / 'stay-preview'
-prefix = '/Halo-Lab/stay-preview/'
+preview_name = sys.argv[3] if len(sys.argv) > 3 else 'stay-preview'
+entry = sys.argv[2] if len(sys.argv) > 2 else 'project/stay/index.html'
+output = pathlib.Path(__file__).resolve().parents[1] / preview_name
+prefix = f'/Halo-Lab/{preview_name}/'
 pending = set()
 copied = set()
 
@@ -29,11 +31,12 @@ def asset(value, relative_to=''):
         return prefix + path + suffix
     return 'https://www.halo-lab.com/' + path + suffix
 
-page = (source / 'project/stay/index.html').read_text()
+page = (source / entry).read_text()
 page = page.replace('<base href="/">', f'<base href="{prefix}">')
 page = page.replace('<head>', '<head>\n  <meta name="robots" content="noindex, nofollow">', 1)
 # Keep this public preview out of production analytics.
 page = re.sub(r'<script[^>]+src="/js/global/gtm-country.js"[^>]*></script>', '', page)
+page = re.sub(r'<noscript>\s*<iframe[^>]+googletagmanager[^>]*></iframe>\s*</noscript>', '', page)
 
 def rewrite_tag(match):
     tag = match.group()
@@ -57,7 +60,7 @@ def rewrite_tag(match):
 
 page = re.sub(r'<[^>]+>', rewrite_tag, page)
 output.mkdir(exist_ok=True)
-(output / 'index.html').write_text(page)
+(output / 'index.html').write_text('\n'.join(line.rstrip() for line in page.splitlines()) + '\n')
 while pending:
     path = pending.pop()
     if path in copied:
