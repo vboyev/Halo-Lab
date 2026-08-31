@@ -1,5 +1,9 @@
 # Stay preview
 
+## 2026-08-31
+
+- Added Industry below Services, with the compact Finance tag from the case CMS data.
+
 ## 2026-08-26
 
 - Removed hero portraits and Show me demo from the published preview; retained the description, bottom alignment and hero entrance.
