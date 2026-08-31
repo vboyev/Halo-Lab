@@ -198,6 +198,255 @@
   [data-swiper="lovelatters"] .swiper-slide > div {
   background-color: #747481;
 }
+
+/** 2026 services mega menu — desktop layout from Figma 86147:44629. **/
+@media screen and (min-width: 992px) {
+  /* Shrink to the Services content and center without changing reveal transforms. */
+  .header .container.mod--menu {
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+  .header .menu__block:has(.services-mega) {
+    --services-panel-inset: 2rem;
+    padding: 1.4375rem var(--services-panel-inset) var(--services-panel-inset);
+  }
+
+  .services-mega__legacy-mobile { display: none !important; }
+
+  .header.is-menu-open .header__nav-link {
+    color: #fff !important;
+    opacity: .8;
+  }
+
+  .header.is-menu-open [data-menu-open].header__nav-link {
+    color: #fff !important;
+    opacity: 1;
+  }
+
+  .header.is-menu-open .header__nav-link:hover,
+  .header.is-menu-open .header__nav-link:focus-visible {
+    color: #fff !important;
+    opacity: 1;
+  }
+
+  .services-mega {
+    width: 100%;
+    color: #02021e;
+    font-family: Suisse, Arial, sans-serif;
+    font-weight: 400;
+    /* Figma type sizes must not scale with the site's viewport-based root rem. */
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+
+  .services-mega__grid {
+    --services-column-gap: 4.667rem;
+    display: grid;
+    grid-template-columns: minmax(0, 35.45rem) max-content max-content;
+    gap: var(--services-column-gap);
+  }
+
+  .services-mega__eyebrow {
+    margin: 0 0 1.8rem;
+    color: rgba(2, 2, 30, .5);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .services-mega__core {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .services-mega__core-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Visible row spacing: (24px gap + 10px card padding) × 1.25 = 42.5px. */
+    gap: 32.5px 2.8125rem;
+  }
+
+  .services-mega__feature {
+    position: relative;
+    isolation: isolate;
+    align-self: start;
+    min-height: 0;
+    padding: 10px 0 0;
+    border-radius: .5rem;
+    color: inherit;
+    transition: transform .25s;
+  }
+
+  .services-mega__feature::before {
+    content: "";
+    position: absolute;
+    /* Top content inset is 10px padding + 8px outset = 18px. */
+    inset: -8px -12px -18px -18px;
+    z-index: -1;
+    border-radius: .5rem;
+    background: #f1f3f6;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+
+  .services-mega__feature:hover::before,
+  .services-mega__feature:focus-visible::before { opacity: 1; }
+
+  .services-mega__feature:hover,
+  .services-mega__feature:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .services-mega__feature-title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding-right: 0;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .services-mega__service-icon {
+    width: 24px;
+    height: 24px;
+    padding: 1px;
+    flex: none;
+  }
+
+  .services-mega__description {
+    display: block;
+    max-width: 17rem;
+    margin: 12px 0 0;
+    color: rgba(0, 0, 0, .6);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .services-mega__arrow {
+    position: absolute;
+    top: .65rem;
+    right: .65rem;
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    transition: opacity .3s;
+  }
+
+  a:hover > .services-mega__arrow,
+  a:focus-visible > .services-mega__arrow {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  .services-mega__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .services-mega__list a {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6px;
+    align-items: center;
+    min-height: 40px;
+    padding: 12px 0;
+    color: #02021e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    transition: color .3s, transform .2s;
+  }
+
+  .services-mega__list a span {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  .services-mega__list a:hover,
+  .services-mega__list a:focus-visible {
+    color: var(--blue, #3827c7);
+    opacity: 1;
+    transform: translateX(.25rem);
+    outline: none;
+  }
+
+  .services-mega__list a:hover span,
+  .services-mega__list a:focus-visible span {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  .services-mega__discovery {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 6.3125rem;
+    margin: auto 0 0;
+    padding: 1.5rem;
+    gap: 1rem;
+    overflow: hidden;
+    border-radius: .5rem;
+    background: #e2e7ee;
+    color: #02021e;
+  }
+
+  /* Keep the banner at the bottom even if either right-hand list is taller. */
+  .services-mega__core-grid { margin-bottom: calc(40px + 1.6875rem); }
+
+  .services-mega__arrow svg,
+  .services-mega__list a span svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform .3s;
+  }
+
+  .services-mega a:hover > .services-mega__arrow svg,
+  .services-mega a:focus-visible > .services-mega__arrow svg,
+  .services-mega__list a:hover span svg,
+  .services-mega__list a:focus-visible span svg { transform: translateX(0); }
+
+  .services-mega__feature:nth-child(1) .services-mega__description { max-width: 13.1875rem; }
+  .services-mega__feature:nth-child(2) .services-mega__description { max-width: 12.375rem; }
+  .services-mega__feature:nth-child(3) .services-mega__description { max-width: 13.6875rem; }
+
+  .services-mega__list .services-mega__eyebrow { margin-bottom: 1.675rem; }
+
+  .services-mega__discovery-copy {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+  }
+
+  .services-mega__discovery-copy strong { font-size: 22px; font-weight: 500; line-height: 1; }
+  .services-mega__discovery-copy span { font-size: 16px; line-height: 1.4; }
+  .services-mega__discovery em { flex-shrink: 0; align-self: flex-end; font-family: "Instrument Serif", serif; font-size: 18px; line-height: 1.4; letter-spacing: .36px; white-space: nowrap; }
+  .services-mega__feature:focus-visible,
+  .services-mega__list a:focus-visible,
+  .services-mega__discovery:focus-visible { outline: 2px solid #3827c7; outline-offset: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-mega__feature,
+  .services-mega__feature::before,
+  .services-mega__list a,
+  .services-mega__arrow,
+  .services-mega__list a span,
+  .services-mega__arrow svg,
+  .services-mega__list a span svg { transition: none !important; }
+}
     [data-swiper="lovelatters"] .swiper-slide-prev-second > div,
 [data-swiper="lovelatters"] .swiper-slide-next + div > div {
   background-color: #788FAF;

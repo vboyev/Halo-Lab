@@ -11,24 +11,6 @@
 .branding-work__link img { width: 100%; height: auto; border-radius: .5rem; transition: transform .3s; }
 .branding-work__link:hover img { transform: scale(1.025); }
 .branding-work__link:focus-visible, .branding-contact__button:focus-visible { outline: 3px solid #fdc448; outline-offset: 6px; }
-.branding-process-preview { padding-top: 11rem; }
-.branding-process-preview__stage { position: relative; min-height: 33.875rem; padding-bottom: 7rem; }
-.branding-process-preview__tilt { position: relative; width: min(100%, 45.625rem); margin: 0 auto; }
-.branding-process-preview__tilt .branding-process-preview__card { width: 100%; margin: 0; transform-origin: center; }
-.branding-process-preview__tilt.is-tilting .branding-process-preview__card { will-change: transform; }
-.branding-process-preview__graph { position: absolute; inset: auto 50% 0 auto; transform: translateX(50%); width: 70.875rem; height: 29.5rem; object-fit: fill; }
-.branding-process-preview__card { position: relative; width: 45.625rem; min-height: 26.875rem; margin: 0 auto; border-radius: .75rem; padding: 2rem; overflow: hidden; color: #02021e; background: linear-gradient(#b9d1ed 10.222%, #f5f7fa 50%, #fff); }
-.branding-process-preview__number { position: relative; z-index: 1; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #fff; font-size: 1.125rem; }
-.branding-process-preview__art { position: absolute; width: 23.1rem; height: 23.1rem; top: -2rem; right: -1rem; transform: rotate(-87.48deg); object-fit: contain; }
-.branding-process-preview__body { position: relative; margin-top: 11.6875rem; display: grid; grid-template-columns: 23.75rem 1fr; gap: 2rem; align-items: end; }
-.branding-process-preview__body h3 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -.03rem; margin: 0 0 1rem; }
-.branding-process-preview__body p { font-size: .875rem; line-height: 1.6; letter-spacing: -.0175rem; color: rgb(2 2 30 / .6); margin: 0; }
-.branding-process-preview__body .branding-process-preview__timing { color: #02021e; text-align: right; }
-.branding-process-preview__timing span { display: block; color: rgb(2 2 30 / .6); }
-.branding-process-preview__roadmap { list-style: none; display: flex; justify-content: space-between; gap: 1rem; margin: 1.5rem 0 0; padding: 0; }
-.branding-process-preview__roadmap li { display: flex; align-items: center; gap: .5rem; border: 1px solid rgb(255 255 255 / .25); border-radius: 2rem; padding: .5rem 1rem; font-size: .875rem; }
-.branding-process-preview__roadmap span { font-size: .7rem; opacity: .6; }
-.branding-process-preview__roadmap li:first-child { background: #fff; color: #02021e; }
 .page-branding-redesign #branding-advantages { padding-top: 11rem; padding-bottom: 0; }
 .page-branding-redesign #branding-advantages .h2 { text-transform: none; font-size: 3.5rem; line-height: 1.1; font-weight: 600; }
 .page-branding-redesign #branding-advantages .reasons__icon { width: 3.5rem; height: 3.5rem; object-fit: contain; }
@@ -51,26 +33,13 @@
 .page-branding-redesign #branding-contact { margin-top: 11rem; }
 @media (max-width: 991px) {
   .branding-work .branding-work__layout { grid-template-columns: 1fr 1.3fr; gap: 2rem; min-height: 36rem; }
-  .branding-process-preview__card { width: min(100%, 45.625rem); }
-  .branding-process-preview__body { grid-template-columns: 2fr 1fr; gap: 1rem; }
-  .branding-process-preview__roadmap { flex-wrap: wrap; justify-content: center; }
-  .branding-process-preview, .page-branding-redesign #branding-advantages, .page-branding-redesign #branding-reviews > .section { padding-top: 7rem; }
+  .branding-process, .page-branding-redesign #branding-advantages, .page-branding-redesign #branding-reviews > .section { padding-top: 7rem; }
   .page-branding-redesign #branding-contact { margin-top: 7rem; }
 }
 @media (max-width: 767px) {
   .branding-work .branding-work__layout { grid-template-columns: 1fr; padding-block: 4rem; gap: 2rem; min-height: 0; }
   .branding-work__copy { max-width: 28rem; }
   .branding-work__link { max-width: 33.75rem; width: 100%; margin: auto; }
-  .branding-process-preview { padding-top: 4.5rem; }
-  .branding-process-preview .branding-section-heading { margin-bottom: 2.5rem; }
-  .branding-process-preview__stage { min-height: 0; padding: 0; }
-  .branding-process-preview__graph { display: none; }
-  .branding-process-preview__card { padding: 1.5rem; }
-  .branding-process-preview__art { width: 17rem; height: 17rem; top: -1.5rem; right: -2rem; }
-  .branding-process-preview__body { margin-top: 11rem; grid-template-columns: 1fr; gap: 1.5rem; }
-  .branding-process-preview__body .branding-process-preview__timing { text-align: left; }
-  .branding-process-preview__roadmap { justify-content: flex-start; gap: .5rem; }
-  .branding-process-preview__roadmap li { padding: .5rem .75rem; font-size: .75rem; }
   .page-branding-redesign #branding-advantages { padding-top: 5rem; }
   .page-branding-redesign #branding-advantages .h2 { width: 100%; font-size: 2.5rem; }
   .page-branding-redesign #branding-reviews > .section { padding-top: 5rem; padding-bottom: 4rem; }
@@ -301,28 +270,6 @@
 .branding-case-tags span + span::before { content: '·'; opacity: .4; margin-right: .75rem; }
 .branding-positioning__clutch-link:focus-visible::before { transform: scaleX(1); transform-origin: bottom left; }
 
-/* A short light follows the actual perimeter; a blue halo keeps it visible on white. */
-#branding-reviews .lovelatters__block { position: relative; }
-.branding-review-glint { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; opacity: 0; transition: opacity .4s; }
-.branding-review-glint rect {
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 10 90;
-  animation: branding-review-glint 10s linear infinite paused;
-}
-.branding-review-glint__halo { stroke: #7189ee; stroke-width: 6px; filter: blur(3px); opacity: .7; }
-.branding-review-glint__trail { stroke: #9cb6ff; stroke-width: 2px; }
-.branding-review-glint rect.branding-review-glint__head { stroke: #fff; stroke-width: 1.5px; stroke-dasharray: 2 98; filter: drop-shadow(0 0 2px #506ee0); }
-#branding-reviews .swiper-slide-active .branding-review-glint { opacity: 1; }
-#branding-reviews.is-reviews-in-view .swiper-slide-active .branding-review-glint rect { animation-play-state: running; }
-@keyframes branding-review-glint { to { stroke-dashoffset: -100; } }
-@media (prefers-reduced-motion: reduce) {
-  .branding-review-glint { transition: none; }
-  .branding-review-glint rect { animation: none; }
-}
-
 /* Pin only the service strip; vertical page movement becomes horizontal travel. */
 .page-branding-redesign .branding-top {
   background-size: 100% calc(100% - var(--branding-offering-scroll-distance, 0px));
@@ -333,3 +280,97 @@
 .has-offering-scroll .branding-offerings__viewport { position: sticky; overflow: clip; scroll-snap-type: none; }
 .has-offering-scroll .branding-offerings__track { width: max-content; padding-inline: var(--offering-gutter); will-change: transform; }
 .has-offering-scroll .branding-offerings__card { scroll-snap-align: none; }
+
+/* ---------------------------------------------------------------------------
+   Process stages. Pinned on desktop: the page scroll steps five cards, fills the
+   graph, and walks the marker up it. Below 992px it degrades to a scroll-snap
+   strip, because a pinned card cannot fit a short viewport.
+   --------------------------------------------------------------------------- */
+.branding-process { padding-top: 11rem; }
+.branding-process__pin { position: relative; }
+.branding-process__stage { position: relative; min-height: 33.875rem; }
+
+/* Graph. Bars carry their Figma height; the fill inside each one is what animates. */
+.branding-process__graph { position: absolute; inset: 4.375rem 50% auto auto; transform: translateX(50%); width: 70.875rem; height: 29.5rem; }
+.branding-process__bars { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; height: 100%; }
+.branding-process__bar { position: relative; width: 1px; border-radius: 1px; background: rgb(255 255 255 / .18); }
+.branding-process__bar i { position: absolute; inset: auto 0 0 0; height: 0; border-radius: 1px; background: #fff; transition: height .28s ease; }
+@media (prefers-reduced-motion: reduce) { .branding-process__bar i { transition: none; } }
+
+/* Marker climbing the filled edge, and the peak label above the tallest bar. */
+.branding-process__marker { position: absolute; left: 0; bottom: 0; z-index: 2; transform: translate(-50%, 50%); transition: left .28s ease, bottom .28s ease; }
+@media (prefers-reduced-motion: reduce) { .branding-process__marker { transition: none; } }
+.branding-process__marker-dot { display: block; width: .5625rem; height: .5625rem; border-radius: 50%; background: #fff; }
+.branding-process__marker-label,
+.branding-process__peak-label { position: absolute; bottom: calc(100% + .75rem); left: 50%; transform: translateX(-50%); white-space: nowrap; border-radius: 1.25rem; padding: .5rem .875rem; font-size: .625rem; line-height: 1; background: #02021e; border: 1px solid rgb(255 255 255 / .16); color: #fff; }
+.branding-process__marker-label::after,
+.branding-process__peak-label::after { content: ''; position: absolute; top: 100%; left: 50%; width: .5rem; height: .5rem; background: inherit; border-right: inherit; border-bottom: inherit; transform: translate(-50%, -60%) rotate(45deg); }
+.branding-process__marker-label { transition: opacity .28s ease; }
+.branding-process:not(.is-step-0) .branding-process__marker-label { opacity: 0; }
+.branding-process__peak { position: absolute; right: 0; bottom: 100%; transform: translate(50%, 2.75rem); }
+.branding-process__peak-icon { display: block; width: .6875rem; height: .6875rem; background: #fff; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
+
+/* Cards cross-fade in place; only the active one is reachable. */
+.branding-process__cards { position: relative; width: 45.625rem; min-height: 26.875rem; margin: 0 auto; transform-origin: center; }
+.branding-process__cards.is-tilting { will-change: transform; }
+.branding-process__card { position: absolute; inset: 0; display: block; border-radius: .75rem; padding: 2rem; overflow: hidden; color: #02021e; opacity: 0; visibility: hidden; transition: opacity .45s ease; }
+.branding-process__card.is-active { position: relative; opacity: 1; visibility: visible; }
+@media (prefers-reduced-motion: reduce) { .branding-process__card { transition: none; } }
+.branding-process__card.is--blue { background: linear-gradient(180deg, #b9d1ed 10.222%, #f5f7fa 50%, #fff 100%); }
+.branding-process__card.is--violet { background: linear-gradient(180deg, #d8ceef 19.653%, #f5f3f6 68.459%, #fff 100%); }
+.branding-process__card.is--green { background: linear-gradient(180deg, #a7e8cf 0%, #fafffb 66.218%, #fff 100%); }
+.branding-process__card.is--lilac { background: linear-gradient(180deg, #d8ceef 10.222%, #f5f7fa 68.351%, #fff 100%); }
+.branding-process__number { position: relative; z-index: 1; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #fff; font-size: 1.125rem; letter-spacing: -.0225rem; }
+
+/* Art crops follow the Figma placement per card. */
+.branding-process__art { position: absolute; pointer-events: none; object-fit: contain; }
+.branding-process__art.is--atom { width: 21.678rem; height: 21.678rem; left: calc(50% + 8.369rem); top: calc(50% - 2.276rem); transform: translate(-50%, -50%); }
+.branding-process__art.is--strategy { width: 28.5rem; height: 21.438rem; left: 15.625rem; top: .938rem; }
+.branding-process__art.is--creative { width: 35.519rem; height: 25.092rem; left: calc(50% + 5.053rem); top: calc(50% - 2.921rem); transform: translate(-50%, -50%); }
+.branding-process__art.is--identity { width: 24.25rem; height: 24.25rem; left: calc(50% + 6.688rem); top: -.875rem; transform: translateX(-50%); }
+.branding-process__art.is--guidelines { width: 23.25rem; height: 19.625rem; left: calc(50% + 8.438rem); top: calc(50% - 2.688rem); transform: translate(-50%, -50%); }
+
+.branding-process__body { position: relative; margin-top: 11.6875rem; display: grid; grid-template-columns: 23.75rem 1fr; gap: 2rem; align-items: end; }
+.branding-process__body h3 { font-size: 1.75rem; line-height: 1.2; letter-spacing: -.035rem; margin: 0 0 1rem; }
+.branding-process__body p { font-size: .875rem; line-height: 1.6; letter-spacing: -.0175rem; color: rgb(2 2 30 / .6); margin: 0; }
+.branding-process__timing { color: #02021e; text-align: right; }
+.branding-process__timing span { display: block; color: rgb(2 2 30 / .6); }
+
+/* Roadmap doubles as the stepper. */
+.branding-process__roadmap { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin: 1.5rem 0 0; padding: 0; }
+.branding-process__roadmap-dots { display: flex; gap: 1.5rem; }
+.branding-process__roadmap-dots span { width: .375rem; height: .375rem; border-radius: 50%; background: rgb(255 255 255 / .3); }
+.branding-process__step { display: flex; align-items: center; gap: .5rem; border: 0; border-radius: 2rem; padding: .5rem 1rem; font: inherit; font-size: .875rem; color: inherit; background: transparent; cursor: pointer; transition: background-color .3s, color .3s; }
+.branding-process__step-dot { display: none; place-items: center; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: #fff; color: #3719ca; font-size: .625rem; }
+.branding-process__step.is-active { background: #3719ca; color: #fff; }
+.branding-process__step.is-active .branding-process__step-dot { display: grid; }
+.branding-process__step:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (hover: hover) { .branding-process__step:not(.is-active):hover { background: rgb(255 255 255 / .1); } }
+
+/* Scroll runway that drives the pinned section. Collapsed unless the pin is live. */
+.branding-process__anchors { display: none; }
+.branding-process.has-process-scroll .branding-process__anchors { display: block; }
+.branding-process.has-process-scroll .branding-process__anchors > div { height: 60vh; }
+.branding-process.has-process-scroll .branding-process__pin { position: sticky; }
+
+@media (max-width: 991px) {
+  .branding-process__graph, .branding-process__peak, .branding-process__marker { display: none; }
+  .branding-process__stage { min-height: 0; }
+  .branding-process__cards { display: flex; gap: 1rem; width: auto; margin: 0 -1.25rem; padding: 0 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .branding-process__cards::-webkit-scrollbar { display: none; }
+  .branding-process__card { position: relative; inset: auto; flex: 0 0 min(100%, 45.625rem); opacity: 1; visibility: visible; scroll-snap-align: start; }
+  .branding-process__body { grid-template-columns: 2fr 1fr; gap: 1rem; }
+  .branding-process__roadmap { flex-wrap: wrap; justify-content: center; }
+  .branding-process__roadmap-dots { display: none; }
+  .branding-process__step { border: 1px solid rgb(255 255 255 / .25); }
+}
+@media (max-width: 767px) {
+  .branding-process { padding-top: 4.5rem; }
+  .branding-process .branding-section-heading { margin-bottom: 2.5rem; }
+  .branding-process__card { padding: 1.5rem; min-height: 26.875rem; }
+  .branding-process__art.is--atom, .branding-process__art.is--identity { width: 17rem; height: 17rem; }
+  .branding-process__body { margin-top: 11rem; grid-template-columns: 1fr; gap: 1.5rem; }
+  .branding-process__timing { text-align: left; }
+  .branding-process__roadmap { justify-content: flex-start; gap: .5rem; }
+  .branding-process__step { padding: .5rem .75rem; font-size: .75rem; }
+}
