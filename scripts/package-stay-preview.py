@@ -1,5 +1,6 @@
 """Package a built Stay case for the repository's GitHub Pages subdirectory."""
 import html
+import hashlib
 import pathlib
 import posixpath
 import re
@@ -28,6 +29,10 @@ def asset(value, relative_to=''):
     suffix = ('?' + parsed.query if parsed.query else '') + ('#' + parsed.fragment if parsed.fragment else '')
     if (source / path).is_file():
         pending.add(path)
+        if path.endswith(('.css', '.js')):
+            version = hashlib.sha256((source / path).read_bytes()).hexdigest()[:12]
+            query = parsed.query + ('&' if parsed.query else '') + 'v=' + version
+            suffix = '?' + query + ('#' + parsed.fragment if parsed.fragment else '')
         return prefix + path + suffix
     return 'https://www.halo-lab.com/' + path + suffix
 
