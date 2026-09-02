@@ -248,6 +248,8 @@
     box-sizing: border-box;
     width: 240px;
     min-width: 240px;
+    padding-top: 7px;
+    padding-bottom: 7px;
   }
   .header-dropdown__content .menu-link__text-wrap { gap: 8px; }
   .header-dropdown__content .menu__link-ico {

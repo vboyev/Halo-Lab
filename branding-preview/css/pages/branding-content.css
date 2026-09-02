@@ -166,8 +166,8 @@
 .branding-evolution__quote {
   grid-area: 1 / 1;
   margin: 0;
+  position: relative;
   padding: 4rem clamp(2rem, 14.3vw, 12.875rem);
-  border: 1px solid #fff;
   border-radius: .75rem;
   background: rgb(255 255 255 / .01);
   box-shadow: inset 0 0 6.25rem 1.5rem rgb(255 255 255 / .16);
@@ -177,26 +177,40 @@
   transition: opacity .5s ease;
 }
 .branding-evolution__quote.is-active { opacity: 1; visibility: visible; }
+/* The stroke fades down the card: on the reference the top edge reads as a white hairline and the
+   bottom edge has none at all, so a flat 1px border ringed it far too brightly. Drawn as a masked
+   gradient ring rather than a border, which cannot itself be a gradient. */
+.branding-evolution__quote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, #fff 0%, rgb(255 255 255 / 0) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 @media (prefers-reduced-motion: reduce) { .branding-evolution__quote { transition: none; } }
 
-/* Progress bar. Segments sit on the light end of the section gradient, hence the dark ink. */
-.branding-evolution__progress { list-style: none; display: flex; gap: 1.0625rem; margin: 1.5rem 0 0; padding: 0; }
-.branding-evolution__progress li { flex: 1 1 0; min-width: 0; }
+/* Progress bar per the Pagination node: fixed 80px pills, 16px apart, white on 30% white. */
+.branding-evolution__progress { list-style: none; display: flex; gap: 1rem; margin: 1.5rem 0 0; padding: 0; }
 .branding-evolution__progress button {
   display: block;
-  width: 100%;
+  width: 5rem;
   height: .25rem;
   padding: 0;
   border: 0;
-  border-radius: 2.5rem;
-  background: rgb(2 2 30 / .1);
+  border-radius: 1.5rem;
+  background: rgb(255 255 255 / .3);
   overflow: hidden;
   cursor: pointer;
   appearance: none;
 }
-.branding-evolution__progress button > span { display: block; width: 0; height: 100%; border-radius: 2.5rem; background: #02021e; }
-.branding-evolution__progress button:focus-visible { outline: 2px solid #02021e; outline-offset: 3px; }
-@media (hover: hover) { .branding-evolution__progress button:hover { background: rgb(2 2 30 / .2); } }
+.branding-evolution__progress button > span { display: block; width: 0; height: 100%; border-radius: 1.5rem; background: #fff; }
+.branding-evolution__progress button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+@media (hover: hover) { .branding-evolution__progress button:hover { background: rgb(255 255 255 / .5); } }
 .branding-evolution__score { display: flex; align-items: center; justify-content: center; gap: .5rem; font-size: 1.5rem; line-height: 1.2; font-weight: 500; }
 .branding-evolution__score img { width: 6.8125rem; height: 1rem; }
 .branding-evolution__quote blockquote { margin: 1.5rem 0 2.5rem; padding: 0; border: 0; font-size: 2.5rem; line-height: 1.3; letter-spacing: -.05rem; }
@@ -346,7 +360,7 @@
 }
 .branding-process__marker-label { position: absolute; left: 50%; bottom: calc(100% + .5rem); transform: translateX(-50%); width: 6.8125rem; height: 2.377rem; background-image: url('../../images/services/branding-2026/process-pill-here.svg'); transition: opacity .28s ease; }
 .branding-process:not(.is-step-0) .branding-process__marker-label { opacity: 0; }
-.branding-process__peak { position: absolute; right: 0; bottom: 100%; display: flex; flex-direction: column; align-items: center; gap: .375rem; transform: translate(50%, 3.25rem); }
+.branding-process__peak { position: absolute; right: 0; bottom: calc(100% + .5rem); display: flex; flex-direction: column; align-items: center; gap: .75rem; transform: translateX(50%); }
 .branding-process__peak-label { width: 4.875rem; height: 2.44rem; background-image: url('../../images/services/branding-2026/process-pill-top.svg'); }
 .branding-process__peak-icon { display: block; width: .6875rem; height: .6875rem; background: no-repeat center / contain url('../../images/services/branding-2026/process-peak-icon.svg'); }
 

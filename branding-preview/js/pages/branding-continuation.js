@@ -206,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const count = buttons.length;
   // How much scroll each stage costs. Lower is a faster run through the five.
   const STAGE_SCROLL = 0.21;
+  const MARKER_REACH = 0.94;
   let stickyTop = 0;
   let step = -1;
   let frame = 0;
@@ -239,7 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Marker rides the curve between the two bars it currently sits over.
     if (marker && geometry.length) {
-      const t = p * (geometry.length - 1);
+      // The design stops the marker around 94% of the curve, which keeps it clear of the peak
+      // sparkle sitting over the tallest bar instead of colliding with the Top 1% pill.
+      const t = p * MARKER_REACH * (geometry.length - 1);
       const i0 = Math.min(geometry.length - 1, Math.floor(t));
       const i1 = Math.min(geometry.length - 1, i0 + 1);
       const f = t - i0;
