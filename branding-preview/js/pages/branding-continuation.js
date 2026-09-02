@@ -206,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const count = buttons.length;
   // How much scroll each stage costs. Lower is a faster run through the five.
   const STAGE_SCROLL = 0.21;
-  const MARKER_REACH = 0.94;
   let stickyTop = 0;
   let step = -1;
   let frame = 0;
@@ -227,6 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
       else button.removeAttribute('aria-current');
     });
     root.classList.toggle('is-step-0', next === 0);
+    // On the final stage the marker has reached the peak: it becomes the sparkle and Top 1% shows.
+    root.classList.toggle('is-peak', next === count - 1);
   }
 
   function applyProgress(p) {
@@ -240,19 +241,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Marker rides the curve between the two bars it currently sits over.
     if (marker && geometry.length) {
-      // The design stops the marker around 94% of the curve, which keeps it clear of the peak
-      // sparkle sitting over the tallest bar instead of colliding with the Top 1% pill.
-      const t = p * MARKER_REACH * (geometry.length - 1);
+      const t = p * (geometry.length - 1);
       const i0 = Math.min(geometry.length - 1, Math.floor(t));
       const i1 = Math.min(geometry.length - 1, i0 + 1);
       const f = t - i0;
       marker.style.left = `${(geometry[i0].x + (geometry[i1].x - geometry[i0].x) * f).toFixed(2)}px`;
       marker.style.bottom = `${(geometry[i0].y + (geometry[i1].y - geometry[i0].y) * f).toFixed(2)}px`;
     }
-    // Visible travel, but downward only: the card must never ride up over the heading.
+    // The card holds its position: it only turns about its vertical axis as the stages advance.
+    // It used to drop as well, which read as the card sinking away down the section.
     if (float) {
-      const drop = Math.min(96, innerHeight * 0.11);
-      float.style.transform = `perspective(1000px) translate3d(0, ${(p * drop).toFixed(2)}px, 0) rotateX(${(p * -2).toFixed(2)}deg)`;
+      float.style.transform = `perspective(1200px) rotateY(${(p * -9).toFixed(2)}deg)`;
     }
     setStep(Math.min(count - 1, Math.max(0, Math.floor(p * count))));
   }

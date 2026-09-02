@@ -231,9 +231,7 @@
   overflow: hidden;
   background: rgb(255 255 255 / var(--avatar-disc, 15%));
 }
-.branding-evolution__avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.branding-evolution__avatar img.is--bottom { object-position: bottom; }
-.branding-evolution__avatar img.is--zoom { inset: auto; left: -16.04%; top: -3.86%; width: 130.15%; height: 130.15%; }
+.branding-evolution__avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .branding-evolution__quote figcaption strong { display: block; font-size: 1rem; font-weight: 500; line-height: 1.6; }
 .branding-evolution__quote figcaption span span { display: block; font-size: .875rem; line-height: 1.6; color: rgb(255 255 255 / .6); }
 .branding-section-heading { text-align: center; margin-bottom: 5rem; }
@@ -361,7 +359,7 @@
 
 /* Marker climbing the filled edge, and the peak label above the tallest bar. */
 .branding-process__marker { position: absolute; left: 0; bottom: 0; z-index: 2; transform: translate(-50%, 50%); }
-.branding-process__marker-dot { display: block; width: .5625rem; height: .5625rem; border-radius: 50%; background: #fff; }
+.branding-process__marker-dot { display: block; width: .5625rem; height: .5625rem; border-radius: 50%; background: #fff; transition: width .3s ease, height .3s ease, border-radius .3s ease; }
 /* Both pills, their tails and the peak sparkle are exported straight from the design — the tail
    is part of the Union path, so drawing it as a rotated square never matched. */
 .branding-process__pill {
@@ -379,9 +377,40 @@
 }
 .branding-process__marker-label { position: absolute; left: 50%; bottom: calc(100% + .5rem); transform: translateX(-50%); width: 6.8125rem; height: 2.377rem; background-image: url('../../images/services/branding-2026/process-pill-here.svg'); transition: opacity .28s ease; }
 .branding-process:not(.is-step-0) .branding-process__marker-label { opacity: 0; }
-.branding-process__peak { position: absolute; right: 0; bottom: calc(100% + .5rem); display: flex; flex-direction: column; align-items: center; gap: .75rem; transform: translateX(50%); }
+.branding-process__peak { position: absolute; right: 0; bottom: calc(100% + 1.125rem); display: flex; justify-content: center; transform: translateX(50%); opacity: 0; transition: opacity .35s ease; }
+.branding-process.is-peak .branding-process__peak { opacity: 1; }
+/* Once the marker lands on the peak, a yellow highlight runs the pill's contour — the same
+   travelling-angle trick as the header CTA, reusing its registered property and keyframes, but
+   masked by the pill's own outline so the light follows the tail as well as the rounded body. */
+.branding-process__peak-label { position: relative; }
+.branding-process.is-peak .branding-process__peak-label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from var(--branding-glow-angle),
+    rgba(253, 196, 72, .95) 0deg,
+    rgba(253, 196, 72, 0) 70deg,
+    rgba(253, 196, 72, 0) 300deg,
+    rgba(253, 196, 72, .95) 360deg);
+  -webkit-mask: url('../../images/services/branding-2026/process-pill-top.svg') no-repeat center / 100% 100%;
+  mask: url('../../images/services/branding-2026/process-pill-top.svg') no-repeat center / 100% 100%;
+  animation: branding-glow-turn 4s linear infinite;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Parked at its starting angle rather than travelling. */
+  .branding-process.is-peak .branding-process__peak-label::after { animation: none; }
+}
 .branding-process__peak-label { width: 4.875rem; height: 2.44rem; background-image: url('../../images/services/branding-2026/process-pill-top.svg'); }
-.branding-process__peak-icon { display: block; width: .6875rem; height: .6875rem; background: no-repeat center / contain url('../../images/services/branding-2026/process-peak-icon.svg'); }
+/* The travelling dot turns into the sparkle once it reaches the top of the tallest bar. */
+.branding-process.is-peak .branding-process__marker-dot {
+  width: .6875rem;
+  height: .6875rem;
+  border-radius: 0;
+  background: no-repeat center / contain url('../../images/services/branding-2026/process-peak-icon.svg');
+}
+@media (prefers-reduced-motion: reduce) { .branding-process__peak { transition: none; } }
 
 /* Cards cross-fade in place; only the active one is reachable. */
 .branding-process__float { position: relative; z-index: 1; will-change: transform; }
@@ -459,6 +488,8 @@
   margin-left: .5rem;
   vertical-align: middle;
   background: no-repeat center / contain url('../../images/services/branding-2026/offerings-arrow.svg');
+  /* The exported shape's apex sits at its bottom-left corner; a quarter-turn back points it down. */
+  transform: rotate(-45deg);
 }
 
 @media (hover: hover) and (pointer: fine) {
