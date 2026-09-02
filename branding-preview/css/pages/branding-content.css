@@ -1,5 +1,14 @@
 /* Branding 2026: rem dimensions follow the site's fluid 82rem content grid. */
-.branding-bottom { overflow: clip; background: linear-gradient(#000218 35.486%, #1964d1 60.542%, #f8f9fd 94.769%); color: #fff; }
+.branding-bottom {
+  overflow: clip;
+  /* Stops chosen so the love letters land on exactly the stretch of ramp the homepage puts them
+     on: they span 48.6-61.3% of this block, which is 0.223-0.816 of the dark-to-blue segment —
+     the same fractions the homepage's own gradient gives them. The light stop stays where it was
+     rather than following the homepage's, so the white FAQ card below still has a backdrop to
+     sit against. */
+  background: linear-gradient(#000218 43.78%, #1964d1 65.24%, #f8f9fd 94.769%);
+  color: #fff;
+}
 .branding-work { position: relative; overflow: hidden; color: #fff; background: #161a1d; }
 .branding-work__background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .branding-work .branding-work__layout { position: relative; display: grid; grid-template-columns: 21rem 33.75rem 1fr; align-items: center; gap: 4.6875rem; min-height: 46.875rem; }
@@ -533,3 +542,60 @@
   .branding-shots__card { transform: scale(.5875) translate(var(--shot-x, 0), var(--shot-y, 0)) rotate(var(--shot-r, 0deg)); }
 }
 @media (prefers-reduced-motion: reduce) { .branding-shots { animation: none; } }
+
+/* FAQ. White card on the section gradient; rows are native buttons with their panels below. */
+.branding-faq { padding-top: 7rem; }
+.branding-faq__card {
+  position: relative;
+  max-width: 56.75rem;
+  margin: 0 auto;
+  padding: 3.5rem 4rem;
+  border-radius: .75rem;
+  background: #fff;
+  color: #02021e;
+}
+.branding-faq__title { margin: 0 0 .5rem; font-size: 3.5rem; line-height: 1; font-weight: 500; letter-spacing: -.035rem; text-transform: uppercase; }
+.branding-faq__avatar { position: absolute; top: 3.5rem; right: 3rem; width: 4.5rem; height: 4.5rem; border-radius: 50%; object-fit: cover; }
+.branding-faq__list { margin: 2.5rem 0 0; padding: 0; }
+.branding-faq__item { border-top: 1px solid rgb(2 2 30 / .15); }
+.branding-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.5rem 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.03rem;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+}
+.branding-faq__question:focus-visible { outline: 2px solid #3827c7; outline-offset: 4px; border-radius: .25rem; }
+.branding-faq__plus {
+  flex: 0 0 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: no-repeat center / contain url('../../images/services/branding-2026/faq-plus.svg');
+  transition: transform .3s ease;
+}
+.branding-faq__question[aria-expanded="true"] .branding-faq__plus { transform: rotate(45deg); }
+.branding-faq__answer { margin: 0; padding: 0 4.5rem 1.5rem 0; }
+.branding-faq__answer p { margin: 0; font-size: 1rem; line-height: 1.6; color: rgb(2 2 30 / .6); }
+.branding-faq__answer a { color: #3827c7; text-decoration: underline; text-underline-offset: .15em; }
+@media (hover: hover) { .branding-faq__question:hover .branding-faq__plus { opacity: .6; } }
+@media (prefers-reduced-motion: reduce) { .branding-faq__plus { transition: none; } }
+@media (max-width: 991px) {
+  .branding-faq { padding-top: 4.5rem; }
+  .branding-faq__card { padding: 2.5rem 2rem; }
+  .branding-faq__title { font-size: 2.5rem; }
+  .branding-faq__avatar { top: 2.5rem; right: 2rem; width: 3.5rem; height: 3.5rem; }
+  .branding-faq__question { font-size: 1.125rem; }
+  .branding-faq__answer { padding-right: 0; }
+}

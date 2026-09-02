@@ -409,3 +409,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   show(0);
 });
+
+/* FAQ accordion. Native buttons carrying their own ARIA state; one panel open at a time, and the
+   answers stay in the document either way so they are readable without JavaScript. */
+document.addEventListener('DOMContentLoaded', () => {
+  const toggles = [...document.querySelectorAll('[data-branding-faq-toggle]')];
+  if (!toggles.length) return;
+  toggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggles.forEach((other) => {
+        const panel = document.getElementById(other.getAttribute('aria-controls'));
+        const next = other === toggle && !open;
+        other.setAttribute('aria-expanded', String(next));
+        if (panel) panel.hidden = !next;
+      });
+    });
+  });
+});
