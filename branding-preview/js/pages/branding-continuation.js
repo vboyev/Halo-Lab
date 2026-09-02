@@ -121,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* Tilt the rectangular process card, never its graph, heading or navigation. */
+/* The card's only movement: a parallax tilt that follows the pointer, never the scroll. Applies
+   to the card alone — not its graph, heading or navigation. */
 document.addEventListener('DOMContentLoaded', () => {
   const host = document.querySelector('[data-process-tilt]');
   // The stack itself is the transformed element, so the tilt survives the card cross-fade.
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const zone = host.closest('#branding-process');
   const pointer = matchMedia('(hover: hover) and (pointer: fine)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const limit = 4;
+  const limit = 9;
   let frame = 0;
   let currentX = 0, currentY = 0, targetX = 0, targetY = 0;
   let previousTime = 0;
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const settled = Math.abs(targetX - currentX) + Math.abs(targetY - currentY) < .01;
     if (settled) { currentX = targetX; currentY = targetY; }
     card.style.transform = currentX || currentY
-      ? `perspective(1200px) rotateX(${currentX.toFixed(3)}deg) rotateY(${currentY.toFixed(3)}deg)`
+      ? `perspective(900px) rotateX(${currentX.toFixed(3)}deg) rotateY(${currentY.toFixed(3)}deg)`
       : '';
     if (settled) {
       frame = 0;
@@ -226,8 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
       else button.removeAttribute('aria-current');
     });
     root.classList.toggle('is-step-0', next === 0);
-    // On the final stage the marker has reached the peak: it becomes the sparkle and Top 1% shows.
-    root.classList.toggle('is-peak', next === count - 1);
   }
 
   function applyProgress(p) {
@@ -248,11 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
       marker.style.left = `${(geometry[i0].x + (geometry[i1].x - geometry[i0].x) * f).toFixed(2)}px`;
       marker.style.bottom = `${(geometry[i0].y + (geometry[i1].y - geometry[i0].y) * f).toFixed(2)}px`;
     }
-    // The card holds its position: it only turns about its vertical axis as the stages advance.
-    // It used to drop as well, which read as the card sinking away down the section.
-    if (float) {
-      float.style.transform = `perspective(1200px) rotateY(${(p * -9).toFixed(2)}deg)`;
-    }
+    // Only at the very end of the track, where the last bar finishes, does the marker become the
+    // sparkle and Top 1% appear.
+    root.classList.toggle('is-peak', p >= 0.99);
     setStep(Math.min(count - 1, Math.max(0, Math.floor(p * count))));
   }
 

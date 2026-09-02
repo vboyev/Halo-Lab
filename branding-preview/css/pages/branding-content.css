@@ -511,3 +511,25 @@
     .branding-offerings__arrow { transition: none; transform: none; }
   }
 }
+
+/* Branding's own final-CTA ring: sixteen shots placed on the circle the shared `spin` animation
+   already turns, in place of the one flattened image every other page uses. */
+.branding-shots { position: relative; height: 102.125rem; }
+.branding-shots__card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14.75rem;
+  height: 11rem;
+  margin: -5.5rem 0 0 -7.375rem;
+  border-radius: .25rem;
+  overflow: hidden;
+  transform: translate(var(--shot-x, 0), var(--shot-y, 0)) rotate(var(--shot-r, 0deg));
+}
+.branding-shots__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 991px) {
+  .branding-shots { height: 60rem; }
+  /* The circle shrinks to 60rem there, so the offsets have to come in with it. */
+  .branding-shots__card { transform: scale(.5875) translate(var(--shot-x, 0), var(--shot-y, 0)) rotate(var(--shot-r, 0deg)); }
+}
+@media (prefers-reduced-motion: reduce) { .branding-shots { animation: none; } }
