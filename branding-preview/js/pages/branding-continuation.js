@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktop = matchMedia('(min-width: 992px) and (prefers-reduced-motion: no-preference)');
   const count = buttons.length;
   // How much scroll each stage costs. Lower is a faster run through the five.
-  const STAGE_SCROLL = 0.42;
+  const STAGE_SCROLL = 0.21;
   let stickyTop = 0;
   let step = -1;
   let frame = 0;
@@ -233,7 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const total = bars.length;
     for (let i = 0; i < total; i += 1) {
       const fill = Math.min(1, Math.max(0, p * total - i));
-      bars[i].firstElementChild.style.height = fill ? `${(fill * 100).toFixed(2)}%` : '0';
+      // The lit bar is a gradient the full height of the bar, so it fades in rather than growing:
+      // growing it from the bottom would only ever reveal the transparent end of that gradient.
+      bars[i].firstElementChild.style.opacity = fill ? fill.toFixed(3) : '0';
     }
     // Marker rides the curve between the two bars it currently sits over.
     if (marker && geometry.length) {
@@ -243,13 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const f = t - i0;
       marker.style.left = `${(geometry[i0].x + (geometry[i1].x - geometry[i0].x) * f).toFixed(2)}px`;
       marker.style.bottom = `${(geometry[i0].y + (geometry[i1].y - geometry[i0].y) * f).toFixed(2)}px`;
-    }
-    // The stack climbs as the curve does, which is the movement the page is missing otherwise.
-    if (float) {
-      const lift = Math.min(64, innerHeight * 0.075);
-      const y = (0.5 - p) * 2 * lift;
-      const tilt = (0.5 - p) * 2 * 3;
-      float.style.transform = `perspective(1000px) translate3d(0, ${y.toFixed(2)}px, 0) rotateX(${tilt.toFixed(2)}deg)`;
     }
     setStep(Math.min(count - 1, Math.max(0, Math.floor(p * count))));
   }

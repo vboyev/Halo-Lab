@@ -388,8 +388,18 @@
     background: #dadfe1;
     color: #02021e;
   }
-  .services-mega__discovery-clouds { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-  .services-mega__discovery-clouds img { width: 100%; height: 100%; }
+  .services-mega__discovery-clouds { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+  .services-mega__discovery-clouds img {
+    position: absolute;
+    top: 50%;
+    left: -21.5%;
+    width: 144%;
+    max-width: none;
+    height: auto;
+    transform: translate3d(var(--services-parallax-x, 0px), calc(-50% + var(--services-parallax-y, 0px)), 0);
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1);
+    will-change: transform;
+  }
   .services-mega__discovery-copy { position: relative; z-index: 3; display: block; }
   .services-mega__discovery-heading { display: flex; align-items: center; gap: 12px; min-height: 24px; padding-right: 16px; }
   .services-mega__discovery-heading strong { font-size: 18px; font-weight: 500; line-height: 1; }
@@ -463,6 +473,7 @@
   .services-mega__list a span,
   .services-mega__arrow svg,
   .services-mega__list a span svg,
+  .services-mega__discovery-clouds img,
   .services-mega__discovery-icon .button__icon-anim { transition: none !important; }
 }
     [data-swiper="lovelatters"] .swiper-slide-prev-second > div,
