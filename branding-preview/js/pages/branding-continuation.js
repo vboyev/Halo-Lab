@@ -322,3 +322,95 @@ document.addEventListener('DOMContentLoaded', () => {
   setStep(0);
   configure();
 });
+
+/* Evolution reviews. Three quotes cross-fade while the active segment of the progress bar fills,
+   which is what the design's partly-filled bar depicts. It pauses whenever nobody is looking —
+   off-screen, hidden tab, or while the block is hovered or focused — and reduced-motion users get
+   a static indicator with no timer at all. */
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.querySelector('[data-branding-reviews]');
+  if (!root) return;
+  const quotes = [...root.querySelectorAll('[data-branding-review]')];
+  const buttons = [...root.querySelectorAll('[data-branding-review-btn]')];
+  if (quotes.length < 2 || buttons.length !== quotes.length) return;
+
+  const HOLD = 6000;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let index = 0;
+  let started = 0;
+  let frame = 0;
+  let onScreen = false;
+  let held = false;
+
+  const fills = buttons.map((button) => button.firstElementChild);
+
+  function paint(progress) {
+    fills.forEach((fill, i) => {
+      fill.style.width = i < index ? '100%' : i > index ? '0%' : `${(progress * 100).toFixed(2)}%`;
+    });
+  }
+
+  function show(next) {
+    index = (next + quotes.length) % quotes.length;
+    quotes.forEach((quote, i) => {
+      const on = i === index;
+      quote.classList.toggle('is-active', on);
+      quote.toggleAttribute('aria-hidden', !on);
+    });
+    buttons.forEach((button, i) => {
+      if (i === index) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    });
+    started = performance.now();
+    paint(reduced.matches ? 1 : 0);
+  }
+
+  function tick(now) {
+    frame = 0;
+    if (!running()) return;
+    const progress = Math.min(1, (now - started) / HOLD);
+    paint(progress);
+    if (progress >= 1) show(index + 1);
+    frame = requestAnimationFrame(tick);
+  }
+  function running() {
+    return onScreen && !held && !document.hidden && !reduced.matches;
+  }
+  function run() {
+    if (!running() || frame) return;
+    // Resume from where the bar stopped rather than restarting the quote.
+    started = performance.now() - (parseFloat(fills[index].style.width) || 0) / 100 * HOLD;
+    frame = requestAnimationFrame(tick);
+  }
+  function stop() {
+    if (frame) { cancelAnimationFrame(frame); frame = 0; }
+  }
+
+  buttons.forEach((button, i) => button.addEventListener('click', () => {
+    stop();
+    show(i);
+    run();
+  }));
+
+  // Hovering or tabbing into the block should not steal the quote out from under the reader.
+  ['pointerenter', 'focusin'].forEach((type) => root.addEventListener(type, () => { held = true; stop(); }));
+  ['pointerleave', 'focusout'].forEach((type) => root.addEventListener(type, () => {
+    if (type === 'focusout' && root.contains(document.activeElement)) return;
+    held = false;
+    run();
+  }));
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      onScreen = entries.some((entry) => entry.isIntersecting);
+      if (onScreen) run(); else stop();
+    }, { threshold: 0.2 }).observe(root);
+  } else {
+    onScreen = true;
+    run();
+  }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else run(); });
+  reduced.addEventListener('change', () => { stop(); show(index); run(); });
+
+  show(0);
+});
