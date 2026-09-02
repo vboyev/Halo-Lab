@@ -246,6 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
       marker.style.left = `${(geometry[i0].x + (geometry[i1].x - geometry[i0].x) * f).toFixed(2)}px`;
       marker.style.bottom = `${(geometry[i0].y + (geometry[i1].y - geometry[i0].y) * f).toFixed(2)}px`;
     }
+    // Visible travel, but downward only: the card must never ride up over the heading.
+    if (float) {
+      const drop = Math.min(96, innerHeight * 0.11);
+      float.style.transform = `perspective(1000px) translate3d(0, ${(p * drop).toFixed(2)}px, 0) rotateX(${(p * -2).toFixed(2)}deg)`;
+    }
     setStep(Math.min(count - 1, Math.max(0, Math.floor(p * count))));
   }
 
