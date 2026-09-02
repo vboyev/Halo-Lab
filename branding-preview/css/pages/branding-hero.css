@@ -373,10 +373,13 @@
    first paint and the fallback, and the video only fades in once it is actually playing. */
 .page-branding-redesign .branding-showreel__video {
   position: absolute;
-  inset: 0;
+  /* Bleed a pixel past the button on every side. The slot is wider than the clip's 1.35:1, so
+     `cover` always spans the full width mathematically, but the button's own fill can still show
+     as a hairline seam where a fractional box width rasterises. The button clips the overhang. */
+  inset: -1px;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
   object-fit: cover;
   opacity: 0;
   pointer-events: none;

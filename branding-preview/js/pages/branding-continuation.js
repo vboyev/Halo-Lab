@@ -348,7 +348,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let started = 0;
   let frame = 0;
   let onScreen = false;
-  let held = false;
 
   const fills = buttons.map((button) => button.firstElementChild);
 
@@ -382,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
     frame = requestAnimationFrame(tick);
   }
   function running() {
-    return onScreen && !held && !document.hidden && !reduced.matches;
+    return onScreen && !document.hidden && !reduced.matches;
   }
   function run() {
     if (!running() || frame) return;
@@ -397,14 +396,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buttons.forEach((button, i) => button.addEventListener('click', () => {
     stop();
     show(i);
-    run();
-  }));
-
-  // Hovering or tabbing into the block should not steal the quote out from under the reader.
-  ['pointerenter', 'focusin'].forEach((type) => root.addEventListener(type, () => { held = true; stop(); }));
-  ['pointerleave', 'focusout'].forEach((type) => root.addEventListener(type, () => {
-    if (type === 'focusout' && root.contains(document.activeElement)) return;
-    held = false;
     run();
   }));
 

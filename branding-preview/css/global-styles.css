@@ -217,6 +217,7 @@
     padding: 24px 32px 32px;
     margin-top: 0;
     border-radius: 12px;
+    box-shadow: 0 32px 80px rgba(2, 2, 30, .18), 0 8px 24px rgba(2, 2, 30, .1);
   }
   .services-mega__legacy-mobile { display: none !important; }
   .header .header__nav-link {
@@ -250,6 +251,7 @@
     min-width: 272px;
     padding-top: 12px;
     padding-bottom: 12px;
+    box-shadow: 0 32px 80px rgba(2, 2, 30, .18), 0 8px 24px rgba(2, 2, 30, .1);
   }
   .header-dropdown__content .menu-link__text-wrap { gap: 8px; }
   .header-dropdown__content .menu__link-ico {
