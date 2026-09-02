@@ -195,7 +195,7 @@
 @media (prefers-reduced-motion: reduce) { .branding-evolution__quote { transition: none; } }
 
 /* Progress bar per the Pagination node: fixed 80px pills, 16px apart, white on 30% white. */
-.branding-evolution__progress { list-style: none; display: flex; gap: 1rem; margin: 1.5rem 0 0; padding: 0; }
+.branding-evolution__progress { list-style: none; display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0 0; padding: 0; }
 .branding-evolution__progress button {
   display: block;
   width: 5rem;
@@ -431,16 +431,27 @@
 
 /* `What we deliver` copy is held back until the card is pointed at. Direct child only: the
    artwork partials carry their own paragraphs and those must never be hidden. */
+/* The shared chevron, riding after the title so it follows the last word rather than pinning to
+   the card edge. It comes in on the same hover that reveals the description. */
+.branding-offerings__arrow { display: inline-flex; align-items: center; margin-left: .375rem; vertical-align: middle; }
+.branding-offerings__arrow svg { display: block; width: 1rem; height: 1rem; }
+
 @media (hover: hover) and (pointer: fine) {
-  .branding-offerings__card > p {
+  .branding-offerings__card > p,
+  .branding-offerings__arrow {
     opacity: 0;
-    transform: translateY(.375rem);
     transition: opacity .35s ease, transform .35s ease;
   }
+  .branding-offerings__card > p { transform: translateY(.375rem); }
+  .branding-offerings__arrow { transform: translateX(-.25rem); }
   .branding-offerings__card:hover > p,
   .branding-offerings__card:focus-visible > p,
-  .branding-offerings__card:focus-within > p { opacity: 1; transform: none; }
+  .branding-offerings__card:focus-within > p,
+  .branding-offerings__card:hover .branding-offerings__arrow,
+  .branding-offerings__card:focus-visible .branding-offerings__arrow,
+  .branding-offerings__card:focus-within .branding-offerings__arrow { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .branding-offerings__card > p { transition: none; transform: none; }
+    .branding-offerings__card > p,
+    .branding-offerings__arrow { transition: none; transform: none; }
   }
 }
