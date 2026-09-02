@@ -200,24 +200,26 @@
 }
 
 /** Services mega menu — Figma 86147:44629, remeasured 2026-08-31.
- * Reference viewport 1440: panel (64,88) 1312×469; core 602; banner 602×103.
+ * Reference viewport 1440: panel 1256×465; core and banner 602px wide.
  * Pixel geometry is intentional: the site's fluid root rem must not scale this design.
  */
 @media screen and (min-width: 992px) {
   .header .container.mod--menu {
-    width: 1236px;
+    width: 1256px;
     max-width: 100%;
+    left: -28px;
     margin-inline: auto;
     top: 88px !important;
     margin-top: 0;
   }
   .header .menu__block:has(.services-mega) {
-    padding: 24px 32px 36px;
+    min-height: 465px;
+    padding: 24px 32px 32px;
     margin-top: 0;
     border-radius: 12px;
   }
   .services-mega__legacy-mobile { display: none !important; }
-  .header.is-menu-open .header__nav-link { color: #fff !important; opacity: .8; }
+  .header.is-menu-open .header__nav-link { color: #fff !important; opacity: .7; }
   .header.is-menu-open [data-menu-open].header__nav-link,
   .header.is-menu-open .header__nav-link:hover,
   .header.is-menu-open .header__nav-link:focus-visible { color: #fff !important; opacity: 1; }
@@ -231,16 +233,19 @@
     letter-spacing: 0;
   }
   .services-mega__grid {
+    position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 602px) 199px minmax(211px, 1fr);
-    gap: 80px;
+    grid-template-columns: minmax(0, 602px) 110px minmax(211px, 1fr);
+    gap: 129px;
   }
   .services-mega__eyebrow {
-    margin: 0 0 31.6px;
+    margin: 0 0 34.8px;
     color: rgba(2, 2, 30, .5);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.6;
+    letter-spacing: .6px;
+    text-transform: uppercase;
   }
   .services-mega__core { min-width: 0; }
   .services-mega__core > .services-mega__eyebrow { margin-left: 24px; }
@@ -248,7 +253,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-rows: minmax(81px, auto);
-    gap: 48px 10px;
+    gap: 40px 10px;
     padding-left: 24px;
   }
   .services-mega__feature {
@@ -282,7 +287,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1;
   }
@@ -297,13 +302,16 @@
     max-width: min(239px, calc(100% - 3px));
     margin: 10px 0 0 3px;
     color: rgba(0, 0, 0, .6);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.4;
   }
   .services-mega__feature:nth-child(1) .services-mega__description { max-width: min(211px, calc(100% - 3px)); min-height: 47px; }
   .services-mega__feature:nth-child(2) .services-mega__description { max-width: min(198px, calc(100% - 3px)); min-height: 47px; }
   .services-mega__feature:nth-child(3) .services-mega__description { max-width: min(219px, calc(100% - 3px)); }
+  .services-mega__feature:nth-child(1) .services-mega__description { max-width: min(197px, calc(100% - 3px)); }
+  .services-mega__feature:nth-child(3) .services-mega__description { max-width: min(189px, calc(100% - 3px)); }
+  .services-mega__feature:nth-child(4) .services-mega__description { max-width: min(215px, calc(100% - 3px)); }
   .services-mega__arrow {
     position: absolute;
     top: 4px;
@@ -317,8 +325,9 @@
   .services-mega a:hover > .services-mega__arrow,
   .services-mega a:focus-visible > .services-mega__arrow { opacity: 1; }
   .services-mega__list { display: flex; flex-direction: column; min-width: 0; }
+  .services-mega__divider { position: absolute; top: 0; left: 666px; width: 1px; height: 420px; }
   /* 112 + 22.4 + 19.6 + 12 = 166: first link's text top in Figma. */
-  .services-mega__list .services-mega__eyebrow { margin-bottom: 19.6px; }
+  .services-mega__list .services-mega__eyebrow { margin-bottom: 22.8px; }
   .services-mega__list a {
     display: flex;
     align-items: center;
@@ -363,16 +372,18 @@
     isolation: isolate;
     display: block;
     min-height: 103px;
-    margin: 42px 0 0;
-    padding: 23px 24px;
+    margin: 50px 0 0;
+    padding: 27px;
     overflow: hidden;
     border-radius: 8px;
-    background: linear-gradient(90deg, #bccfed, #dee6f3);
+    background: #dadfe1;
     color: #02021e;
   }
-  .services-mega__discovery-copy { position: relative; z-index: 2; display: block; }
+  .services-mega__discovery-clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .services-mega__discovery-clouds img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; transform: scaleX(-1); }
+  .services-mega__discovery-copy { position: relative; z-index: 3; display: block; }
   .services-mega__discovery-heading { display: flex; align-items: center; gap: 12px; min-height: 24px; padding-right: 16px; }
-  .services-mega__discovery-heading strong { font-size: 20px; font-weight: 500; line-height: 1; }
+  .services-mega__discovery-heading strong { font-size: 18px; font-weight: 500; line-height: 1; }
   .services-mega__discovery-badge {
     display: inline-flex;
     flex: none;
@@ -393,7 +404,7 @@
   .services-mega__discovery-description {
     display: block;
     max-width: 371px;
-    margin-top: 10px;
+    margin-top: 5px;
     color: rgba(0, 0, 0, .6);
     font-size: 16px;
     font-weight: 400;
@@ -401,7 +412,7 @@
   }
   .services-mega__discovery-icon {
     position: absolute;
-    z-index: 3;
+    z-index: 4;
     top: 19px;
     right: 19px;
     width: 14px;
@@ -418,7 +429,7 @@
   .services-mega__discovery-orbs {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
     opacity: .48;
     filter: saturate(1);
@@ -451,7 +462,7 @@
   .services-mega__discovery-orbs i:nth-child(3) { left: 5%; top: -200%; background: radial-gradient(circle, #d7b6d8 0%, transparent 70%); animation-delay: -4s; }
   .services-mega__discovery-glint {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     inset: 0;
     padding: 1px;
     border-radius: inherit;
@@ -486,7 +497,8 @@
   /* The site's header grows with rem above the reference frame; avoid overlap. */
   .header .container.mod--menu { top: 6rem !important; }
 }
-@media screen and (min-width: 992px) and (max-width: 1199px) {
+@media screen and (min-width: 992px) and (max-width: 1319px) {
+  .header .container.mod--menu { left: 0; }
   .services-mega__grid { grid-template-columns: minmax(0, 1fr) 165px 211px; gap: 24px; }
   .services-mega__core-grid { column-gap: 16px; }
   .services-mega__feature { width: 100%; }
@@ -497,6 +509,7 @@
   .services-mega__discovery-heading { flex-wrap: wrap; row-gap: 8px; }
   .services-mega__discovery-description { max-width: 100%; }
   .services-mega__feature-title { padding-right: 16px; }
+  .services-mega__divider { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .services-mega__feature,
@@ -628,89 +641,89 @@
   }
   @media screen and (min-width: 992px) {
     [data-mask='solution'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a8635c64fb995068b8c8dd_bg-card-solutionBorder_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a8635c64fb995068b8c8dd_bg-card-solutionBorder_laptop.webp);
     }
     [data-mask='awards'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6512ef9d06d51a6b376bab9d_award-border.svg");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6512ef9d06d51a6b376bab9d_award-border.svg);
     }
     [data-mask='benefits'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/651539b0daa2b9a3e60232ca_card-benefitsBorder.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/651539b0daa2b9a3e60232ca_card-benefitsBorder.webp);
     }
     [data-mask='benefits-long'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/651539b01ac75a2f07a6f425_card-benefitsBorderLong.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/651539b01ac75a2f07a6f425_card-benefitsBorderLong.webp);
     }
     [data-mask='reviews'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648c620695b80bc58810a156_bg-card-reviews_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648c620695b80bc58810a156_bg-card-reviews_laptop.webp);
     }
     [data-mask='error'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64b14376d206bc88a0374470_form-error_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64b14376d206bc88a0374470_form-error_laptop.webp);
     }
     [data-mask='works'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648b10ef9ccee0a3fa3ae1cb_bg-card-worksSlide_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648b10ef9ccee0a3fa3ae1cb_bg-card-worksSlide_laptop.webp);
     }
     [data-mask='post'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/647f40ca80b2366090015301_bg-card-post_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/647f40ca80b2366090015301_bg-card-post_laptop.webp);
     }
     [data-mask='on-dribble'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64afa9bfcc6b742829ac4578_bg-card-onDribble_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64afa9bfcc6b742829ac4578_bg-card-onDribble_laptop.webp);
     }
     [data-mask='projects-big'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858ecefbe57e58587357_bg-card-postBig_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858ecefbe57e58587357_bg-card-postBig_laptop.webp);
     }
     [data-mask='projects-big-invert'],
     [data-projects-big] > div:nth-child(even) [data-mask='projects-big'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858edd23f5690e30e623_bg-card-postBig2_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858edd23f5690e30e623_bg-card-postBig2_laptop.webp);
     }
   }
   @media screen and (max-width: 991px) and (min-width: 480px) {
     [data-mask='solution'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a8635b8d7cd698bc48de97_bg-card-solutionBorder_tablet.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a8635b8d7cd698bc48de97_bg-card-solutionBorder_tablet.webp);
     }
     [data-mask='reviews'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648c6205918a5b5121781a8b_bg-card-reviews_tablet.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648c6205918a5b5121781a8b_bg-card-reviews_tablet.webp);
     }
     [data-mask='error'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64b14376d206bc88a0374470_form-error_laptop.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64b14376d206bc88a0374470_form-error_laptop.webp);
     }
     [data-mask='works'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648b10ef60a6ff58e72bfc12_bg-card-worksSlide_tablet.png");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648b10ef60a6ff58e72bfc12_bg-card-worksSlide_tablet.png);
     }
     [data-mask='post'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/647f40ca4096796087778f34_bg-card-post_tablet.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/647f40ca4096796087778f34_bg-card-post_tablet.webp);
     }
     [data-mask='on-dribble'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64afa9be376d3438a757bc33_bg-card-onDribble_tablet.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64afa9be376d3438a757bc33_bg-card-onDribble_tablet.webp);
     }
     [data-mask='projects-big'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858d011d127471d61998_bg-card-postBig_tablet.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858d011d127471d61998_bg-card-postBig_tablet.webp);
     }
     [data-mask='projects-big-invert'],
     [data-projects-big] > div:nth-child(even) [data-mask='projects-big'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858e9c6ab83eafdbd7a7_bg-card-postBig2_tablet.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858e9c6ab83eafdbd7a7_bg-card-postBig2_tablet.webp);
     }
   }
   @media screen and (max-width: 479px) {
     [data-mask='solution'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a8635ca0e69ebdfd26c3be_bg-card-solutionBorder_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a8635ca0e69ebdfd26c3be_bg-card-solutionBorder_mobile.webp);
     }
     [data-mask='reviews'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648c620595b80bc58810a130_bg-card-reviews_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648c620595b80bc58810a130_bg-card-reviews_mobile.webp);
     }
     [data-mask='error'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64b14376bfa43fcb0540d46e_form-error_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64b14376bfa43fcb0540d46e_form-error_mobile.webp);
     }
     [data-mask='works'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648b10ef45910495411c1a28_bg-card-worksSlide_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/648b10ef45910495411c1a28_bg-card-worksSlide_mobile.webp);
     }
     [data-mask='post'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/647f425dc9adcf998fe5ada2_bg-card-post_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/647f425dc9adcf998fe5ada2_bg-card-post_mobile.webp);
     }
     [data-mask='on-dribble'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64afa9bec17b5670ade3f278_bg-card-onDribble_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64afa9bec17b5670ade3f278_bg-card-onDribble_mobile.webp);
     }
     [data-mask='projects-big'],
     [data-mask='projects-big-invert'] {
-      -webkit-mask-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858d2e8b1b93ebd64cb6_bg-card-postBig_mobile.webp");
+      -webkit-mask-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/6488858d2e8b1b93ebd64cb6_bg-card-postBig_mobile.webp);
     }
   }
   .rich-heading-4 h2::before {

@@ -187,37 +187,33 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('visibilitychange', () => { if (document.hidden) reset(true); });
 });
 
-/* Pinned process stages: page scroll steps the cards, fills the graph, walks the marker.
-   Desktop and motion-enabled only; elsewhere the cards stay a scroll-snap strip. */
+/* Pinned process stages. The scroll runs as one continuous track rather than five discrete
+   anchors: the bars fill fractionally, the marker interpolates along the curve, and the card
+   stack drifts on Y while the stage index snaps at each fifth. Desktop and motion only. */
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('[data-branding-process]');
   if (!root) return;
   const pin = root.querySelector('[data-branding-process-pin]');
-  const graph = root.querySelector('[data-branding-process-graph]');
+  const runway = root.querySelector('[data-branding-process-runway]');
+  const float = root.querySelector('[data-branding-process-float]');
   const marker = root.querySelector('[data-branding-process-marker]');
-  const anchors = root.querySelector('[data-branding-process-anchors]');
   const bars = [...root.querySelectorAll('.branding-process__bar')];
   const cards = [...root.querySelectorAll('[data-branding-process-card]')];
   const buttons = [...root.querySelectorAll('[data-branding-process-btn]')];
-  if (!pin || !cards.length) return;
+  if (!pin || !runway || !cards.length) return;
 
   const desktop = matchMedia('(min-width: 992px) and (prefers-reduced-motion: no-preference)');
-  let active = -1;
+  const count = buttons.length;
+  // How much scroll each stage costs. Lower is a faster run through the five.
+  const STAGE_SCROLL = 0.42;
+  let stickyTop = 0;
+  let step = -1;
   let frame = 0;
+  let geometry = [];
 
-  // The marker sits on top of the last filled bar, so it climbs the curve as steps advance.
-  function placeMarker(index) {
-    if (!marker || !bars.length) return;
-    const ratio = index / Math.max(1, buttons.length - 1);
-    const bar = bars[Math.min(bars.length - 1, Math.round(ratio * (bars.length - 1)))];
-    marker.style.left = `${bar.offsetLeft + bar.offsetWidth / 2}px`;
-    marker.style.bottom = `${bar.offsetHeight}px`;
-  }
-
-  function setStep(index, force) {
-    const next = Math.max(0, Math.min(buttons.length - 1, index));
-    if (next === active && !force) return;
-    active = next;
+  function setStep(next) {
+    if (next === step) return;
+    step = next;
     cards.forEach((card, i) => {
       const on = i === next;
       card.classList.toggle('is-active', on);
@@ -229,41 +225,74 @@ document.addEventListener('DOMContentLoaded', () => {
       if (on) button.setAttribute('aria-current', 'step');
       else button.removeAttribute('aria-current');
     });
-    // Bars fill up to the step's share of the curve.
-    const filled = Math.round(bars.length * (next / Math.max(1, buttons.length - 1)));
-    bars.forEach((bar, i) => { bar.firstElementChild.style.height = i < filled ? '100%' : '0'; });
     root.classList.toggle('is-step-0', next === 0);
-    placeMarker(next);
   }
 
-  function stepFromScroll() {
+  function applyProgress(p) {
+    // Bars fill one after another, the last one partially, so the edge sweeps rather than jumps.
+    const total = bars.length;
+    for (let i = 0; i < total; i += 1) {
+      const fill = Math.min(1, Math.max(0, p * total - i));
+      bars[i].firstElementChild.style.height = fill ? `${(fill * 100).toFixed(2)}%` : '0';
+    }
+    // Marker rides the curve between the two bars it currently sits over.
+    if (marker && geometry.length) {
+      const t = p * (geometry.length - 1);
+      const i0 = Math.min(geometry.length - 1, Math.floor(t));
+      const i1 = Math.min(geometry.length - 1, i0 + 1);
+      const f = t - i0;
+      marker.style.left = `${(geometry[i0].x + (geometry[i1].x - geometry[i0].x) * f).toFixed(2)}px`;
+      marker.style.bottom = `${(geometry[i0].y + (geometry[i1].y - geometry[i0].y) * f).toFixed(2)}px`;
+    }
+    // The stack climbs as the curve does, which is the movement the page is missing otherwise.
+    if (float) {
+      const lift = Math.min(64, innerHeight * 0.075);
+      const y = (0.5 - p) * 2 * lift;
+      const tilt = (0.5 - p) * 2 * 3;
+      float.style.transform = `perspective(1000px) translate3d(0, ${y.toFixed(2)}px, 0) rotateX(${tilt.toFixed(2)}deg)`;
+    }
+    setStep(Math.min(count - 1, Math.max(0, Math.floor(p * count))));
+  }
+
+  function progress() {
+    // 0 when the runway sits directly under the pinned block, 1 as its end reaches that same line.
+    const height = runway.offsetHeight;
+    if (!height) return 0;
+    const travelled = stickyTop + pin.offsetHeight - runway.getBoundingClientRect().top;
+    return Math.min(1, Math.max(0, travelled / height));
+  }
+
+  function render() {
     frame = 0;
     if (!root.classList.contains('has-process-scroll')) return;
-    const steps = [...anchors.children];
-    let index = 0;
-    steps.forEach((anchor, i) => { if (anchor.getBoundingClientRect().top <= 0) index = i + 1; });
-    setStep(index);
+    applyProgress(progress());
   }
-  function requestStep() { if (!frame && desktop.matches) frame = requestAnimationFrame(stepFromScroll); }
+  function requestRender() {
+    if (!frame && desktop.matches) frame = requestAnimationFrame(render);
+  }
 
   function measure() {
     if (!root.classList.contains('has-process-scroll')) return;
-    // Centre the pinned block; a taller block than the viewport just pins to the top.
-    const height = pin.getBoundingClientRect().height;
-    pin.style.top = `${Math.max(0, (innerHeight - height) / 2)}px`;
-    placeMarker(Math.max(0, active));
+    stickyTop = Math.max(0, (innerHeight - pin.offsetHeight) / 2);
+    pin.style.top = `${stickyTop}px`;
+    runway.style.height = `${Math.round(innerHeight * STAGE_SCROLL) * count}px`;
+    geometry = bars.map(bar => ({ x: bar.offsetLeft + bar.offsetWidth / 2, y: bar.offsetHeight }));
+    render();
   }
 
   function configure() {
     root.classList.remove('has-process-scroll');
     pin.style.top = '';
+    runway.style.height = '';
+    if (float) float.style.transform = '';
     // A viewport that cannot show the pinned block whole would trap the reader mid-card.
     if (desktop.matches && innerHeight >= pin.offsetHeight) {
       root.classList.add('has-process-scroll');
       measure();
-      stepFromScroll();
     } else {
-      setStep(0, true);
+      step = -1;
+      setStep(0);
+      applyProgress(0);
     }
   }
 
@@ -272,21 +301,20 @@ document.addEventListener('DOMContentLoaded', () => {
       cards[index]?.scrollIntoView({ block: 'nearest', inline: 'start', behavior: 'smooth' });
       return;
     }
-    const anchor = anchors.children[index - 1];
-    const top = index <= 0
-      ? scrollY + anchors.getBoundingClientRect().top - 1
-      : scrollY + anchor.getBoundingClientRect().top;
+    // Land in the middle of the stage's slice so it is unambiguously that stage.
+    const target = (index + 0.5) / count;
+    const wanted = stickyTop + pin.offsetHeight - target * runway.offsetHeight;
+    const top = scrollY + (runway.getBoundingClientRect().top - wanted);
     if (window.lenis) window.lenis.scrollTo(top, { immediate: true });
     else scrollTo({ top, behavior: 'instant' });
+    render();
   }
 
-  buttons.forEach((button, index) => {
-    button.addEventListener('click', () => { setStep(index); scrollToStep(index); });
-  });
+  buttons.forEach((button, index) => button.addEventListener('click', () => scrollToStep(index)));
 
-  addEventListener('scroll', requestStep, { passive: true });
+  addEventListener('scroll', requestRender, { passive: true });
   // Lenis drives the page and swallows native scroll events, so bind to it as well once it exists.
-  const bindLenis = () => Boolean(window.lenis?.on) && (window.lenis.on('scroll', requestStep), true);
+  const bindLenis = () => Boolean(window.lenis?.on) && (window.lenis.on('scroll', requestRender), true);
   if (!bindLenis()) {
     let tries = 0;
     const waitForLenis = setInterval(() => {
@@ -296,6 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
   addEventListener('resize', configure, { passive: true });
   desktop.addEventListener('change', configure);
   document.fonts.ready.then(configure);
-  setStep(0, true);
+  setStep(0);
   configure();
 });

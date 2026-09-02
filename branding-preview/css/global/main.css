@@ -452,7 +452,7 @@ a:hover>[data-link-underline]:before {
 .iti__selected-flag>.iti__arrow {
   width: 1rem;
   height: 1rem;
-  background-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/660c0b8c02c44d93ec1204e0_icon-arrow-black.svg");
+  background-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/660c0b8c02c44d93ec1204e0_icon-arrow-black.svg);
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -467,7 +467,7 @@ a:hover>[data-link-underline]:before {
 }
 
 .iti__flag.iti__globe {
-  background-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/660e4d9c852532a5c261f27e_icon-flag-unknown.svg");
+  background-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/660e4d9c852532a5c261f27e_icon-flag-unknown.svg);
 }
 
 .iti__selected-flag {
@@ -501,7 +501,7 @@ ul.iti__country-list li,
   font-size: 0.875rem;
   padding-left: 44px;
   background: transparent;
-  background-image: url("https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/67beda784b502aa29d4d6f40_icon-search.svg");
+  background-image: url(https://cdn.prod.website-files.com/63f38a8c92397a024fcb9ae8/67beda784b502aa29d4d6f40_icon-search.svg);
   background-size: 16px;
   background-position: 16px;
   background-repeat: no-repeat;
@@ -509,7 +509,7 @@ ul.iti__country-list li,
 }
 
 ul.iti__country-list li.is--active {
-  background-image: url("https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a6fc58755faad4851761cb_icon-check-blue.svg");
+  background-image: url(https://uploads-ssl.webflow.com/63f38a8c92397a024fcb9ae8/64a6fc58755faad4851761cb_icon-check-blue.svg);
   background-position: 95% 50%;
   background-size: 1.1rem;
   background-repeat: no-repeat;

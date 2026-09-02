@@ -294,12 +294,10 @@
 .branding-process__graph { position: absolute; inset: 4.375rem 50% auto auto; transform: translateX(50%); width: 70.875rem; height: 29.5rem; }
 .branding-process__bars { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; height: 100%; }
 .branding-process__bar { position: relative; width: 1px; border-radius: 1px; background: rgb(255 255 255 / .18); }
-.branding-process__bar i { position: absolute; inset: auto 0 0 0; height: 0; border-radius: 1px; background: #fff; transition: height .28s ease; }
-@media (prefers-reduced-motion: reduce) { .branding-process__bar i { transition: none; } }
+.branding-process__bar i { position: absolute; inset: auto 0 0 0; height: 0; border-radius: 1px; background: #fff; }
 
 /* Marker climbing the filled edge, and the peak label above the tallest bar. */
-.branding-process__marker { position: absolute; left: 0; bottom: 0; z-index: 2; transform: translate(-50%, 50%); transition: left .28s ease, bottom .28s ease; }
-@media (prefers-reduced-motion: reduce) { .branding-process__marker { transition: none; } }
+.branding-process__marker { position: absolute; left: 0; bottom: 0; z-index: 2; transform: translate(-50%, 50%); }
 .branding-process__marker-dot { display: block; width: .5625rem; height: .5625rem; border-radius: 50%; background: #fff; }
 .branding-process__marker-label,
 .branding-process__peak-label { position: absolute; bottom: calc(100% + .75rem); left: 50%; transform: translateX(-50%); white-space: nowrap; border-radius: 1.25rem; padding: .5rem .875rem; font-size: .625rem; line-height: 1; background: #02021e; border: 1px solid rgb(255 255 255 / .16); color: #fff; }
@@ -311,9 +309,10 @@
 .branding-process__peak-icon { display: block; width: .6875rem; height: .6875rem; background: #fff; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
 
 /* Cards cross-fade in place; only the active one is reachable. */
+.branding-process__float { position: relative; z-index: 1; transform-style: preserve-3d; will-change: transform; }
 .branding-process__cards { position: relative; width: 45.625rem; min-height: 26.875rem; margin: 0 auto; transform-origin: center; }
 .branding-process__cards.is-tilting { will-change: transform; }
-.branding-process__card { position: absolute; inset: 0; display: block; border-radius: .75rem; padding: 2rem; overflow: hidden; color: #02021e; opacity: 0; visibility: hidden; transition: opacity .45s ease; }
+.branding-process__card { position: absolute; inset: 0; display: block; border-radius: .75rem; padding: 2rem; overflow: hidden; color: #02021e; opacity: 0; visibility: hidden; transition: opacity .28s ease; }
 .branding-process__card.is-active { position: relative; opacity: 1; visibility: visible; }
 @media (prefers-reduced-motion: reduce) { .branding-process__card { transition: none; } }
 .branding-process__card.is--blue { background: linear-gradient(180deg, #b9d1ed 10.222%, #f5f7fa 50%, #fff 100%); }
@@ -348,13 +347,13 @@
 @media (hover: hover) { .branding-process__step:not(.is-active):hover { background: rgb(255 255 255 / .1); } }
 
 /* Scroll runway that drives the pinned section. Collapsed unless the pin is live. */
-.branding-process__anchors { display: none; }
-.branding-process.has-process-scroll .branding-process__anchors { display: block; }
-.branding-process.has-process-scroll .branding-process__anchors > div { height: 60vh; }
+.branding-process__runway { display: none; }
+.branding-process.has-process-scroll .branding-process__runway { display: block; }
 .branding-process.has-process-scroll .branding-process__pin { position: sticky; }
 
 @media (max-width: 991px) {
   .branding-process__graph, .branding-process__peak, .branding-process__marker { display: none; }
+  .branding-process__float { transform: none !important; will-change: auto; }
   .branding-process__stage { min-height: 0; }
   .branding-process__cards { display: flex; gap: 1rem; width: auto; margin: 0 -1.25rem; padding: 0 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
   .branding-process__cards::-webkit-scrollbar { display: none; }
