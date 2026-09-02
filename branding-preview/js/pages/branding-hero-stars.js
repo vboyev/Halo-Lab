@@ -447,3 +447,61 @@
     },
   );
 })();
+
+/* Showreel preview. The poster is the first paint and the no-JS fallback; the loop is only
+   fetched once the block is actually near the viewport, and never on phones or for
+   reduced-motion users, so nobody downloads 2.5 MB to look at a still. */
+(() => {
+  const video = document.querySelector('[data-branding-showreel-video]');
+  const trigger = video?.closest('.branding-showreel__trigger');
+  if (!video || !trigger) return;
+
+  const eligible = matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+  let loaded = false;
+
+  const play = () => {
+    if (!eligible.matches) return;
+    if (!loaded) {
+      video.src = video.dataset.src;
+      loaded = true;
+    }
+    // A muted inline video is allowed to autoplay, but a rejected promise must not throw.
+    video.play().then(() => trigger.classList.add('is-preview-playing')).catch(() => {});
+  };
+  const pause = () => {
+    if (!video.paused) video.pause();
+  };
+  const teardown = () => {
+    pause();
+    trigger.classList.remove('is-preview-playing');
+    if (loaded) {
+      video.removeAttribute('src');
+      video.load();
+      loaded = false;
+    }
+  };
+
+  let onScreen = false;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      onScreen = entries.some((entry) => entry.isIntersecting);
+      if (onScreen) play();
+      else pause();
+    }, { rootMargin: '200px' });
+    observer.observe(trigger);
+  } else {
+    onScreen = true;
+    play();
+  }
+
+  // Nothing should keep decoding in a background tab.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pause();
+    else if (onScreen) play();
+  });
+  eligible.addEventListener('change', () => {
+    if (eligible.matches) {
+      if (onScreen) play();
+    } else teardown();
+  });
+})();

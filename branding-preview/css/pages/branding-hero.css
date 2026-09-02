@@ -369,6 +369,32 @@
   transform: scale(1.015);
 }
 
+/* Looping preview over the poster, the way the homepage showreel reads. The poster stays as the
+   first paint and the fallback, and the video only fades in once it is actually playing. */
+.page-branding-redesign .branding-showreel__video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.page-branding-redesign .branding-showreel__trigger.is-preview-playing .branding-showreel__video {
+  opacity: 1;
+}
+
+.page-branding-redesign .branding-showreel__trigger:hover .branding-showreel__video {
+  transform: scale(1.015);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-branding-redesign .branding-showreel__video { display: none; }
+}
+
 @media screen and (max-width: 1199px) {
   .page-branding-redesign .branding-hero {
     height: auto;

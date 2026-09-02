@@ -219,6 +219,15 @@
     border-radius: 12px;
   }
   .services-mega__legacy-mobile { display: none !important; }
+  .header .header__nav-link {
+    color: #fff !important;
+    opacity: .7;
+  }
+  .header .header__nav-link:hover,
+  .header .header__nav-link:focus-visible {
+    color: #fff !important;
+    opacity: 1;
+  }
   .header.is-menu-open .header__nav-link { color: #fff !important; opacity: .7; }
   .header.is-menu-open [data-menu-open].header__nav-link,
   .header.is-menu-open .header__nav-link:hover,
@@ -379,8 +388,8 @@
     background: #dadfe1;
     color: #02021e;
   }
-  .services-mega__discovery-clouds { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-  .services-mega__discovery-clouds img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; transform: scaleX(-1); }
+  .services-mega__discovery-clouds { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .services-mega__discovery-clouds img { width: 100%; height: 100%; }
   .services-mega__discovery-copy { position: relative; z-index: 3; display: block; }
   .services-mega__discovery-heading { display: flex; align-items: center; gap: 12px; min-height: 24px; padding-right: 16px; }
   .services-mega__discovery-heading strong { font-size: 18px; font-weight: 500; line-height: 1; }
@@ -424,75 +433,10 @@
   .services-mega__discovery:hover .services-mega__discovery-icon .button__icon-anim,
   .services-mega__discovery:focus-visible .services-mega__discovery-icon .button__icon-anim { transform: translate(180%, -180%); }
 
-  /* Air reference: rotating radial orbs, staggered breathing, a one-pixel glint.
-     Keep the Figma blue foundation and dark text; no external runtime or assets. */
-  .services-mega__discovery-orbs {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: .48;
-    filter: saturate(1);
-    transition: opacity .35s ease, filter .35s ease;
-  }
-  .services-mega__discovery:hover .services-mega__discovery-orbs,
-  .services-mega__discovery:focus-visible .services-mega__discovery-orbs {
-    opacity: .68;
-    filter: saturate(1.25);
-  }
-  .services-mega__discovery-orbs > span {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    left: 25%;
-    top: 0;
-    animation: services-orbit 6s linear infinite paused;
-  }
-  .services-mega__discovery-orbs i {
-    position: absolute;
-    width: 120%;
-    aspect-ratio: 1;
-    left: 15%;
-    top: -110%;
-    border-radius: 50%;
-    background: radial-gradient(circle, #76a9e9 0%, transparent 70%);
-    animation: services-breathe 4s ease-in-out infinite alternate-reverse paused;
-  }
-  .services-mega__discovery-orbs i:nth-child(2) { left: -55%; top: -80%; background: radial-gradient(circle, #c5dab4 0%, transparent 70%); animation-delay: -2s; }
-  .services-mega__discovery-orbs i:nth-child(3) { left: 5%; top: -200%; background: radial-gradient(circle, #d7b6d8 0%, transparent 70%); animation-delay: -4s; }
-  .services-mega__discovery-glint {
-    position: absolute;
-    z-index: 2;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    pointer-events: none;
-    background: rgba(94,146,221,.22);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-  }
-  .services-mega__discovery-glint::before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    aspect-ratio: 1;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    background: conic-gradient(from 0deg, #5e92dd, #5e92dd1a 20deg, #5e92dd1a 120deg, #5e92dd 180deg, #5e92dd1a 240deg, #5e92dd1a 340deg, #5e92dd);
-    animation: services-orbit 6s linear infinite paused;
-  }
-  .header.is-menu-open .services-mega__discovery-orbs > span,
-  .header.is-menu-open .services-mega__discovery-orbs i,
-  .header.is-menu-open .services-mega__discovery-glint::before { animation-play-state: running; }
   .services-mega__feature:focus-visible,
   .services-mega__list a:focus-visible,
   .services-mega__discovery:focus-visible { outline: 2px solid #3827c7; outline-offset: 3px; }
 }
-@keyframes services-orbit { to { transform: rotate(360deg); } }
-@keyframes services-breathe { from { scale: 1; } to { scale: 1.5; } }
 @media screen and (min-width: 1441px) {
   /* The site's header grows with rem above the reference frame; avoid overlap. */
   .header .container.mod--menu { top: 6rem !important; }
@@ -519,11 +463,7 @@
   .services-mega__list a span,
   .services-mega__arrow svg,
   .services-mega__list a span svg,
-  .services-mega__discovery-icon .button__icon-anim,
-  .services-mega__discovery-orbs { transition: none !important; }
-  .services-mega__discovery-orbs > span,
-  .services-mega__discovery-orbs i,
-  .services-mega__discovery-glint::before { animation: none !important; }
+  .services-mega__discovery-icon .button__icon-anim { transition: none !important; }
 }
     [data-swiper="lovelatters"] .swiper-slide-prev-second > div,
 [data-swiper="lovelatters"] .swiper-slide-next + div > div {
