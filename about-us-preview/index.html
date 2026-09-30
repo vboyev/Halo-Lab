@@ -50,6 +50,14 @@
 
 #approach.letters-intro{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:85px 0;margin:0;background:transparent;border-bottom:0}
 .leadership-letter{max-width:700px}.letter-draft{display:block;font-size:11px;letter-spacing:.6px;color:#777;margin-bottom:24px}.leadership-letter h2{font-size:clamp(30px,3.2vw,44px);line-height:1.14;letter-spacing:-1.5px;margin-bottom:30px}.letter-body p{font-size:19px;line-height:1.7;color:#4e5852;margin:0 0 20px}.letter-signature{margin-top:32px;display:flex;flex-direction:column;gap:4px}.letter-signature b{font-size:22px;font-family:Instrument,serif;font-style:italic;font-weight:400}.letter-signature span{font-size:12px;color:#747971}.closing-letter .leadership-letter{margin:auto}.closing-letter{padding:90px 0}@media(max-width:760px){#approach.letters-intro{grid-template-columns:1fr;gap:55px;padding:55px 0}.letter-body p{font-size:17px}.leadership-letter h2{font-size:34px}}
+
+/* Staggered letter sheets */
+#approach.letters-intro{display:flex;flex-direction:column;gap:95px;padding:110px 45px 120px;overflow:visible}
+.leadership-letter{width:65%;max-width:780px;background:#eeeee9;padding:48px 52px;box-shadow:0 12px 30px #17282008;transform:rotate(5deg);align-self:flex-start}
+#approach .leadership-letter:nth-child(2){align-self:flex-end;transform:rotate(-6deg)}
+.leadership-letter h2{font-size:clamp(28px,2.8vw,39px);margin-bottom:24px}.letter-body p{font-size:17px;line-height:1.65}.letter-draft{font-size:10px;margin-bottom:22px}.letter-signature{margin-top:26px}
+.closing-letter{padding:110px 45px 120px}.closing-letter .leadership-letter{margin:0 auto 0 0;transform:rotate(4deg)}
+@media(max-width:760px){#approach.letters-intro{padding:60px 12px 70px;gap:55px}.leadership-letter{width:95%;padding:30px 25px;transform:rotate(2deg)}#approach .leadership-letter:nth-child(2){transform:rotate(-2deg)}.closing-letter{padding:60px 12px 70px}.closing-letter .leadership-letter{width:95%;transform:rotate(2deg)}.leadership-letter h2{font-size:29px}.letter-body p{font-size:16px}}
 </style>
 </head>
 <body>
