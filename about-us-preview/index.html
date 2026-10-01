@@ -71,6 +71,8 @@
 #clients.client-trust{margin-top:90px}@media(max-width:760px){#clients.client-trust{margin-top:60px}}
 .letter-signature .letter-initials{display:flex;align-items:center;justify-content:center;width:58px;height:58px;flex-shrink:0;border-radius:50%;background:#d9dfd0;color:#52614f;font:16px Suisse,Arial,sans-serif}
 .hero .lead{font-size:20px}@media(max-width:760px){.hero .lead{font-size:18px}}
+
+.leadership-letter{transform-origin:center center}@media(prefers-reduced-motion:reduce){#approach .leadership-letter,.closing-letter .leadership-letter{transform:none!important}}
 </style>
 </head>
 <body>
@@ -516,5 +518,34 @@
 </main>
 <footer><span>© Halo Lab · 2026</span><span>Design · Build · Grow</span><a href="#top">Back to top ↑</a></footer>
 
+<script id="letter-scroll-motion">
+(() => {
+  const cards = [...document.querySelectorAll('.leadership-letter')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = matchMedia('(max-width: 760px)');
+  let frame = 0;
+  function update() {
+    frame = 0;
+    const height = innerHeight;
+    const rotations = cards.map(card => {
+      const even = [...card.parentElement.children].filter(el => el.classList.contains('leadership-letter')).indexOf(card) % 2 === 1;
+      const start = mobile.matches ? (even ? -6 : 5) : (even ? -7 : 6);
+      const rect = card.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const progress = Math.max(0, Math.min(1, (height * 1.05 - center) / (height * .65)));
+      const eased = progress * progress * (3 - 2 * progress);
+      return reduced.matches ? 0 : start * (1 - eased);
+    });
+    cards.forEach((card, i) => { card.style.transform = 'rotate(' + rotations[i].toFixed(3) + 'deg)'; });
+  }
+  function schedule() { if (!frame) frame = requestAnimationFrame(update); }
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule);
+  reduced.addEventListener('change', schedule);
+  document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
 </body>
 </html>
