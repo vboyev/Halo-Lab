@@ -1,0 +1,61 @@
+/* Final CTA shot wheel. Shared by the homepage and the project template, so it cannot
+   live in a page- or template-specific stylesheet. */
+.final-cta__shot {
+    --y: 45rem;
+  }
+
+  .final-cta__wheel.is-moving .final-cta__shot {
+    filter: saturate(1.035);
+  }
+
+  .final-cta__shot:hover,
+  .final-cta__shot:focus-visible {
+    filter: saturate(1.08) brightness(1.035);
+  }
+  .final-cta__shot:hover .final-cta__shot-wrap,
+  .final-cta__shot:focus-visible .final-cta__shot-wrap {
+    transform: translateZ(0) scale(1.025);
+  }
+
+  .final-cta__shot:focus-visible {
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.9),
+      0 0 0 6px rgba(36, 103, 199, 0.4);
+  }
+
+  .final-cta.is-dragging .final-cta__shot {
+    cursor: grabbing;
+  }
+
+  .section.mod--new-discuss:has(.final-cta.is-boosted) .new-discuss__title-wrap .heading-3 {
+    opacity: 0 !important;
+    filter: blur(7px);
+    transform: scale(0.9);
+  }
+
+  .section.mod--new-discuss:has(.final-cta.is-boosted) .final-cta__spin-gif {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+  }
+
+  @media screen and (max-width: 992px) {
+    .final-cta__shot {
+      --y: 30rem;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .final-cta__shot {
+      --y: 24rem;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .final-cta__shot {
+      --y: 18rem;
+    }
+  }
+
+/* Dark variant (New case pages): the shots ride above the lower violet gradient, which sits at
+   z-index 0 after the wheel in the markup, and stay below the copy and button (z-index 5). */
+.section.mod--new-discuss.w-variant-9becc955-a4f7-8a6e-9d6c-475c5e79e963 > .final-cta {
+  z-index: 1;
+}

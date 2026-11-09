@@ -1,0 +1,87 @@
+/* FAQ uses the Projects page shell, assets, and design system. */
+.faq-main{background:#02021e}.faq-hero{padding:176px 0 52px;position:relative;z-index:1}.faq-hero h1{font:500 clamp(36px,3.85vw,64px)/1.1 Suisse,Arial,sans-serif;letter-spacing:-.035em;text-align:center;margin:0 auto 40px;max-width:1000px}.faq-search{display:flex;align-items:center;position:relative;width:min(650px,100%);height:64px;margin:auto;border:1px solid #b1c3ff59;border-radius:100px;background:linear-gradient(180deg,#181941a8,#4c66b0b3);box-shadow:inset 0 -5px 16px #9bb2ff65,inset 0 2px 6px #d0dbff40;padding:6px 7px 6px 24px}.faq-search:focus-within{border-color:#b6c2ff;box-shadow:0 0 30px #7c7dff40,inset 0 -5px 16px #9bb2ff65}.faq-search input{color:white;background:none;border:0;outline:0;width:100%;min-width:0;font:400 17px Suisse,Arial,sans-serif}.faq-search input::placeholder{color:#b6b6d0}.faq-search button{border:1px solid #ffffff60;width:48px;height:48px;flex:none;border-radius:50%;display:grid;place-items:center;background:linear-gradient(130deg,#ffffff66,#ffffff12);color:white;cursor:pointer}.faq-quick{display:flex;justify-content:center;align-items:center;gap:22px;margin:22px 0 0;font-size:13px}.faq-quick span{color:#86869e}.faq-quick button{border:0;background:none;color:#d6d5e9;padding:0;cursor:pointer}.faq-quick button:hover{color:white}.faq-page{padding-bottom:88px}.faq-categories{display:flex;gap:32px;border-top:1px solid #ffffff26;border-bottom:1px solid #ffffff26;overflow-x:auto;scrollbar-width:none}.faq-category{flex:none;position:relative;padding:25px 0;border:0;background:none;color:#a5a5bb;cursor:pointer;font:400 14px Suisse,Arial,sans-serif;white-space:nowrap}.faq-category.active{color:#fff}.faq-category.active:after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:white}.faq-category:hover{color:white}.faq-group{display:grid;grid-template-columns:32% 1fr;column-gap:8%;padding-top:62px}.faq-group h2{grid-column:1;grid-row:1 / span 30;font-size:40px;line-height:1.1;letter-spacing:-1.2px;font-weight:500;margin:0}.faq-group h2:before{content:none;display:none}.faq-group details{grid-column:2;border-bottom:1px solid #ffffff26;margin:0}.faq-group summary{display:flex;justify-content:space-between;align-items:center;gap:30px;list-style:none;cursor:pointer;font-size:22px;line-height:1.4;padding:25px 0;color:#f5f5fa}.faq-group details:first-of-type summary{padding-top:0}.faq-group summary::-webkit-details-marker{display:none}.faq-group summary span{display:grid;place-items:center;flex:none;width:34px;height:34px;border:1px solid #ffffff30;border-radius:50%;font:300 24px Arial;transition:transform .2s,background .2s}.faq-group details[open] summary span{transform:rotate(45deg);background:#ffffff1c}.faq-answer{font-size:17px;line-height:1.65;color:#a4a4bc;padding:0 46px 26px 0}.faq-help{display:flex;justify-content:space-between;gap:20px;margin:32px 0 0 40%;font-size:14px;color:#8f8fa8}.faq-help a{color:#fff}.faq-help a span{margin-left:12px}.faq-results{font-size:15px;color:#aaaac2;margin-top:25px}.faq-results:empty{display:none}.faq-empty{padding:65px 0}.faq-empty h2{font-size:36px;margin-bottom:20px}.faq-empty p{color:#a4a4bc}.reset{margin-top:24px;border:1px solid #ffffff40;background:#ffffff12;color:white;border-radius:30px;padding:12px 25px;cursor:pointer}.faq-sr{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden}.faq-main [hidden]{display:none!important}.faq-main :focus-visible{outline:2px solid #b8b3ff!important;outline-offset:5px}.faq-search input:focus-visible{outline:none!important}@media(min-width:1600px){.faq-hero{padding-top:205px}}@media(max-width:991px){.faq-hero{padding-top:150px}.faq-hero h1{font-size:46px}.faq-categories{gap:25px}.faq-group{grid-template-columns:28% 1fr;column-gap:6%}.faq-group h2{font-size:32px}.faq-help{margin-left:34%}.faq-group summary{font-size:20px}}@media(max-width:767px){.faq-hero{padding:130px 0 38px}.faq-hero h1{font-size:38px;max-width:520px;margin-bottom:30px}.faq-hero h1 br{display:none}.faq-search{height:58px;padding-left:20px}.faq-search input{font-size:15px}.faq-search button{width:42px;height:42px}.faq-quick{gap:15px;font-size:12px}.faq-categories{gap:25px}.faq-category{font-size:13px;padding:22px 0}.faq-group{display:block;padding-top:38px}.faq-group h2{font-size:32px;margin-bottom:32px}.faq-group h2:before{font-size:10px;margin-bottom:15px}.faq-group summary{font-size:19px;padding:23px 0}.faq-answer{font-size:16px;padding-right:20px}.faq-help{margin-left:0;font-size:13px}.faq-page{padding-bottom:55px}}@media(prefers-reduced-motion:reduce){.faq-main *{scroll-behavior:auto;transition:none}}
+.faq-hero h1,.faq-group h2,.faq-empty h2{text-transform:none}.faq-hero>.container,.faq-page{width:90%;max-width:1600px;margin-left:auto;margin-right:auto}.faq-hero:before{content:'';position:absolute;pointer-events:none;z-index:-1;inset:-120px -10% auto;height:360px;background:radial-gradient(ellipse at 8% 10%,#2920e9a6,transparent 38%),radial-gradient(ellipse at 65% 0%,#6b8be6b3,transparent 45%),radial-gradient(ellipse at 95% 0%,#7b40d5b3,transparent 40%);filter:blur(45px)}
+/* Keep the Projects glow and orbit artwork inside the page canvas. */
+.page-wrapper{overflow-x:clip}.faq-main{overflow:clip}
+/* White accordion cards from the Branding service FAQ. */
+.faq-group{row-gap:12px;align-items:start}
+.faq-group details{background:#fff;color:#02021e;border:0;border-radius:12px;padding:0 16px 0 32px;overflow:hidden}
+.faq-group summary,.faq-group details:first-of-type summary{color:#02021e;padding:24px 0;font-size:22px;font-weight:500}
+.faq-group summary span{border:0;background:none;color:#02021e;font-size:28px}
+.faq-group details[open] summary span{background:none}
+.faq-answer{color:#02021e;padding:0 35px 24px 0}
+.faq-final-cta .new-discuss__text-wrap,.faq-final-cta .new-discuss__title-wrap,.faq-final-cta h2,.faq-final-cta .new-discuss__text,.faq-final-cta .button{opacity:1!important;visibility:visible!important;filter:none!important;transform:none!important}
+.faq-final-cta .container{position:relative;z-index:2;pointer-events:auto}
+@media(max-width:767px){.faq-group details{margin-bottom:12px;padding:0 16px 0 22px}.faq-group summary,.faq-group details:first-of-type summary{font-size:18px;padding:22px 0}.faq-answer{padding:0 10px 22px 0}}
+/* Blog-style filter chips: all questions are visible by default. */
+.faq-categories{border:0;display:flex;flex-wrap:wrap;justify-content:center;gap:16px;overflow:visible;padding:0 0 20px}
+.faq-category{height:48px;border:1px solid #ffffff4d;border-radius:30px;padding:0 20px;font-size:14px;font-weight:500;display:flex;align-items:center;color:#fff}
+.faq-category.active{color:#02021e;background:#fff;border-color:#fff}
+.faq-category.active:after{display:none}.faq-category:hover{background:#ffffff20}.faq-category.active:hover{background:#fff;color:#02021e}
+.faq-final-cta .new-discuss{color:#fff}.faq-final-cta .new-discuss__text{color:#ffffffb3}.faq-final-cta{isolation:isolate;padding-top:60px}
+@media(max-width:767px){.faq-categories{gap:10px;justify-content:flex-start}.faq-category{height:42px;padding:0 16px;font-size:13px}}
+/* The restored isolated CTA gradient ends on a light surface. */
+.faq-final-cta .new-discuss{color:#02021e}.faq-final-cta .new-discuss__text{color:#02021eb3}
+
+/* Category headings sit above a single column of questions. */
+.faq-group{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.faq-group h2{margin:0 0 20px}
+.faq-group details{width:100%;margin:0}
+
+/* Readable answers and stable links for sharing individual questions. */
+.faq-group details{scroll-margin-top:120px}
+.faq-answer p{margin:0 0 16px;font:inherit;color:inherit}
+.faq-answer a{text-decoration:underline;text-underline-offset:3px;color:inherit}
+.faq-answer .faq-permalink{display:inline-block;font-size:14px;color:#55556b}
+.faq-category:focus-visible,.faq-group summary:focus-visible,.faq-answer a:focus-visible{outline:2px solid #8a69ff;outline-offset:4px}
+/* Branding service FAQ: white cards, plus/minus and circular hover state. */
+.faq-group details{border-radius:12px;padding:0 16px 0 32px}
+.faq-group summary,.faq-group details:first-of-type summary{padding:24px 0;font-size:20px;line-height:1.4;letter-spacing:-.02em;font-weight:500}
+.faq-group summary span{position:relative;width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#02021e;transform:none;transition:background-color .175s,color .175s}
+.faq-group summary span:before,.faq-group summary span:after{content:'';position:absolute;left:8px;top:15px;width:16px;height:2px;border-radius:2px;background:currentColor;transition:transform .175s,opacity .175s}
+.faq-group summary span:after{transform:rotate(90deg)}
+.faq-group details[open] summary span{transform:none;background:transparent}
+.faq-group details[open] summary span:after{transform:rotate(0);opacity:0}
+@media(hover:hover){.faq-group summary:hover span,.faq-group details[open] summary:hover span{background:#02021e;color:#fff}}
+.faq-group summary:focus-visible span{background:#02021e;color:#fff}
+.faq-answer{max-width:78ch;padding:0 16px 24px 0;font-size:16px;line-height:1.6}
+.faq-answer p{margin:0 0 24px}.faq-answer p:last-child{margin-bottom:0}
+.faq-answer a{color:#5151ff}
+@supports (interpolate-size:allow-keywords){
+ .faq-group details{interpolate-size:allow-keywords}
+ .faq-group details::details-content{height:0;overflow:clip;opacity:0;transition:height .175s ease,opacity .125s ease,content-visibility .175s allow-discrete}
+ .faq-group details[open]::details-content{height:auto;opacity:1}
+}
+@media(max-width:767px){.faq-group details{padding:0 16px}.faq-group summary,.faq-group details:first-of-type summary{font-size:16px;line-height:1.4;padding:20px 0;gap:16px}.faq-answer{font-size:14px;padding:0 0 24px}.faq-answer p{margin-bottom:16px}}
+@media(prefers-reduced-motion:reduce){.faq-group details::details-content,.faq-group summary span,.faq-group summary span:before,.faq-group summary span:after{transition:none}}
+
+/* Comfortable reading width and larger answer text. */
+.faq-group{width:100%;max-width:1080px;margin-left:auto;margin-right:auto}
+.faq-answer{max-width:70ch;font-size:20px;line-height:1.65;padding-right:16px;padding-bottom:32px}
+.faq-answer p{font-size:inherit;line-height:inherit}
+@media(max-width:767px){.faq-answer{font-size:17px;line-height:1.6;padding-right:0;padding-bottom:24px}}
+
+/* Compact centered cards; category names already appear in the filters. */
+.faq-group{max-width:920px;padding-top:28px;gap:10px}
+.faq-group details{padding-left:24px;padding-right:16px}
+.faq-group summary,.faq-group details:first-of-type summary{padding:18px 0}
+.faq-answer{padding-bottom:24px}
+@media(max-width:767px){.faq-group{padding-top:20px}.faq-group details{padding-left:16px}.faq-group summary,.faq-group details:first-of-type summary{padding:16px 0}}
+
+.faq-group summary,.faq-group details:first-of-type summary{font-size:22px}
+@media(max-width:767px){.faq-group summary,.faq-group details:first-of-type summary{font-size:18px}}
+
+/* More breathing room inside the FAQ cards. */
+.faq-group details{padding-left:48px;padding-right:32px}
+.faq-group summary,.faq-group details:first-of-type summary{padding:36px 0}
+.faq-answer{padding-bottom:48px;padding-right:16px}
+@media(max-width:767px){.faq-group details{padding-left:32px;padding-right:32px}.faq-group summary,.faq-group details:first-of-type summary{padding:32px 0}.faq-answer{padding-right:0;padding-bottom:48px}}
+
+/* Tighter answer leading; question controls closer to card edges. */
+.faq-group details{padding-left:24px;padding-right:16px}
+.faq-group summary,.faq-group details:first-of-type summary{padding:24px 0}
+.faq-answer{line-height:1.4;padding-left:24px;padding-right:32px}
+@media(max-width:767px){.faq-group details{padding-left:16px;padding-right:16px}.faq-group summary,.faq-group details:first-of-type summary{padding:22px 0}.faq-answer{line-height:1.4;padding-left:16px;padding-right:16px}}
+
+/* Align answer text with the question at every breakpoint. */
+.faq-group .faq-answer{padding-left:0}
