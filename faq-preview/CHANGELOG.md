@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-11-09
+- Made search global across all 84 questions and answers; clearing search restores the selected category, while selecting a category exits search.
 - Expanded all six service/process/pricing categories to 10 questions each (84 total) and synchronized structured data.
 - Packaged a standalone faq-preview for the preview repository with local asset copies instead of external symlinks.
 - Aligned answer paragraphs with question text by removing the extra left inset at all breakpoints.

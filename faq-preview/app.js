@@ -11,7 +11,7 @@ function render() {
   for (const group of groups) {
     let matches = 0;
     for (const row of group.querySelectorAll('details')) {
-      const match = group.dataset.category === selected && (!query || row.textContent.toLowerCase().includes(query));
+      const match = query ? row.textContent.toLowerCase().includes(query) : group.dataset.category === selected;
       row.hidden = !match;
       if (match) matches++;
     }
@@ -19,11 +19,11 @@ function render() {
     count += matches;
   }
   categories.forEach(button => {
-    const active = button.dataset.topic === selected;
+    const active = !query && button.dataset.topic === selected;
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-  status.textContent = query ? `${count} ${count === 1 ? 'answer' : 'answers'} in ${selected} for “${input.value.trim()}”` : '';
+  status.textContent = query ? `${count} ${count === 1 ? 'answer' : 'answers'} across all categories for “${input.value.trim()}”` : '';
   document.querySelector('.faq-empty').hidden = count !== 0;
 }
 function select(topic, keepHash = false) {
@@ -45,7 +45,7 @@ function revealAnchor() {
   row.open = true;
   requestAnimationFrame(() => row.scrollIntoView({block: 'start'}));
 }
-categories.forEach(button => button.addEventListener('click', () => select(button.dataset.topic)));
+categories.forEach(button => button.addEventListener('click', () => { input.value = ''; select(button.dataset.topic); }));
 input.addEventListener('input', render);
 document.querySelector('.faq-search').addEventListener('submit', event => {
   event.preventDefault();
